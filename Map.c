@@ -1,6 +1,6 @@
 #include "Map.h"
 
-void select() {
+void MapSelect() {
 
     int selected = 0;
 
@@ -23,7 +23,7 @@ void select() {
     }
 }
 
-void render(int selected) {
+void MapRender(int selected) {
 
     
 

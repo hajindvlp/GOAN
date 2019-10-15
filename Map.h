@@ -18,5 +18,5 @@ typedef struct {
 
 Map map;
 
-void select();
-void render(int selected);
+void MapSelect();
+void MapRender(int selected);

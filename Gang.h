@@ -8,9 +8,9 @@ typedef struct {
 typedef struct {
     int chracterNum = 0;
     Character characters[100];
-    void (*upgrade)(int, int, int) = Upgrade;
+    void (*upgrade)(int, int, int) = GangUpgrade;
 } Gang;
 
 Gang gang;
 
-void Upgrade(int characterCode, int hpUp, int dgUp);
+void GangUpgrade(int characterCode, int hpUp, int dgUp);

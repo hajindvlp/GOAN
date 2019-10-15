@@ -1,6 +1,6 @@
 #include "Upgrade.h"
 
-void select() {
+void UpgradeSelect() {
 
     int selected = 0;
 
@@ -27,7 +27,7 @@ void select() {
     }
 }
 
-void render(int selected) {
+void UpgradeRender(int selected) {
 
 
 

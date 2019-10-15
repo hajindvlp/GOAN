@@ -1,6 +1,6 @@
 #include "Gang.h"
 
-void Upgrade(int characterCode, int hpUp, int dgUp) {
+void GangUpgrade(int characterCode, int hpUp, int dgUp) {
     if(exp > 0) {
         exp--;
         gang.characters[characterCode].hp += hpUp;
