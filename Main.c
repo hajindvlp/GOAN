@@ -1,8 +1,6 @@
 #include "Main.h"
 
 int main() {
-    printf("start");
-    MapSelect();
     MainGame();
 }
 

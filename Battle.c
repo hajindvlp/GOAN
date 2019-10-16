@@ -11,20 +11,7 @@ void BattleMain() {
 }
 
 void BattleInit() {
-    ConsoleInstance = GetModuleHandle(NULL);
-    ConsoleWindow = GetConsoleWindow();
-    ConsoleDC = GetDC(ConsoleWindow);
-
-    BackgroundDC = CreateCompatibleDC(ConsoleDC);
-    BackgroundMap = (HBITMAP) LoadImage(NULL, 
-                                          TEXT("./resources/background.bmp"),
-                                          IMAGE_BITMAP,
-                                          0,
-                                          0,
-                                          LR_LOADFROMFILE | LR_CREATEDIBSECTION);
-    SelectObject(BackgroundDC, BackgroundMap);
-
-    BattleRender();
+    
 }
 
 void BattleUpdate() {

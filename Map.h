@@ -10,6 +10,8 @@
 
 typedef struct {
     char name;
+    int MapX;
+    int MapY;
     Gang enemy;
 } Country;
 
@@ -17,6 +19,7 @@ typedef struct {
     int a[WIDTH+1][HEIGHT+1];
     int countriesNum;
     Country countries[10];
+    char MapString;
 } Map;
 
 Map map;

@@ -17,6 +17,9 @@ typedef struct {
     int width;
     int height;
     int speed;
+
+    char path[101];
+
     HDC CharacterWalkSpriteDC[101];
     HDC CharacterAttackSpriteDC[101];
     HBITMAP CharacterWalkSpritemMap[101];
@@ -25,7 +28,9 @@ typedef struct {
     int CharacterSpriteWalkCnt;
     int CharacterSpriteAttackNum;
     int CharacterSpriteAttackCnt;
+
     char shortcut;
+
     int BattleHp;
     int BattleDg;
     int BattleX;
