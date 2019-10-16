@@ -19,6 +19,7 @@ void MapSelect() {
             }
         } else if(getch() == '\n') {
             startBattle(selected);
+            break;
         }
     }
 }
