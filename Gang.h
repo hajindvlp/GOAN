@@ -10,11 +10,17 @@ typedef struct {
     int hp;
     int dg;
     int cost;
+    int width;
+    int height;
     int speed;
-    HDC CharacterDC;
-    HBITMAP CharacterSprite[101];
-    int CharacterSpriteNum;
-    int CharacterSpriteCnt;
+    HDC CharacterWalkSprite[101];
+    HDC CharacterAttackSprite[101];
+    HBITMAP CharacterWalkSprite[101];
+    HBITMAP CharacterAttackSprite[101];
+    int CharacterSpriteWalkNum;
+    int CharacterSpriteWalkCnt;
+    int CharacterSpriteAttackNum;
+    int CharacterSpriteAttackCnt;
     char shortcut;
     int BattleHp;
     int BattleDg;
@@ -27,6 +33,10 @@ typedef struct {
     Character characters[100];
     void (*upgrade)(int, int, int) = GangUpgrade;
 } Gang;
+
+typedef struct {
+    int hp;
+} Castle;
 
 Gang gang;
 

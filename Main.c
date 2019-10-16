@@ -1,9 +1,7 @@
 #include "Main.h"
 
 int main() {
-
-    
-
+    MapSelect();
     MainGame();
 }
 

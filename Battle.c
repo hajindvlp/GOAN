@@ -14,6 +14,16 @@ void BattleInit() {
     ConsoleInstance = GetModuleHandle(NULL);
     ConsoleWindow = GetConsoleWindow();
     ConsoleDC = GetDC(ConsoleWindow);
+
+    BackgroundDC = CreateCompatibleDC(ConsoleDC);
+    BackgroundImage = (HBITMAP) LoadImage(NULL, 
+                                          TEXT("./resources/background.bmp"),
+                                          IMAGE_BITMAP,
+                                          0,
+                                          0,
+                                          LR_LOADFROMFILE | LR_CREATEDIBSECTION);
+    SelectOject(BackgroundDC, BackgroundImage);
+
     BattleRender();
 }
 
@@ -35,7 +45,7 @@ void BattleUpdate() {
         }
     }
 
-    // collision check
+    // collision check Ally<->Enemy / Ally<->EnemyCastle / Enemy<->AllyCastle
 
     // attack
     
@@ -45,8 +55,7 @@ void BattleUpdate() {
 void BattleKeyin() {
     char tmp = getch();
     for(i=0 ; i< gang.characterNum ; i++) 
-        if(gang.characters[i].shortcut == tmp && OutAllyCnt < 100) 
-        {
+        if(gang.characters[i].shortcut == tmp && OutAllyCnt < 100) {
             OutAlly[OutAllyCnt] = gang.characters[i];
             OutAlly[OutAllyCnt].BattleHp = OutAlly[OutAllyCnt].hp;
             OutAlly[OutAllyCnt].BattleDg = OutAlly[OutAllyCnt].dg;
@@ -58,8 +67,13 @@ void BattleKeyin() {
 
 void BattleRender() {
     // Render Background
+    BitBlt(ConsoleDC, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, BackgroundDC, 0, 0, SRCCOPY);
 
     // Render Allys
+    for(int i=0 ; i<OutAllyCnt ; i++) 
+        if(!OutAlly[i].BattleDead) {
+            BitBlt(ConsoleDC, OutAlly[i].BattleX, Ground+OutAlly[i].width, 0, 0, SRCCOPY);
+        }
 
     // Render Enemy
 }

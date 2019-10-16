@@ -9,7 +9,7 @@
 
 #define SCREEN_WIDTH 200
 #define SCREEN_HEIGHT 200
-#define FPS 60
+#define FPS 30
 
 void BattleInit();
 void BattleMain();
@@ -22,7 +22,9 @@ HWND ConsoleWindow;
 HDC ConsoleDC, BufferDC;
 HINSTANCE ConsoleInstance;
 HBITMAP BufferMap;
-COLORREF *ScreenPix;
+
+HDC BackgroundDC;
+HBITMAP BackgroundMap;
 
 Character OutAlly[101];
 Character OutEnemy[101];
@@ -31,3 +33,6 @@ int OutEnemyCnt;
 int OutAllyXMax;
 int OutEnemyXMax;
 int Collided;
+
+Gang enemy;
+Castle AllyCastle, EnemyCastle;
