@@ -8,21 +8,21 @@ void UpgradeSelect() {
         if(getch() == '\033') {
             getch();
             switch(getch()) {
-                case C: // right
+                case 'C': // right
                     if(selected > 0) selected--;
-                    render(selected);
+                    UpgradeRender(selected);
                     break;
-                case D: // left
-                    if(selected+1 < gang.chracterNum) selected++;
-                    render(selected);
+                case 'D': // left
+                    if(selected+1 < gang.characterNum) selected++;
+                    UpgradeRender(selected);
                     break;
             }
         } else if(getch() == '1') { // upgrade Hp
-            Upgrade(selected, 1, 0);
-            render(selected);
+            GangUpgrade(selected, 1, 0);
+            UpgradeRender(selected);
         } else if(getch() == '2') { // upgrade Dg
-            Upgrade(selected, 0, 1);
-            render(selected);
+            GangUpgrade(selected, 0, 1);
+            UpgradeRender(selected);
         }
     }
 }

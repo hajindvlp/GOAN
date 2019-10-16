@@ -1,6 +1,7 @@
 #include "Main.h"
 
 int main() {
+    printf("start");
     MapSelect();
     MainGame();
 }
@@ -15,7 +16,7 @@ void MainGame() {
 }
 
 void MainInit() {
-
+    MapSelect();
 }
 
 void MainUpdate() {

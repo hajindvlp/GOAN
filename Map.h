@@ -1,3 +1,6 @@
+#ifndef MAP_H
+#define MAP_H
+
 #include <stdio.h>
 #include "Gang.h"
 #include "Battle.h"
@@ -11,8 +14,8 @@ typedef struct {
 } Country;
 
 typedef struct {
-    int a[WIDTH+1][HEIGHT+1] = {0};
-    int countriesNum = 0;
+    int a[WIDTH+1][HEIGHT+1];
+    int countriesNum;
     Country countries[10];
 } Map;
 
@@ -20,3 +23,6 @@ Map map;
 
 void MapSelect();
 void MapRender(int selected);
+void startBattle(int selected);
+
+#endif

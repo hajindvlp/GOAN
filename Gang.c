@@ -1,8 +1,8 @@
 #include "Gang.h"
 
 void GangUpgrade(int characterCode, int hpUp, int dgUp) {
-    if(exp > 0) {
-        exp--;
+    if(PlayerExp > 0) {
+        PlayerExp--;
         gang.characters[characterCode].hp += hpUp;
         gang.characters[characterCode].dg += dgUp;
     }

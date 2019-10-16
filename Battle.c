@@ -5,7 +5,7 @@ void BattleMain() {
     while(1) {
         BattleUpdate();
         BattleKeyin();
-        BattleRener();
+        BattleRender();
         Sleep(1000/FPS);
     }
 }
@@ -16,30 +16,30 @@ void BattleInit() {
     ConsoleDC = GetDC(ConsoleWindow);
 
     BackgroundDC = CreateCompatibleDC(ConsoleDC);
-    BackgroundImage = (HBITMAP) LoadImage(NULL, 
+    BackgroundMap = (HBITMAP) LoadImage(NULL, 
                                           TEXT("./resources/background.bmp"),
                                           IMAGE_BITMAP,
                                           0,
                                           0,
                                           LR_LOADFROMFILE | LR_CREATEDIBSECTION);
-    SelectOject(BackgroundDC, BackgroundImage);
+    SelectObject(BackgroundDC, BackgroundMap);
 
     BattleRender();
 }
 
 void BattleUpdate() {
-    for(i=0 ; i<OutAllyCnt ; i++) {
+    for(int i=0 ; i<OutAllyCnt ; i++) {
         if(!OutAlly[i].BattleDead && OutAlly[i].BattleHp > 0) {
             if(!Collided) 
                 OutAlly[i].BattleX += OutAlly[i].speed;
-            OutAllyXMax = (OutAllyXMax > OutAllay[i].BattleX) ? OutAllyXMax : OutAllay[i].BattleX;
+            OutAllyXMax = (OutAllyXMax > OutAlly[i].BattleX) ? OutAllyXMax : OutAlly[i].BattleX;
         } else {
             OutAlly[i].BattleDead = 1;
         }
     } 
-    for(i=0 ; i<OutEnemyCnt ; i++) {
+    for(int i=0 ; i<OutEnemyCnt ; i++) {
         if(!OutEnemy[i].BattleDead && OutEnemy[i].BattleHp > 0 && OutEnemy[i].BattleX) {
-            OutEnemy[i].BattleY -= OutEnemy[i].speed;
+            OutEnemy[i].BattleX -= OutEnemy[i].speed;
         } else {
             OutEnemy[i].BattleDead = 1;
         }
@@ -54,7 +54,7 @@ void BattleUpdate() {
 
 void BattleKeyin() {
     char tmp = getch();
-    for(i=0 ; i< gang.characterNum ; i++) 
+    for(int i=0 ; i< gang.characterNum ; i++) 
         if(gang.characters[i].shortcut == tmp && OutAllyCnt < 100) {
             OutAlly[OutAllyCnt] = gang.characters[i];
             OutAlly[OutAllyCnt].BattleHp = OutAlly[OutAllyCnt].hp;
@@ -72,10 +72,11 @@ void BattleRender() {
     // Render Allys
     for(int i=0 ; i<OutAllyCnt ; i++) 
         if(!OutAlly[i].BattleDead) {
-            BitBlt(ConsoleDC, OutAlly[i].BattleX, Ground+OutAlly[i].width, 0, 0, SRCCOPY);
+            BitBlt(ConsoleDC, OutAlly[i].BattleX, BattleGround+OutAlly[i].width, OutAlly[i].width, OutAlly[i].height, OutAlly[i].CharacterWalkSpriteDC[0], 0, 0, SRCCOPY);
         }
 
     // Render Enemy
+
 }
 
 void HideCursor() {

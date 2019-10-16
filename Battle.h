@@ -1,3 +1,6 @@
+#ifndef BATTLE_H
+#define BATTLE_H
+
 #include "Map.h"
 #include "Gang.h"
 #include <stdio.h>
@@ -36,3 +39,7 @@ int Collided;
 
 Gang enemy;
 Castle AllyCastle, EnemyCastle;
+
+int BattleGround;
+
+#endif
