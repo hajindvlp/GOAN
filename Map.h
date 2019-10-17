@@ -5,9 +5,6 @@
 #include "Gang.h"
 #include "Battle.h"
 
-#define WIDTH 50
-#define HEIGHT 50
-
 typedef struct {
     char name;
     int MapX;
@@ -16,10 +13,11 @@ typedef struct {
 } Country;
 
 typedef struct {
-    int a[WIDTH+1][HEIGHT+1];
+    int Width;
+    int Height;
     int countriesNum;
     Country countries[10];
-    char MapString;
+    char MapString[400][400];
 } Map;
 
 Map map;

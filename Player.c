@@ -56,6 +56,20 @@ void Load() {
 
         fscanf(ConfigureFile, "%d %d", &AllyCastle.hp, &EnemyCastle.hp);
     }
+
+    fscanf(ConfigureFile, "%d", &map.countriesNum);
+    fscanf(ConfigureFile, "%d %d", &map.Height, &map.Width);
+    for(int i=0 ; i<map.Height ; i++) {
+        char tmp[301];
+        fscanf(ConfigureFile, "%s", tmp);
+        for(int j=0 ; j<map.Width ; j++) {
+            map.MapString[i][j] = tmp[j];
+        }
+    }
+    for(int i=0 ; i<map.countriesNum ; i++) {
+        fscanf(ConfigureFile, "%d %d", &map.countries[i].MapX, &map.countries[i].MapY);
+    }
+
     
     ConsoleInstance = GetModuleHandle(NULL);
     ConsoleWindow = GetConsoleWindow();
