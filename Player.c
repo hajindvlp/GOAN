@@ -1,8 +1,10 @@
 #include "Player.h"
 
 void Load() {
+    printf("[*] Load Function\n");
     ConfigureFile = fopen("./resources/DATA", "r+");
     if(ConfigureFile != NULL) {
+        printf("[*] Reading Config File\n");
 
         fscanf(ConfigureFile, "%d", &PlayerExp); // player exp
 
@@ -39,7 +41,7 @@ void Load() {
 
             for(int j=0 ; j<gang.characters[i].CharacterAttackSpriteNum ; j++) {
                 char path[101];
-                sprintf(path, "%s/Walk/%d.bmp", gang.characters[i].path, j);
+                sprintf(path, "%s/Attack/%d.bmp", gang.characters[i].path, j);
 
                 gang.characters[i].CharacterAttackSpriteDC[j] = CreateCompatibleDC(ConsoleDC);
                 gang.characters[i].CharacterAttackSpriteMap[j] = (HBITMAP) LoadImage(NULL,
@@ -67,6 +69,24 @@ void Load() {
                                           0,
                                           LR_LOADFROMFILE | LR_CREATEDIBSECTION);
     SelectObject(BackgroundDC, BackgroundMap);
+}
+
+void Debug() {
+    printf("%d\n", PlayerExp); // player exp
+
+    printf("%d\n", gang.characterNum);
+    for(int i=0 ; i<gang.characterNum ; i++) {
+        printf("%s\n", gang.characters[i].name);
+        printf("%d\n", gang.characters[i].hp);
+        printf("%d\n", gang.characters[i].dg);
+        printf("%d\n", gang.characters[i].cost);
+        printf("%d\n", gang.characters[i].width);
+        printf("%d\n", gang.characters[i].height);
+        printf("%d\n", gang.characters[i].speed);
+        printf("%c\n", gang.characters[i].shortcut);
+        printf("%d\n", gang.characters[i].CharacterWalkSpriteNum);
+        printf("%d\n", gang.characters[i].CharacterAttackSpriteNum);
+    }
 }
 
 void Save() {

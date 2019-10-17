@@ -10,9 +10,8 @@
 
 FILE * ConfigureFile;
 
-int PlayerExp;
-
 void Load();
 void Save();
+void Debug();
 
 #endif

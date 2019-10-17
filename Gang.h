@@ -7,7 +7,6 @@
 #include <unistd.h>
 #include <windows.h>
 #include <conio.h>
-#include "Player.h"
 
 typedef struct {
     char name[101];
@@ -22,12 +21,12 @@ typedef struct {
 
     HDC CharacterWalkSpriteDC[101];
     HDC CharacterAttackSpriteDC[101];
-    HBITMAP CharacterWalkSpritemMap[101];
-    HBITMAP CharacterAttackSpritemMap[101];
-    int CharacterSpriteWalkNum;
-    int CharacterSpriteWalkCnt;
-    int CharacterSpriteAttackNum;
-    int CharacterSpriteAttackCnt;
+    HBITMAP CharacterWalkSpriteMap[101];
+    HBITMAP CharacterAttackSpriteMap[101];
+    int CharacterWalkSpriteNum;
+    int CharacterWalkSpriteCnt;
+    int CharacterAttackSpriteNum;
+    int CharacterAttackSpriteCnt;
 
     char shortcut;
 
@@ -47,6 +46,7 @@ typedef struct {
 } Castle;
 
 Gang gang;
+int PlayerExp;
 
 void GangUpgrade(int characterCode, int hpUp, int dgUp);
 
