@@ -30,9 +30,11 @@ void MainInit() {
                                          LR_LOADFROMFILE | LR_CREATEDIBSECTION);
     SelectObject(StartScreenDC, StartScreenMap);
 
+    if(StartScreenDC && StartScreenMap) printf("[*] Image Load Success\n");
+
     if(BitBlt(ConsoleDC, 0, 0, 500, 400, StartScreenDC, 0, 0, SRCCOPY)) printf("[*] Renderd\n");
     else printf("[*] Render Failed");
-    while(!getch());
+    while(!getch()); 
 
     printf("[*] MainInit Function\n");
     Load();

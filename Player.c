@@ -67,7 +67,7 @@ void Load() {
         }
     }
     for(int i=0 ; i<map.countriesNum ; i++) {
-        fscanf(ConfigureFile, "%d %d", &map.countries[i].MapX, &map.countries[i].MapY);
+        fscanf(ConfigureFile, "%d %d %c", &map.countries[i].MapX, &map.countries[i].MapY, &map.countries[i].name);
     }
 
     BackgroundDC = CreateCompatibleDC(ConsoleDC);

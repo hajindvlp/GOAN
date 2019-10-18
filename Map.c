@@ -39,8 +39,8 @@ void MapRender(int selected) {
         case 5:
             break;
     }
-    system("cls");
-    puts(mapString);
+    //system("cls");
+    // puts(mapString);
 
 }
 
