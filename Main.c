@@ -2,6 +2,7 @@
 
 int main() {
     printf("[*] Main Function\n");
+    system("mode 80, 25");
     MainGame();
 }
 
@@ -10,7 +11,6 @@ void MainGame() {
     MainInit();
     while(1) {
         MainUpdate();
-        MainKeyin();
         MainRender();
     }
 }
@@ -32,21 +32,27 @@ void MainInit() {
 
     if(StartScreenDC && StartScreenMap) printf("[*] Image Load Success\n");
 
-    if(BitBlt(ConsoleDC, 0, 0, 500, 400, StartScreenDC, 0, 0, SRCCOPY)) printf("[*] Renderd\n");
-    else printf("[*] Render Failed");
-    while(!getch()); 
+    (BitBlt(ConsoleDC, 0, 0, 500, 400, StartScreenDC, 0, 0, SRCCOPY)) ? printf("[*] Rendered\n") : printf("[*] Render Failed");
+    while(!getch()) {
+        gotoxy(9, 10);
+        printf("Press Key To Start");
+        Sleep(500);
+        printf("                  ");
+        Sleep(300);
+    }
 
     printf("[*] MainInit Function\n");
     Load();
-    MapSelect();
 }
 
 void MainUpdate() {
-
-}
-
-void MainKeyin() {
-
+    while(1) {
+        if(GetAsyncKeyState('I') & 0x8000) {
+            UpgradeSelect();
+        } else if(GetAsyncKeyState('O') & 0x8000) {
+            MapSelect();
+        }
+    }
 }
 
 void MainRender() {

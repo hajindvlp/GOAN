@@ -9,11 +9,11 @@
 #include "Upgrade.h"
 #include "Battle.h"
 #include "Player.h"
+#include "Utility.h"
 
 void MainInit();
 void MainGame();
 void MainUpdate();
-void MainKeyin();
 void MainRender();
 
 HDC StartScreenDC;
