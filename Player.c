@@ -70,11 +70,6 @@ void Load() {
         fscanf(ConfigureFile, "%d %d", &map.countries[i].MapX, &map.countries[i].MapY);
     }
 
-    
-    ConsoleInstance = GetModuleHandle(NULL);
-    ConsoleWindow = GetConsoleWindow();
-    ConsoleDC = GetDC(ConsoleWindow);
-
     BackgroundDC = CreateCompatibleDC(ConsoleDC);
     BackgroundMap = (HBITMAP) LoadImage(NULL, 
                                           TEXT("./resources/background.bmp"),

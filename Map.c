@@ -3,8 +3,8 @@
 void MapSelect() {
 
     int selected = 0;
-
-    printf("d");
+    
+    printf("[*] MapSelect Function\n");
 
     while(1) {
         if(GetAsyncKeyState(VK_LEFT) & 0x8000 && selected+1 < map.countriesNum) { //left
@@ -21,6 +21,7 @@ void MapSelect() {
 }
 
 void MapRender(int selected) {
+    printf("[*] MapRender Function\n");
 
     char mapString[100001] = "##################################################################\n#     #                                   #                      #\n#      #                                 #                       #\n#   @   #                               #                        #\n#        #                    ##########                         #\n#         #        C         #                                   #\n############                #                                    #\n#          #               #                                     #\n#         #               #                                      #\n#        #               #                                       #\n#       # #             #                      A                 #\n#          #           #                                         #\n#           ############                                         #\n#              #         #                                       #\n#     E       #           #                                      #\n#             #            #                                     #\n#            #              #                                    #\n#           #                ################################### #\n#          #                #                                   ##\n#         #                #                                     #\n#         #       D       #                                      #\n#         #              #                                       #\n#         #             #                   B                    #\n#        #             #                                         #\n#       #             #                                          #\n#      #              #                                          #\n#     #               #                                          #\n#     #               #                                          #\n##################################################################\n";
 

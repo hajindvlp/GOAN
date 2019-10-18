@@ -1,2 +1,2 @@
 cls
-gcc ./*.c libgdi32.a && a
+gcc ./*.c libgdi32.a 

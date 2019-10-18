@@ -16,4 +16,7 @@ void MainUpdate();
 void MainKeyin();
 void MainRender();
 
+HDC StartScreenDC;
+HBITMAP StartScreenMap;
+
 #endif
