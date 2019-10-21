@@ -1,8 +1,9 @@
 #include "Main.h"
 
 int main() {
+    HideCursor();
     printf("[*] Main Function\n");
-    system("mode 80, 25");
+    system("mode 90, 40");
     MainGame();
 }
 
@@ -32,29 +33,35 @@ void MainInit() {
 
     if(StartScreenDC && StartScreenMap) printf("[*] Image Load Success\n");
 
-    (BitBlt(ConsoleDC, 0, 0, 500, 400, StartScreenDC, 0, 0, SRCCOPY)) ? printf("[*] Rendered\n") : printf("[*] Render Failed");
-    while(!getch()) {
-        gotoxy(9, 10);
+    while(!kbhit()) {
+        gotoxy(39, 30);
         printf("Press Key To Start");
         Sleep(500);
+        gotoxy(39, 30);
         printf("                  ");
         Sleep(300);
     }
 
+    gotoxy(39, 30);
     printf("[*] MainInit Function\n");
     Load();
+    gotoxy(39, 30);
+    printf("[*] Reading End\n");
+
+    Sleep(1000);
+    system("cls");
 }
 
 void MainUpdate() {
-    while(1) {
-        if(GetAsyncKeyState('I') & 0x8000) {
-            UpgradeSelect();
-        } else if(GetAsyncKeyState('O') & 0x8000) {
-            MapSelect();
-        }
+    if(GetAsyncKeyState('I') & 0x8000) {
+        UpgradeSelect();
+    } else if(GetAsyncKeyState('O') & 0x8000) {
+        MapSelect();
     }
 }
 
 void MainRender() {
-
+    // Render Background
+    // system("cls");
+    (BitBlt(ConsoleDC, 0, 0, 500, 400, StartScreenDC, 0, 0, SRCCOPY));
 }

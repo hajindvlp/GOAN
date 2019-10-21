@@ -15,10 +15,10 @@ void MapSelect() {
     }
 
     while(1) {
-        if(GetAsyncKeyState(VK_LEFT) & 0x8000 && selected+1 < map.countriesNum) { //left
+        if(GetAsyncKeyState(VK_RIGHT) & 0x8000 && selected+1 < map.countriesNum) { //left
             selected++;
             MapRender(selected);
-        } else if(GetAsyncKeyState(VK_RIGHT) & 0x8000 && selected > 0) {  // right 
+        } else if(GetAsyncKeyState(VK_LEFT) & 0x8000 && selected > 0) {  // right 
             selected--;
             MapRender(selected);
         } else if(GetAsyncKeyState(VK_RETURN) & 0x8000) {
@@ -26,9 +26,13 @@ void MapSelect() {
             break;
         } else if(GetAsyncKeyState('I') & 0x8000) {
             UpgradeSelect();
-        } else if(GetAsyncKeyState('O') & 0x8000) {
-            MapSelect();
+        } else if(getch() == 12) {
+            BattleMain(selected);
+            break;
         }
+        // else if(GetAsyncKeyState('O') & 0x8000) {
+        //     MapSelect();
+        // }
     }
 }
 

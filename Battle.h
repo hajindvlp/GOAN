@@ -15,8 +15,8 @@
 #define SCREEN_HEIGHT 200
 #define FPS 30
 
+void BattleMain(int EnemyCode);
 void BattleInit();
-void BattleMain();
 void BattleUpdate();
 void BattleKeyin();
 void BattleRender();
@@ -30,6 +30,7 @@ HBITMAP BufferMap;
 HDC BackgroundDC;
 HBITMAP BackgroundMap;
 
+int ECode;
 Character OutAlly[101];
 Character OutEnemy[101];
 int OutAllyCnt;

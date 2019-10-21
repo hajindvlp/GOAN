@@ -1,6 +1,7 @@
 #include "Battle.h"
 
-void BattleMain() {
+void BattleMain(int EnemyCode) {
+    ECode = EnemyCode;
     BattleInit();
     while(1) {
         BattleUpdate();

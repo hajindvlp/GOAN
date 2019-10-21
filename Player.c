@@ -1,9 +1,11 @@
 #include "Player.h"
 
 void Load() {
+    gotoxy(39, 30);
     printf("[*] Load Function\n");
     ConfigureFile = fopen("./resources/DATA", "r+");
     if(ConfigureFile != NULL) {
+        gotoxy(39, 30);
         printf("[*] Reading Config File\n");
 
         fscanf(ConfigureFile, "%d", &PlayerExp); // player exp
@@ -28,6 +30,8 @@ void Load() {
             for(int j=0 ; j<gang.characters[i].CharacterWalkSpriteNum ; j++) {
                 char path[101];
                 sprintf(path, "%s/Walk/%d.bmp", gang.characters[i].path, j);
+                gotoxy(39, 30);
+                printf("%s\n", path);
 
                 gang.characters[i].CharacterWalkSpriteDC[j] = CreateCompatibleDC(ConsoleDC);
                 gang.characters[i].CharacterWalkSpriteMap[j] = (HBITMAP) LoadImage(NULL,
@@ -61,7 +65,7 @@ void Load() {
     fscanf(ConfigureFile, "%d %d", &map.Height, &map.Width);
     for(int i=0 ; i<map.Height ; i++) {
         char tmp[301];
-        fscanf(ConfigureFile, "%s", tmp);
+        fscanf(ConfigureFile, "%[^\n]", tmp);
         for(int j=0 ; j<map.Width ; j++) {
             map.MapString[i][j] = tmp[j];
         }
@@ -78,9 +82,13 @@ void Load() {
                                           0,
                                           LR_LOADFROMFILE | LR_CREATEDIBSECTION);
     SelectObject(BackgroundDC, BackgroundMap);
+    gotoxy(39, 30);
+    printf("[*] Read File in File\n");
+    Debug();
 }
 
 void Debug() {
+    gotoxy(10, 25);
     printf("%d\n", PlayerExp); // player exp
 
     printf("%d\n", gang.characterNum);
@@ -95,6 +103,17 @@ void Debug() {
         printf("%c\n", gang.characters[i].shortcut);
         printf("%d\n", gang.characters[i].CharacterWalkSpriteNum);
         printf("%d\n", gang.characters[i].CharacterAttackSpriteNum);
+    }
+
+    printf("%d : %d x %d\n", map.countriesNum, map.Width, map.Height);
+
+    while(!kbhit()) {
+        gotoxy(39, 30);
+        printf("Press Key To Start");
+        Sleep(500);
+        gotoxy(39, 30);
+        printf("                  ");
+        Sleep(300);
     }
 }
 
