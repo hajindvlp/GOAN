@@ -35,11 +35,18 @@ void Load() {
 
                 gang.characters[i].CharacterWalkSpriteDC[j] = CreateCompatibleDC(ConsoleDC);
                 gang.characters[i].CharacterWalkSpriteMap[j] = (HBITMAP) LoadImage(NULL,
-                                                                     TEXT(path),
+                                                                     path,
                                                                      IMAGE_BITMAP,
                                                                      0,
                                                                      0,
                                                                      LR_LOADFROMFILE | LR_CREATEDIBSECTION);
+                if(gang.characters[i].CharacterWalkSpriteMap[j] == NULL) {
+                    gotoxy(39, 30);
+                    printf("[*] Image Not");
+                } else {
+                    gotoxy(39, 30);
+                    printf("[*] Image Loaded");
+                }
                 SelectObject(gang.characters[i].CharacterWalkSpriteDC[j], gang.characters[i].CharacterWalkSpriteMap[j]);
             }
 

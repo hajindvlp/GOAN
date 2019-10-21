@@ -24,7 +24,7 @@ void MainInit() {
 
     StartScreenDC = CreateCompatibleDC(ConsoleDC);
     StartScreenMap = (HBITMAP) LoadImage(NULL,
-                                         TEXT("./resources/StartScreen.bmp"),
+                                         TEXT("./resources/background.bmp"),
                                          IMAGE_BITMAP,
                                          0,
                                          0,
@@ -63,5 +63,6 @@ void MainUpdate() {
 void MainRender() {
     // Render Background
     // system("cls");
-    (BitBlt(ConsoleDC, 0, 0, 500, 400, StartScreenDC, 0, 0, SRCCOPY));
+    // (BitBlt(ConsoleDC, 0, 0, 500, 400, StartScreenDC, 0, 0, SRCCOPY));
+    BitBlt(ConsoleDC, 0, 0, 500, 400, gang.characters[0].CharacterWalkSpriteDC[0], 0, 0, SRCCOPY);
 }
