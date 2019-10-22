@@ -91,7 +91,7 @@ void Load() {
     SelectObject(BackgroundDC, BackgroundMap);
     gotoxy(39, 30);
     printf("[*] Read File in File\n");
-    Debug();
+    // Debug();
 }
 
 void Debug() {

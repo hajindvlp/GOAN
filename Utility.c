@@ -10,14 +10,36 @@ int key_pressed(int key) {
     return (GetAsyncKeyState(key) & 0x8000 != 0);
 }
 
-void PrintImage(HDC destDC, int sx, int sy, int dw, int dh, HDC originDC, int w, int h) {
-    if(TransparentBlt(destDC, sx, sy, dw, dh, originDC, 0, 0, w, h, RGB(255, 255, 255)))
-        printf("success");
+void UtilityInit() {
+    UpgradeDC = MapDC = CreateCompatibleDC(ConsoleDC);
+    UpgradeMap = (HBITMAP) LoadImage(NULL,
+                                         TEXT("./resources/Menu_Upgrade.bmp"),
+                                         IMAGE_BITMAP,
+                                         0,
+                                         0,
+                                         LR_LOADFROMFILE | LR_CREATEDIBSECTION);
+    MapMap = (HBITMAP) LoadImage(NULL,
+                                         TEXT("./resources/Menu_Map.bmp"),
+                                         IMAGE_BITMAP,
+                                         0,
+                                         0,
+                                         LR_LOADFROMFILE | LR_CREATEDIBSECTION);
+
+    SelectObject(UpgradeDC, UpgradeMap);
+    SelectObject(MapDC, MapMap);
 }
 
-void UtilityInit() {
-    bf.BlendOp = AC_SRC_OVER;
-    bf.BlendFlags = 0;
-    bf.SourceConstantAlpha = 0xff;
-    bf.AlphaFormat = AC_SRC_ALPHA;
+void PrintImage(int sx, int sy, int w, int h, HDC originDC) {
+    TransparentBlt(ConsoleDC, sx, sy, w, h, originDC, 0, 0, w, h, RGB(255, 0, 255));
+}
+
+void PrintBackground(int UMCode) {
+    switch(UMCode) {
+        case 1:
+            BitBlt(ConsoleDC, 0, 0, 500, 400, UpgradeDC, 0, 0, SRCCOPY);
+            break;
+        case 2:
+            BitBlt(ConsoleDC, 0, 0, 500, 400, MapDC, 0, 0, SRCCOPY);
+            break;
+    }
 }

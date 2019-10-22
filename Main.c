@@ -10,6 +10,7 @@ int main() {
 void MainGame() {
     printf("[*] MainGame Function\n");
     MainInit();
+    UtilityInit();
     while(1) {
         MainUpdate();
         MainRender();
@@ -24,7 +25,7 @@ void MainInit() {
 
     StartScreenDC = CreateCompatibleDC(ConsoleDC);
     StartScreenMap = (HBITMAP) LoadImage(NULL,
-                                         TEXT("./resources/background.bmp"),
+                                         TEXT("./resources/StartScreen.bmp"),
                                          IMAGE_BITMAP,
                                          0,
                                          0,
@@ -48,17 +49,17 @@ void MainInit() {
     gotoxy(39, 30);
     printf("[*] Reading End\n");
 
-    UtilityInit();
-
     Sleep(1000);
     system("cls");
 }
 
 void MainUpdate() {
     if(GetAsyncKeyState('I') & 0x8000) {
-        UpgradeSelect();
+        if( UpgradeSelect() ) MapSelect();
     } else if(GetAsyncKeyState('O') & 0x8000) {
-        MapSelect();
+        // int key = MapSelect();
+        // if( MapSelect() == -1) UpgradeSelect();
+        // else BattleMain(key);
     }
 }
 
@@ -66,5 +67,5 @@ void MainRender() {
     // Render Background
     // system("cls");
     // (BitBlt(ConsoleDC, 0, 0, 500, 400, StartScreenDC, 0, 0, SRCCOPY));
-    BitBlt(ConsoleDC, 0, 0, 500, 400, gang.characters[0].CharacterWalkSpriteDC[0], 0, 0, SRCCOPY);
+    BitBlt(ConsoleDC, 0, 0, 500, 400, StartScreenDC, 0, 0, SRCCOPY);
 }

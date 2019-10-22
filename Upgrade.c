@@ -1,27 +1,30 @@
 #include "Upgrade.h"
 
-void UpgradeSelect() {
+int UpgradeSelect() {
 
     int selected = 0;
 
     gotoxy(39, 30);
     printf("[*] UpgradeSelect Function\n");
 
+    PrintBackground(1);
     while(1) {
-        UpgradeUpdate(&selected);
+        if( UpgradeUpdate(&selected) )
+            return 1;
         UpgradeRender(selected);
         Sleep(200);
     }
 
     gotoxy(39, 30);
     printf("[*] UpgradeSelect Function Ended");
+    
 }
 
-void UpgradeUpdate(int *selected) {
+int UpgradeUpdate(int *selected) {
     gotoxy(39, 30);
     printf("[*] UpgradeUpdate Function");
     if(key_pressed('o')) {
-
+        return 1;
     } 
     if(key_pressed(VK_RIGHT)) {
         (*selected) ++;
@@ -29,6 +32,7 @@ void UpgradeUpdate(int *selected) {
     if(key_pressed(VK_LEFT)) {
         (*selected) --;
     }
+    return 0;
 }
 
 void UpgradeRender(int selected) {
@@ -38,16 +42,12 @@ void UpgradeRender(int selected) {
     for(int i=0 ; i<gang.characterNum ; i++)
     {
         if(selected == i) {
-            PrintImage(ConsoleDC, 
-                       (10+28)*(i), 10, 10+100+28*(i), 10+100, 
-                       gang.characters[i].CharacterWalkSpriteDC[(gang.characters[i].CharacterWalkSpriteCnt++)%gang.characters[i].CharacterWalkSpriteNum],
-                       100, 100);
+            PrintImage( (10 + 40) * i, 40, 40, 40, 
+                       gang.characters[i].CharacterWalkSpriteDC[(gang.characters[i].CharacterWalkSpriteCnt++)%gang.characters[i].CharacterWalkSpriteNum]);
         }
         else {
-            PrintImage(ConsoleDC, 
-                       (10+28)*(i), 10, 10+100+28*(i), 10+100, 
-                       gang.characters[i].CharacterWalkSpriteDC[0],
-                       100, 100);
+            PrintImage( (10 + 40) * i, 40, 40, 40, 
+                       gang.characters[i].CharacterWalkSpriteDC[0]);
         }
     }
 }

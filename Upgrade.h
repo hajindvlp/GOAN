@@ -7,8 +7,8 @@
 #include "Gang.h"
 #include "Battle.h"
 
-void UpgradeSelect();
-void UpgradeUpdate(int *selected);
+int UpgradeSelect();
+int UpgradeUpdate(int *selected);
 void UpgradeRender(int selected);
 
 int x, y;

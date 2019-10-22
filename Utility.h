@@ -7,11 +7,15 @@
 #include <stdlib.h>
 #include <gdiplus.h>
 
+#include "Battle.h"
+ 
+HDC UpgradeDC, MapDC;
+HBITMAP UpgradeMap, MapMap;
+
 void gotoxy(int x, int y);
 int key_pressed(int key);
-void PrintImage(HDC destDC, int sx, int sy, int dw, int dh, HDC originDC, int w, int h);
 void UtilityInit();
-
-BLENDFUNCTION bf;
+void PrintImage(int sx, int sy, int w, int h, HDC originDC);
+void PrintBackground(int UMCode);
 
 #endif
