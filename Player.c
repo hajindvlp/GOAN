@@ -4,6 +4,7 @@ void Load() {
     gotoxy(39, 30);
     printf("[*] Load Function\n");
     ConfigureFile = fopen("./resources/DATA", "r+");
+
     if(ConfigureFile != NULL) {
         gotoxy(39, 30);
         printf("[*] Reading Config File\n");
@@ -66,23 +67,23 @@ void Load() {
         }
 
         fscanf(ConfigureFile, "%d %d", &AllyCastle.hp, &EnemyCastle.hp);
-    }
 
-    fscanf(ConfigureFile, "%d", &map.countriesNum);
-    for(int i=0 ; i<map.countriesNum ; i++) {
-        fscanf(ConfigureFile, "%d %d %c", &map.countries[i].MapX, &map.countries[i].MapY);
-    }
+        fscanf(ConfigureFile, "%d", &map.countriesNum);
+        for(int i=0 ; i<map.countriesNum ; i++) {
+            fscanf(ConfigureFile, "%d %d", &map.countries[i].MapX, &map.countries[i].MapY);
+        }
 
-    BackgroundDC = CreateCompatibleDC(ConsoleDC);
-    BackgroundMap = (HBITMAP) LoadImage(NULL, 
-                                          TEXT("./resources/background.bmp"),
-                                          IMAGE_BITMAP,
-                                          0,
-                                          0,
-                                          LR_LOADFROMFILE | LR_CREATEDIBSECTION);
-    SelectObject(BackgroundDC, BackgroundMap);
-    gotoxy(39, 30);
-    printf("[*] Read File in File\n");
+        BackgroundDC = CreateCompatibleDC(ConsoleDC);
+        BackgroundMap = (HBITMAP) LoadImage(NULL, 
+                                            TEXT("./resources/background.bmp"),
+                                            IMAGE_BITMAP,
+                                            0,
+                                            0,
+                                            LR_LOADFROMFILE | LR_CREATEDIBSECTION);
+        SelectObject(BackgroundDC, BackgroundMap);
+        gotoxy(39, 30);
+        printf("[*] Read File in File\n");
+    }
     // Debug();
 }
 
