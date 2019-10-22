@@ -1,7 +1,7 @@
 #include "Utility.h"
 
 void gotoxy(int x, int y) {
-    Sleep(200);
+    Sleep(10);
     COORD pos={x,y};
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos); 
 }
