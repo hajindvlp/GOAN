@@ -34,15 +34,6 @@ void MainInit() {
 
     if(StartScreenDC && StartScreenMap) printf("[*] Image Load Success\n");
 
-    while(!kbhit()) {
-        gotoxy(39, 30);
-        printf("Press Key To Start");
-        Sleep(500);
-        gotoxy(39, 30);
-        printf("                  ");
-        Sleep(300);
-    }
-
     gotoxy(39, 30);
     printf("[*] MainInit Function\n");
     Load();

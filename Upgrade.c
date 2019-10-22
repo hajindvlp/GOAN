@@ -42,11 +42,11 @@ void UpgradeRender(int selected) {
     for(int i=0 ; i<gang.characterNum ; i++)
     {
         if(selected == i) {
-            PrintImage( (10 + 40) * i, 40, 40, 40, 
+            PrintImage( 30 + (30 + 40) * i, 100, 40, 40, 
                        gang.characters[i].CharacterWalkSpriteDC[(gang.characters[i].CharacterWalkSpriteCnt++)%gang.characters[i].CharacterWalkSpriteNum]);
         }
         else {
-            PrintImage( (10 + 40) * i, 40, 40, 40, 
+            PrintImage( 30 + (30 + 40) * i, 100, 40, 40, 
                        gang.characters[i].CharacterWalkSpriteDC[0]);
         }
     }
