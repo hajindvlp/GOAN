@@ -7,6 +7,8 @@
 #include "Utility.h"
 #include "Upgrade.h"
 
+HDC MapDC;
+
 typedef struct {
     char name;
     int MapX;
@@ -24,7 +26,11 @@ typedef struct {
 
 Map map;
 
-void MapSelect();
+HDC MapDC;
+HBITMAP MapMap;
+
+void MapInit();
+int MapSelect();
 void MapRender(int selected);
 void startBattle(int selected);
 

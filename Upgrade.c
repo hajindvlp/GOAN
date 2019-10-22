@@ -23,7 +23,9 @@ int UpgradeSelect() {
 int UpgradeUpdate(int *selected) {
     gotoxy(39, 30);
     printf("[*] UpgradeUpdate Function");
-    if(key_pressed('o')) {
+    if(key_pressed('O')) {
+        gotoxy(39, 30);
+        printf("[*] O key pressed");
         return 1;
     } 
     if(key_pressed(VK_RIGHT)) {
@@ -42,11 +44,11 @@ void UpgradeRender(int selected) {
     for(int i=0 ; i<gang.characterNum ; i++)
     {
         if(selected == i) {
-            PrintImage( 30 + (30 + 40) * i, 100, 40, 40, 
+            PrintImage( 30 + (30 + 40) * i, 100, 100, 100, 
                        gang.characters[i].CharacterWalkSpriteDC[(gang.characters[i].CharacterWalkSpriteCnt++)%gang.characters[i].CharacterWalkSpriteNum]);
         }
         else {
-            PrintImage( 30 + (30 + 40) * i, 100, 40, 40, 
+            PrintImage( 30 + (30 + 40) * i, 100, 100, 100, 
                        gang.characters[i].CharacterWalkSpriteDC[0]);
         }
     }

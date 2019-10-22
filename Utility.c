@@ -11,17 +11,17 @@ int key_pressed(int key) {
 }
 
 void UtilityInit() {
-    UpgradeDC = CreateCompatibleDC(ConsoleDC);
-    MapDC = CreateCompatibleDC(ConsoleDC);
+    MenuUpgradeDC = CreateCompatibleDC(ConsoleDC);
+    MenuMapDC = CreateCompatibleDC(ConsoleDC);
     BlankDC = CreateCompatibleDC(ConsoleDC);
 
-    UpgradeMap = (HBITMAP) LoadImage(NULL,
+    MenuUpgradeMap = (HBITMAP) LoadImage(NULL,
                                          TEXT("./resources/Menu_Upgrade.bmp"),
                                          IMAGE_BITMAP,
                                          0,
                                          0,
                                          LR_LOADFROMFILE | LR_CREATEDIBSECTION);
-    MapMap = (HBITMAP) LoadImage(NULL,
+    MenuMapMap = (HBITMAP) LoadImage(NULL,
                                          TEXT("./resources/Menu_Map.bmp"),
                                          IMAGE_BITMAP,
                                          0,
@@ -34,9 +34,9 @@ void UtilityInit() {
                                          0,
                                          LR_LOADFROMFILE | LR_CREATEDIBSECTION);
 
-    SelectObject(UpgradeDC, UpgradeMap);
+    SelectObject(MenuUpgradeDC, MenuUpgradeMap);
+    SelectObject(MenuMapDC, MenuMapMap);
     SelectObject(BlankDC, BlankMap);
-    SelectObject(MapDC, MapMap);
 }
 
 void PrintImage(int sx, int sy, int w, int h, HDC originDC) {
@@ -45,9 +45,9 @@ void PrintImage(int sx, int sy, int w, int h, HDC originDC) {
 }
 
 void PrintBackground(int UMCode) {
-    if(UMCode) {
-        BitBlt(ConsoleDC, 0, 0, 500, 400, UpgradeDC, 0, 0, SRCCOPY);
-    } else {
-        BitBlt(ConsoleDC, 0, 0, 500, 400, MapDC, 0, 0, SRCCOPY);
+    if(UMCode == 1) {
+        BitBlt(ConsoleDC, 0, 0, 500, 400, MenuUpgradeDC, 0, 0, SRCCOPY);
+    } else if(UMCode == 2) {
+        BitBlt(ConsoleDC, 0, 0, 500, 400, MenuMapDC, 0, 0, SRCCOPY);
     }
 }

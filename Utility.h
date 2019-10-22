@@ -9,8 +9,8 @@
 
 #include "Battle.h"
  
-HDC UpgradeDC, MapDC, BlankDC;
-HBITMAP UpgradeMap, MapMap, BlankMap;
+HDC MenuUpgradeDC, MenuMapDC, BlankDC;
+HBITMAP MenuUpgradeMap, MenuMapMap, BlankMap;
 
 void gotoxy(int x, int y);
 int key_pressed(int key);

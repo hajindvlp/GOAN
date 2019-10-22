@@ -1,59 +1,46 @@
 #include "Map.h"
 
-void MapSelect() {
+void MapInit() {
+    MapDC = CreateCompatibleDC(ConsoleDC);
+    MapMap = (HBITMAP) LoadImage(NULL,
+                                 TEXT("./resources/Map.bmp"),
+                                 IMAGE_BITMAP,
+                                 0,
+                                 0,
+                                 LR_LOADFROMFILE | LR_CREATEDIBSECTION);
+    SelectObject(MapDC, MapMap);
+}
+
+int MapSelect() {
 
     int selected = 0;
-    
-    printf("[*] MapSelect Function\n");
 
-    system("cls");
-    for(int i=0 ; i<map.Height ; i++) {
-        for(int j=0 ; j<map.Width ; j++) {
-            printf("%c", map.MapString[i][j]);
-        }
-        printf("\n");
-    }
 
+    PrintBackground(2);
     while(1) {
-        if(GetAsyncKeyState(VK_RIGHT) & 0x8000 && selected+1 < map.countriesNum) { //left
+        if(key_pressed(VK_LEFT)) { //left
             selected++;
             MapRender(selected);
-        } else if(GetAsyncKeyState(VK_LEFT) & 0x8000 && selected > 0) {  // right 
+        } else if(key_pressed(VK_LEFT)) {  // right 
             selected--;
             MapRender(selected);
-        } else if(GetAsyncKeyState(VK_RETURN) & 0x8000) {
+        } else if(key_pressed(VK_RETURN)) {
             startBattle(selected);
             break;
-        } else if(GetAsyncKeyState('I') & 0x8000) {
-            UpgradeSelect();
-        } else if(getch() == 12) {
-            BattleMain(selected);
-            break;
-        }
-        // else if(GetAsyncKeyState('O') & 0x8000) {
-        //     MapSelect();
+        } else if(key_pressed('I')) {
+            return -1;
+        } 
+        // else if(getch() == 12) {
+        //     BattleMain(selected);
+        //     break;
         // }
     }
 }
 
 void MapRender(int selected) {
-    int OldSelected = -1;
-    printf("[*] MapRender Function\n");
 
-    if(selected >= 1 && selected <= 5) {
-        if(OldSelected != -1) {
-            gotoxy(map.countries[OldSelected].MapY, map.countries[OldSelected].MapX-1);
-            printf(" ");
-            gotoxy(map.countries[OldSelected].MapY, map.countries[OldSelected].MapX+1);
-            printf(" ");
-        }
-        gotoxy(map.countries[selected].MapY, map.countries[selected].MapX-1);
-        printf("[");
-        gotoxy(map.countries[selected].MapY, map.countries[selected].MapX+1);
-        printf("]");
-        map.MapString[map.countries[selected].MapY][map.countries[selected].MapX-1] = '[';
-        map.MapString[map.countries[selected].MapY][map.countries[selected].MapX+1] = ']';
-    }
+    PrintImage(5, 80, 490, 320, MapDC);
+
 }
 
 void startBattle(int selected) {

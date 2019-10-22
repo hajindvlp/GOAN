@@ -11,6 +11,7 @@ void MainGame() {
     printf("[*] MainGame Function\n");
     MainInit();
     UtilityInit();
+    MapInit();
     while(1) {
         MainUpdate();
         MainRender();
@@ -48,9 +49,9 @@ void MainUpdate() {
     if(GetAsyncKeyState('I') & 0x8000) {
         if( UpgradeSelect() ) MapSelect();
     } else if(GetAsyncKeyState('O') & 0x8000) {
-        // int key = MapSelect();
-        // if( MapSelect() == -1) UpgradeSelect();
-        // else BattleMain(key);
+        int key = MapSelect();
+        if( key == -1) UpgradeSelect();
+        else BattleMain(key);
     }
 }
 
