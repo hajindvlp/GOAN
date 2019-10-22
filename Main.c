@@ -48,6 +48,8 @@ void MainInit() {
     gotoxy(39, 30);
     printf("[*] Reading End\n");
 
+    UtilityInit();
+
     Sleep(1000);
     system("cls");
 }

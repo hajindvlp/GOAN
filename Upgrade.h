@@ -11,4 +11,6 @@ void UpgradeSelect();
 void UpgradeUpdate(int *selected);
 void UpgradeRender(int selected);
 
+int x, y;
+
 #endif

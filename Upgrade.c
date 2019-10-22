@@ -10,7 +10,7 @@ void UpgradeSelect() {
     while(1) {
         UpgradeUpdate(&selected);
         UpgradeRender(selected);
-        gotoxy(39, 30);
+        Sleep(200);
     }
 
     gotoxy(39, 30);
@@ -20,26 +20,34 @@ void UpgradeSelect() {
 void UpgradeUpdate(int *selected) {
     gotoxy(39, 30);
     printf("[*] UpgradeUpdate Function");
-    if(kbhit()) {
-        char key = getch();
-        if(key == 'o') {
-            printf("[*] pressed O");
-        } else if(key == '\033') {
-            printf("[*] pressed arrow key");
-            getch();
-            key = getch();
-            if(key == 'C' && *selected+1 < gang.characterNum) {
-                (*selected) ++;
-            } else if(key =='D' && *selected-1 >= 0) {
-                (*selected) --;
-            }
-        }
+    if(key_pressed('o')) {
+
+    } 
+    if(key_pressed(VK_RIGHT)) {
+        (*selected) ++;
+    }
+    if(key_pressed(VK_LEFT)) {
+        (*selected) --;
     }
 }
 
 void UpgradeRender(int selected) {
     gotoxy(39, 30);
     printf("[*] UpgradeRender Function %d selected", selected);
-
-    BitBlt(ConsoleDC, 0, 0, 500, 400, gang.characters[0].CharacterWalkSpriteDC[0], 0, 0, SRCCOPY);
+    
+    for(int i=0 ; i<gang.characterNum ; i++)
+    {
+        if(selected == i) {
+            PrintImage(ConsoleDC, 
+                       (10+28)*(i), 10, 10+100+28*(i), 10+100, 
+                       gang.characters[i].CharacterWalkSpriteDC[(gang.characters[i].CharacterWalkSpriteCnt++)%gang.characters[i].CharacterWalkSpriteNum],
+                       100, 100);
+        }
+        else {
+            PrintImage(ConsoleDC, 
+                       (10+28)*(i), 10, 10+100+28*(i), 10+100, 
+                       gang.characters[i].CharacterWalkSpriteDC[0],
+                       100, 100);
+        }
+    }
 }
