@@ -17,20 +17,18 @@ typedef struct {
 } Country;
 
 typedef struct {
-    int Width;
-    int Height;
     int countriesNum;
     Country countries[10];
-    char MapString[400][400];
 } Map;
 
 Map map;
 
-HDC MapDC;
-HBITMAP MapMap;
+HDC MapDC, SelectedBraketDC;
+HBITMAP MapMap, SelectedBraketMap;
 
 void MapInit();
 int MapSelect();
+int MapUpdate();
 void MapRender(int selected);
 void startBattle(int selected);
 

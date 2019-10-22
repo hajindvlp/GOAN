@@ -15,7 +15,9 @@ HBITMAP MenuUpgradeMap, MenuMapMap, BlankMap;
 void gotoxy(int x, int y);
 int key_pressed(int key);
 void UtilityInit();
-void PrintImage(int sx, int sy, int w, int h, HDC originDC);
+void PTI(int sx, int sy, int w, int h, HDC originDC);
+void PTIB(int sx, int sy, int w, int h, HDC originDC);
+void PI(int sx, int sy, int w, int h, HDC originDC);
 void PrintBackground(int UMCode);
 
 #endif

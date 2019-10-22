@@ -31,7 +31,7 @@ void Load() {
                 char path[101];
                 sprintf(path, "%s/Walk/%d.bmp", gang.characters[i].path, j);
                 gotoxy(39, 30);
-                printf("%s\n", path);
+                printf("[*] %s Loaded\n", path);
 
                 gang.characters[i].CharacterWalkSpriteDC[j] = CreateCompatibleDC(ConsoleDC);
                 gang.characters[i].CharacterWalkSpriteMap[j] = (HBITMAP) LoadImage(NULL,
@@ -69,16 +69,8 @@ void Load() {
     }
 
     fscanf(ConfigureFile, "%d", &map.countriesNum);
-    fscanf(ConfigureFile, "%d %d", &map.Height, &map.Width);
-    for(int i=0 ; i<map.Height ; i++) {
-        char tmp[301];
-        fscanf(ConfigureFile, "%[^\n]", tmp);
-        for(int j=0 ; j<map.Width ; j++) {
-            map.MapString[i][j] = tmp[j];
-        }
-    }
     for(int i=0 ; i<map.countriesNum ; i++) {
-        fscanf(ConfigureFile, "%d %d %c", &map.countries[i].MapX, &map.countries[i].MapY, &map.countries[i].name);
+        fscanf(ConfigureFile, "%d %d %c", &map.countries[i].MapX, &map.countries[i].MapY);
     }
 
     BackgroundDC = CreateCompatibleDC(ConsoleDC);
@@ -111,8 +103,6 @@ void Debug() {
         printf("%d\n", gang.characters[i].CharacterWalkSpriteNum);
         printf("%d\n", gang.characters[i].CharacterAttackSpriteNum);
     }
-
-    printf("%d : %d x %d\n", map.countriesNum, map.Width, map.Height);
 
     while(!kbhit()) {
         gotoxy(39, 30);

@@ -1,7 +1,7 @@
 #include "Utility.h"
 
 void gotoxy(int x, int y) {
-    Sleep(10);
+    Sleep(200);
     COORD pos={x,y};
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos); 
 }
@@ -39,9 +39,17 @@ void UtilityInit() {
     SelectObject(BlankDC, BlankMap);
 }
 
-void PrintImage(int sx, int sy, int w, int h, HDC originDC) {
-    TransparentBlt(ConsoleDC, sx, sy, w, h, BlankDC, 0, 0, w, h, RGB(255, 0, 255));
+void PTI(int sx, int sy, int w, int h, HDC originDC) {
     TransparentBlt(ConsoleDC, sx, sy, w, h, originDC, 0, 0, w, h, RGB(255, 0, 255));
+}
+
+void PTIB(int sx, int sy, int w, int h, HDC originDC) {
+    BitBlt(ConsoleDC, sx, sy, w, h, BlankDC, w, h, RGB(255, 0, 255));
+    TransparentBlt(ConsoleDC, sx, sy, w, h, originDC, 0, 0, w, h, RGB(255, 0, 255));
+}
+
+void PI(int sx, int sy, int w, int h, HDC originDC) {
+    BitBlt(ConsoleDC, sx, sy, w, h, originDC, 0, 0, SRCCOPY);
 }
 
 void PrintBackground(int UMCode) {

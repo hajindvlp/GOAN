@@ -9,13 +9,13 @@ int main() {
 
 void MainGame() {
     printf("[*] MainGame Function\n");
+    
     MainInit();
     UtilityInit();
     MapInit();
-    while(1) {
-        MainUpdate();
-        MainRender();
-    }
+    
+    MainRender();
+    MainUpdate();
 }
 
 void MainInit() {
@@ -46,18 +46,25 @@ void MainInit() {
 }
 
 void MainUpdate() {
-    if(GetAsyncKeyState('I') & 0x8000) {
-        if( UpgradeSelect() ) MapSelect();
-    } else if(GetAsyncKeyState('O') & 0x8000) {
-        int key = MapSelect();
-        if( key == -1) UpgradeSelect();
-        else BattleMain(key);
+    int key = 0; 
+    
+    while(1) {
+        if(key == 1) {
+            key = UpgradeSelect();
+        } else if(key == 2) {
+            key = MapSelect();
+        } else if(key == 0) {
+            if(GetAsyncKeyState('I') & 0x8000) {
+                key =  1;
+            } else if(GetAsyncKeyState('O') & 0x8000) {
+                key = 2;
+            }
+        }
+        gotoxy(40, 29);
+        printf("[*] key : %d", key);
     }
 }
 
 void MainRender() {
-    // Render Background
-    // system("cls");
-    // (BitBlt(ConsoleDC, 0, 0, 500, 400, StartScreenDC, 0, 0, SRCCOPY));
-    BitBlt(ConsoleDC, 0, 0, 500, 400, StartScreenDC, 0, 0, SRCCOPY);
+    PI(0, 0, 500, 400, StartScreenDC);
 }

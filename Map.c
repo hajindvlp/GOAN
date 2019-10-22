@@ -9,6 +9,15 @@ void MapInit() {
                                  0,
                                  LR_LOADFROMFILE | LR_CREATEDIBSECTION);
     SelectObject(MapDC, MapMap);
+
+    SelectedBraketDC = CreateCompatibleDC(ConsoleDC);
+    SelectedBraketMap = (HBITMAP) LoadImage(NULL,
+                                 TEXT("./resources/Select.bmp"),
+                                 IMAGE_BITMAP,
+                                 0,
+                                 0,
+                                 LR_LOADFROMFILE | LR_CREATEDIBSECTION);
+    SelectObject(SelectedBraketDC, SelectedBraketMap);
 }
 
 int MapSelect() {
@@ -18,29 +27,30 @@ int MapSelect() {
 
     PrintBackground(2);
     while(1) {
-        if(key_pressed(VK_LEFT)) { //left
-            selected++;
-            MapRender(selected);
-        } else if(key_pressed(VK_LEFT)) {  // right 
-            selected--;
-            MapRender(selected);
-        } else if(key_pressed(VK_RETURN)) {
-            startBattle(selected);
-            break;
-        } else if(key_pressed('I')) {
-            return -1;
-        } 
-        // else if(getch() == 12) {
-        //     BattleMain(selected);
-        //     break;
-        // }
+        if(MapUpdate(&selected))
+            return 1;
+        MapRender(selected);
     }
 }
 
+int MapUpdate(int* selected) {
+    if(key_pressed(VK_LEFT)) { //left
+        (*selected)++;
+        MapRender((*selected));
+    } else if(key_pressed(VK_LEFT)) {  // right 
+        (*selected)--;
+        MapRender((*selected));
+    } else if(key_pressed(VK_RETURN)) {
+        startBattle((*selected));
+    } else if(key_pressed('I')) {
+        return 1;
+    }
+    return 0;
+}
+
 void MapRender(int selected) {
-
-    PrintImage(5, 80, 490, 320, MapDC);
-
+    PI(5, 78, 490, 320, MapDC);
+    PTI(map.countries[selected].MapX, map.countries[selected].MapX, 69, 56, SelectedBraketDC);
 }
 
 void startBattle(int selected) {
