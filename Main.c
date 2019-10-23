@@ -21,14 +21,7 @@ void MainInit() {
     ConsoleWindow = GetConsoleWindow();
     ConsoleDC = GetDC(ConsoleWindow);
 
-    StartScreenDC = CreateCompatibleDC(ConsoleDC);
-    StartScreenMap = (HBITMAP) LoadImage(NULL,
-                                         TEXT("./resources/StartScreen.bmp"),
-                                         IMAGE_BITMAP,
-                                         0,
-                                         0,
-                                         LR_LOADFROMFILE | LR_CREATEDIBSECTION);
-    SelectObject(StartScreenDC, StartScreenMap);
+    LI(&StartScreenDC, &StartScreenMap, "./resources/StartScreen.bmp");
 
     Load();
 
@@ -55,5 +48,6 @@ void MainUpdate() {
 }
 
 void MainRender() {
+    gotoxy(30, 39);
     PI(0, 0, 500, 400, StartScreenDC);
 }

@@ -9,15 +9,23 @@
 
 #include "Battle.h"
  
-HDC MenuUpgradeDC, MenuMapDC, BlankDC;
-HBITMAP MenuUpgradeMap, MenuMapMap, BlankMap;
+HWND ConsoleWindow;
+HINSTANCE ConsoleInstance;
+
+HDC     ConsoleDC, MenuUpgradeDC,  MenuMapDC,  BlankDC,  BattleBackgroundDC;
+HBITMAP            MenuUpgradeMap, MenuMapMap, BlankMap, BattleBackgroundMap;
 
 void gotoxy(int x, int y);
 int kp(int key);
 int kpw(int key);
+int GMX();
+int GMY();
+void HideCursor();
+void LI(HDC* DC, HBITMAP* Map, char* path);
 void UtilityInit();
 void PTI(int sx, int sy, int w, int h, HDC originDC);
 void PTIB(int sx, int sy, int w, int h, HDC originDC);
+void PIO(int sx, int sy, int ox, int oy, int w, int h, HDC originDC);
 void PI(int sx, int sy, int w, int h, HDC originDC);
 void PrintBackground(int UMCode);
 

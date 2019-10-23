@@ -3,6 +3,7 @@
 
 #include "Map.h"
 #include "Gang.h"
+#include "Utility.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -22,14 +23,6 @@ void BattleKeyin();
 void BattleRender();
 void HideCursor();
 
-HWND ConsoleWindow;
-HDC ConsoleDC, BufferDC;
-HINSTANCE ConsoleInstance;
-HBITMAP BufferMap;
-
-HDC BackgroundDC;
-HBITMAP BackgroundMap;
-
 int ECode;
 Character OutAlly[101];
 Character OutEnemy[101];
@@ -38,6 +31,8 @@ int OutEnemyCnt;
 int OutAllyXMax;
 int OutEnemyXMax;
 int Collided;
+
+int ScreenX;
 
 Gang enemy;
 Castle AllyCastle, EnemyCastle;

@@ -15,33 +15,39 @@ int kpw(int key) {
         return (getch() == key);
 }
 
+void HideCursor() {
+   HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
+   CONSOLE_CURSOR_INFO info;
+   info.dwSize = 100;
+   info.bVisible = FALSE;
+   SetConsoleCursorInfo(consoleHandle, &info);
+}
+
+void LI(HDC* DC, HBITMAP* Map, char* path) {
+    (*DC) = CreateCompatibleDC(ConsoleDC);
+    (*Map) = (HBITMAP) LoadImage(NULL, path, IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE | LR_CREATEDIBSECTION);
+    SelectObject(*DC, *Map);
+}
+
 void UtilityInit() {
-    MenuUpgradeDC = CreateCompatibleDC(ConsoleDC);
-    MenuMapDC = CreateCompatibleDC(ConsoleDC);
-    BlankDC = CreateCompatibleDC(ConsoleDC);
+    LI(&MenuUpgradeDC, &MenuUpgradeMap, "./resources/Menu_Upgrade.bmp");
+    LI(&MenuMapDC, &MenuMapMap, "./resources/Menu_Map.bmp");
+    LI(&BlankDC, &BlankMap, "./resources/Blank.bmp");
+    LI(&BattleBackgroundDC, &BattleBackgroundMap, "./resources/BattleBackground.bmp");
+}
 
-    MenuUpgradeMap = (HBITMAP) LoadImage(NULL,
-                                         TEXT("./resources/Menu_Upgrade.bmp"),
-                                         IMAGE_BITMAP,
-                                         0,
-                                         0,
-                                         LR_LOADFROMFILE | LR_CREATEDIBSECTION);
-    MenuMapMap = (HBITMAP) LoadImage(NULL,
-                                         TEXT("./resources/Menu_Map.bmp"),
-                                         IMAGE_BITMAP,
-                                         0,
-                                         0,
-                                         LR_LOADFROMFILE | LR_CREATEDIBSECTION);
-    BlankMap = (HBITMAP) LoadImage(NULL,
-                                         TEXT("./resources/Blank.bmp"),
-                                         IMAGE_BITMAP,
-                                         0,
-                                         0,
-                                         LR_LOADFROMFILE | LR_CREATEDIBSECTION);
+int GMX() {
+	POINT pt;
+    GetCursorPos(&pt);
+	ScreenToClient(ConsoleWindow, &pt);
+    return pt.x;
+}
 
-    SelectObject(MenuUpgradeDC, MenuUpgradeMap);
-    SelectObject(MenuMapDC, MenuMapMap);
-    SelectObject(BlankDC, BlankMap);
+int GMY() {
+	POINT pt;
+	GetCursorPos(&pt);
+	ScreenToClient(ConsoleWindow, &pt);
+    return pt.y;
 }
 
 void PTI(int sx, int sy, int w, int h, HDC originDC) {
@@ -51,6 +57,10 @@ void PTI(int sx, int sy, int w, int h, HDC originDC) {
 void PTIB(int sx, int sy, int w, int h, HDC originDC) {
     BitBlt(ConsoleDC, sx, sy, w, h, BlankDC, w, h, SRCCOPY);
     TransparentBlt(ConsoleDC, sx, sy, w, h, originDC, 0, 0, w, h, RGB(255, 0, 255));
+}
+
+void PIO(int sx, int sy, int ox, int oy, int w, int h, HDC originDC) {
+    BitBlt(ConsoleDC, sx, sy, w, h, originDC, ox, oy, SRCCOPY);
 }
 
 void PI(int sx, int sy, int w, int h, HDC originDC) {

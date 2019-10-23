@@ -29,28 +29,18 @@ void Load() {
                 sprintf(path, "%s/Walk/%d.bmp", gang.characters[i].path, j);
                 gotoxy(39, 30);
 
-                gang.characters[i].CharacterWalkSpriteDC[j] = CreateCompatibleDC(ConsoleDC);
-                gang.characters[i].CharacterWalkSpriteMap[j] = (HBITMAP) LoadImage(NULL,
-                                                                     path,
-                                                                     IMAGE_BITMAP,
-                                                                     0,
-                                                                     0,
-                                                                     LR_LOADFROMFILE | LR_CREATEDIBSECTION);
-                SelectObject(gang.characters[i].CharacterWalkSpriteDC[j], gang.characters[i].CharacterWalkSpriteMap[j]);
+                LI(&gang.characters[i].CharacterWalkSpriteDC[j], 
+                   &gang.characters[i].CharacterWalkSpriteMap[j],
+                   path);
             }
 
             for(int j=0 ; j<gang.characters[i].CharacterAttackSpriteNum ; j++) {
                 char path[101];
                 sprintf(path, "%s/Attack/%d.bmp", gang.characters[i].path, j);
 
-                gang.characters[i].CharacterAttackSpriteDC[j] = CreateCompatibleDC(ConsoleDC);
-                gang.characters[i].CharacterAttackSpriteMap[j] = (HBITMAP) LoadImage(NULL,
-                                                                     TEXT(path),
-                                                                     IMAGE_BITMAP,
-                                                                     0,
-                                                                     0,
-                                                                     LR_LOADFROMFILE | LR_CREATEDIBSECTION);
-                SelectObject(gang.characters[i].CharacterAttackSpriteDC[j], gang.characters[i].CharacterAttackSpriteMap[j]);
+                LI(&gang.characters[i].CharacterAttackSpriteDC[j], 
+                   &gang.characters[i].CharacterAttackSpriteMap[j],
+                   path);
             }
         }
 
@@ -60,15 +50,6 @@ void Load() {
         for(int i=0 ; i<map.countriesNum ; i++) {
             fscanf(ConfigureFile, "%d %d", &map.countries[i].MapX, &map.countries[i].MapY);
         }
-
-        BackgroundDC = CreateCompatibleDC(ConsoleDC);
-        BackgroundMap = (HBITMAP) LoadImage(NULL, 
-                                            TEXT("./resources/background.bmp"),
-                                            IMAGE_BITMAP,
-                                            0,
-                                            0,
-                                            LR_LOADFROMFILE | LR_CREATEDIBSECTION);
-        SelectObject(BackgroundDC, BackgroundMap);
     }
     // Debug();
 }

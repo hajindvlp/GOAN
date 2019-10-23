@@ -23,15 +23,11 @@ void MapInit() {
 int MapSelect() {
 
     int selected = 0;
-    int ReturnVal;
 
     PrintBackground(2);
     while(1) {
-        RenturnVal = MapUpdate(&selected);
-        if(ReturnVal == 1)
+        if(MapUpdate(&selected))
             return 1;
-        else if(ReturnVal == -1)
-            return -selected;
         MapRender(selected);
     }
 }
@@ -44,7 +40,7 @@ int MapUpdate(int* selected) {
         (*selected)--;
         MapRender((*selected));
     } else if(kp(VK_RETURN)) {
-        return -1;
+        startBattle(*selected);
     } else if(kp('I')) {
         return 1;
     }
@@ -57,5 +53,5 @@ void MapRender(int selected) {
 }
 
 void startBattle(int selected) {
-    
+    BattleMain(selected);
 }
