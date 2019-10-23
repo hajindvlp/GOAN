@@ -44,8 +44,6 @@ void PTI(int sx, int sy, int w, int h, HDC originDC) {
 }
 
 void PTIB(int sx, int sy, int w, int h, HDC originDC) {
-    gotoxy(20, 20);
-    printf("%d %d %d %d", sx, sy, w, h);
     BitBlt(ConsoleDC, sx, sy, w, h, BlankDC, w, h, SRCCOPY);
     TransparentBlt(ConsoleDC, sx, sy, w, h, originDC, 0, 0, w, h, RGB(255, 0, 255));
 }

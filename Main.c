@@ -2,14 +2,11 @@
 
 int main() {
     HideCursor();
-    printf("[*] Main Function\n");
     system("mode 90, 40");
     MainGame();
 }
 
-void MainGame() {
-    printf("[*] MainGame Function\n");
-    
+void MainGame() {    
     MainInit();
     UtilityInit();
     MapInit();
@@ -33,13 +30,7 @@ void MainInit() {
                                          LR_LOADFROMFILE | LR_CREATEDIBSECTION);
     SelectObject(StartScreenDC, StartScreenMap);
 
-    if(StartScreenDC && StartScreenMap) printf("[*] Image Load Success\n");
-
-    gotoxy(39, 30);
-    printf("[*] MainInit Function\n");
     Load();
-    gotoxy(39, 30);
-    printf("[*] Reading End\n");
 
     Sleep(1000);
     system("cls");
@@ -60,8 +51,6 @@ void MainUpdate() {
                 key = 2;
             }
         }
-        gotoxy(40, 29);
-        printf("[*] key : %d", key);
     }
 }
 

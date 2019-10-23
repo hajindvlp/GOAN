@@ -48,8 +48,6 @@ int MapUpdate(int* selected) {
 }
 
 void MapRender(int selected) {
-    gotoxy(30, 20);
-    printf("[*] Selected : %d", selected);
     PI(5, 78, 490, 320, MapDC);
     PTI(map.countries[selected].MapX, map.countries[selected].MapX, 69, 56, SelectedBraketDC);
 }

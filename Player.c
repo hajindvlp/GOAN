@@ -1,13 +1,9 @@
 #include "Player.h"
 
 void Load() {
-    gotoxy(39, 30);
-    printf("[*] Load Function\n");
     ConfigureFile = fopen("./resources/DATA", "r+");
 
     if(ConfigureFile != NULL) {
-        gotoxy(39, 30);
-        printf("[*] Reading Config File\n");
 
         fscanf(ConfigureFile, "%d", &PlayerExp); // player exp
 
@@ -32,7 +28,6 @@ void Load() {
                 char path[101];
                 sprintf(path, "%s/Walk/%d.bmp", gang.characters[i].path, j);
                 gotoxy(39, 30);
-                printf("[*] %s Loaded\n", path);
 
                 gang.characters[i].CharacterWalkSpriteDC[j] = CreateCompatibleDC(ConsoleDC);
                 gang.characters[i].CharacterWalkSpriteMap[j] = (HBITMAP) LoadImage(NULL,
@@ -41,13 +36,6 @@ void Load() {
                                                                      0,
                                                                      0,
                                                                      LR_LOADFROMFILE | LR_CREATEDIBSECTION);
-                if(gang.characters[i].CharacterWalkSpriteMap[j] == NULL) {
-                    gotoxy(39, 30);
-                    printf("[*] Image Not");
-                } else {
-                    gotoxy(39, 30);
-                    printf("[*] Image Loaded");
-                }
                 SelectObject(gang.characters[i].CharacterWalkSpriteDC[j], gang.characters[i].CharacterWalkSpriteMap[j]);
             }
 
@@ -69,10 +57,8 @@ void Load() {
         fscanf(ConfigureFile, "%d %d", &AllyCastle.hp, &EnemyCastle.hp);
 
         fscanf(ConfigureFile, "%d", &map.countriesNum);
-        printf("\n");
         for(int i=0 ; i<map.countriesNum ; i++) {
             fscanf(ConfigureFile, "%d %d", &map.countries[i].MapX, &map.countries[i].MapY);
-            printf("%d %d\n", map.countries[i].MapX, map.countries[i].MapY);
         }
 
         BackgroundDC = CreateCompatibleDC(ConsoleDC);
@@ -83,8 +69,6 @@ void Load() {
                                             0,
                                             LR_LOADFROMFILE | LR_CREATEDIBSECTION);
         SelectObject(BackgroundDC, BackgroundMap);
-        gotoxy(39, 30);
-        printf("[*] Read File in File\n");
     }
     // Debug();
 }
@@ -105,15 +89,6 @@ void Debug() {
         printf("%c\n", gang.characters[i].shortcut);
         printf("%d\n", gang.characters[i].CharacterWalkSpriteNum);
         printf("%d\n", gang.characters[i].CharacterAttackSpriteNum);
-    }
-
-    while(!kbhit()) {
-        gotoxy(39, 30);
-        printf("Press Key To Start");
-        Sleep(500);
-        gotoxy(39, 30);
-        printf("                  ");
-        Sleep(300);
     }
 }
 
