@@ -24,7 +24,6 @@ int MapSelect() {
 
     int selected = 0;
 
-
     PrintBackground(2);
     while(1) {
         if(MapUpdate(&selected))
@@ -34,10 +33,10 @@ int MapSelect() {
 }
 
 int MapUpdate(int* selected) {
-    if(key_pressed(VK_LEFT)) { //left
+    if(key_pressed(VK_RIGHT) && (*selected)+1 < 5) { //left
         (*selected)++;
         MapRender((*selected));
-    } else if(key_pressed(VK_LEFT)) {  // right 
+    } else if(key_pressed(VK_LEFT) && (*selected)-1 >= 0) {  // right 
         (*selected)--;
         MapRender((*selected));
     } else if(key_pressed(VK_RETURN)) {
@@ -49,10 +48,12 @@ int MapUpdate(int* selected) {
 }
 
 void MapRender(int selected) {
+    gotoxy(30, 20);
+    printf("[*] Selected : %d", selected);
     PI(5, 78, 490, 320, MapDC);
     PTI(map.countries[selected].MapX, map.countries[selected].MapX, 69, 56, SelectedBraketDC);
 }
 
 void startBattle(int selected) {
-
+    
 }

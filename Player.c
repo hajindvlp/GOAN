@@ -69,8 +69,10 @@ void Load() {
         fscanf(ConfigureFile, "%d %d", &AllyCastle.hp, &EnemyCastle.hp);
 
         fscanf(ConfigureFile, "%d", &map.countriesNum);
+        printf("\n");
         for(int i=0 ; i<map.countriesNum ; i++) {
             fscanf(ConfigureFile, "%d %d", &map.countries[i].MapX, &map.countries[i].MapY);
+            printf("%d %d\n", map.countries[i].MapX, map.countries[i].MapY);
         }
 
         BackgroundDC = CreateCompatibleDC(ConsoleDC);
