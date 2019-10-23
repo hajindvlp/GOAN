@@ -2,7 +2,7 @@
 
 int main() {
     HideCursor();
-    system("mode 90, 40");
+    system("mode 80, 30");
     MainGame();
 }
 

@@ -14,13 +14,13 @@ int UpgradeSelect() {
 }
 
 int UpgradeUpdate(int *selected) {
-    if(key_pressed('O')) {
+    if(kp('O')) {
         return 1;
     } 
-    if(key_pressed(VK_RIGHT)) {
+    if(kp(VK_RIGHT)) {
         (*selected) ++;
     }
-    if(key_pressed(VK_LEFT)) {
+    if(kp(VK_LEFT)) {
         (*selected) --;
     }
     return 0;

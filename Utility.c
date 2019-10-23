@@ -6,8 +6,13 @@ void gotoxy(int x, int y) {
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos); 
 }
 
-int key_pressed(int key) {
+int kp(int key) {
     return (GetAsyncKeyState(key) & 0x8000 != 0);
+}
+
+int kpw(int key) {
+    while(!kbhit())
+        return (getch() == key);
 }
 
 void UtilityInit() {

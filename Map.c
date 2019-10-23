@@ -23,25 +23,29 @@ void MapInit() {
 int MapSelect() {
 
     int selected = 0;
+    int ReturnVal;
 
     PrintBackground(2);
     while(1) {
-        if(MapUpdate(&selected))
+        RenturnVal = MapUpdate(&selected);
+        if(ReturnVal == 1)
             return 1;
+        else if(ReturnVal == -1)
+            return -selected;
         MapRender(selected);
     }
 }
 
 int MapUpdate(int* selected) {
-    if(key_pressed(VK_RIGHT) && (*selected)+1 < 5) { //left
+    if(kp(VK_RIGHT) && (*selected)+1 < 5) { //left
         (*selected)++;
         MapRender((*selected));
-    } else if(key_pressed(VK_LEFT) && (*selected)-1 >= 0) {  // right 
+    } else if(kp(VK_LEFT) && (*selected)-1 >= 0) {  // right 
         (*selected)--;
         MapRender((*selected));
-    } else if(key_pressed(VK_RETURN)) {
-        startBattle((*selected));
-    } else if(key_pressed('I')) {
+    } else if(kp(VK_RETURN)) {
+        return -1;
+    } else if(kp('I')) {
         return 1;
     }
     return 0;
