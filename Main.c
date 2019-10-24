@@ -10,12 +10,12 @@ void MainGame() {
     MainInit();
     UtilityInit();
     MapInit();
+    mciSendString("play resources/Sounds/music.mp3", NULL, 0, 0);
     
     HANDLE hInput;
     DWORD prev_mode;
     GetConsoleMode(hInput, &prev_mode); 
     SetConsoleMode(hInput, prev_mode & ~ENABLE_QUICK_EDIT_MODE);
-    mciSendString("play \"./Sounds/music.wav\" repeat", NULL, 0, NULL);
     
     MainRender();
     MainUpdate();
@@ -55,5 +55,5 @@ void MainUpdate() {
 
 void MainRender() {
     gotoxy(30, 39);
-    PI(0, 0, 500, 400, StartScreenDC);
+    PI(0, 0, 800, 450, StartScreenDC);
 }

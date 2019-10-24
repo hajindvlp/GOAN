@@ -1,6 +1,7 @@
 #include "Upgrade.h"
 
 int UpgradeSelect() {
+    
 
     int selected = 0;
 
@@ -27,7 +28,6 @@ int UpgradeUpdate(int *selected) {
 }
 
 void UpgradeRender(int selected) {
-    
     for(int i=0 ; i<gang.characterNum ; i++)
     {
         if(selected == i) {
