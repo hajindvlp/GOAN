@@ -49,7 +49,7 @@ int MapUpdate(int* selected) {
 
 void MapRender(int selected) {
     PI(5, 78, 490, 320, MapDC);
-    PTI(map.countries[selected].MapX, map.countries[selected].MapX, 69, 56, SelectedBraketDC);
+    PT(map.countries[selected].MapX, map.countries[selected].MapX, 69, 56, SelectedBraketDC);
 }
 
 void startBattle(int selected) {

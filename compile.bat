@@ -1,2 +1,2 @@
 cls
-gcc ./*.c libgdi32.a -lmsimg32
+gcc ./*.c libgdi32.a -lmsimg32  -lwinmm

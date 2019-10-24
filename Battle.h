@@ -34,7 +34,8 @@ int Collided;
 
 int ScreenX;
 
-Gang enemy;
+Gang Enemy;
+Gang Ally;
 Castle AllyCastle, EnemyCastle;
 
 int BattleGround;

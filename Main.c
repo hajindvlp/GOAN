@@ -11,6 +11,12 @@ void MainGame() {
     UtilityInit();
     MapInit();
     
+    HANDLE hInput;
+    DWORD prev_mode;
+    GetConsoleMode(hInput, &prev_mode); 
+    SetConsoleMode(hInput, prev_mode & ~ENABLE_QUICK_EDIT_MODE);
+    mciSendString("play \"./Sounds/music.wav\" repeat", NULL, 0, NULL);
+    
     MainRender();
     MainUpdate();
 }

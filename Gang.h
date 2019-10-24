@@ -21,12 +21,16 @@ typedef struct {
 
     HDC CharacterWalkSpriteDC[101];
     HDC CharacterAttackSpriteDC[101];
+    HDC CharacterDieSpriteDC[101];
     HBITMAP CharacterWalkSpriteMap[101];
     HBITMAP CharacterAttackSpriteMap[101];
+    HBITMAP CharacterDieSpriteMap[101];
     int CharacterWalkSpriteNum;
     int CharacterWalkSpriteCnt;
     int CharacterAttackSpriteNum;
     int CharacterAttackSpriteCnt;
+    int CharacterDieSpriteNum;
+    int CharacterDieSpriteCnt;
 
     char shortcut;
 

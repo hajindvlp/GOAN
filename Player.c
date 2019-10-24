@@ -23,6 +23,7 @@ void Load() {
 
             fscanf(ConfigureFile, "%d", &gang.characters[i].CharacterWalkSpriteNum);
             fscanf(ConfigureFile, "%d", &gang.characters[i].CharacterAttackSpriteNum);
+            fscanf(ConfigureFile, "%d", &gang.characters[i].CharacterDieSpriteNum);
 
             for(int j=0 ; j<gang.characters[i].CharacterWalkSpriteNum ; j++) {
                 char path[101];
@@ -40,6 +41,15 @@ void Load() {
 
                 LI(&gang.characters[i].CharacterAttackSpriteDC[j], 
                    &gang.characters[i].CharacterAttackSpriteMap[j],
+                   path);
+            }
+
+            for(int j=0 ; j<gang.characters[i].CharacterDieSpriteNum ; j++) {
+                char path[101];
+                sprintf(path, "%s/Die/%d.bmp", gang.characters[i].path, j);
+
+                LI(&gang.characters[i].CharacterDieSpriteDC[j], 
+                   &gang.characters[i].CharacterDieSpriteMap[j],
                    path);
             }
         }

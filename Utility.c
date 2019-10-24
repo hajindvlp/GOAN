@@ -34,6 +34,7 @@ void UtilityInit() {
     LI(&MenuMapDC, &MenuMapMap, "./resources/Menu_Map.bmp");
     LI(&BlankDC, &BlankMap, "./resources/Blank.bmp");
     LI(&BattleBackgroundDC, &BattleBackgroundMap, "./resources/BattleBackground.bmp");
+    LI(&BattleCharacterSelectBoxDC, &BattleCharacterSelectBoxMap, "./resources/BattleCharacterBox.bmp");
 }
 
 int GMX() {
@@ -50,16 +51,16 @@ int GMY() {
     return pt.y;
 }
 
-void PTI(int sx, int sy, int w, int h, HDC originDC) {
+void PT(int sx, int sy, int w, int h, HDC originDC) {
     TransparentBlt(ConsoleDC, sx, sy, w, h, originDC, 0, 0, w, h, RGB(255, 0, 255));
 }
 
-void PTIB(int sx, int sy, int w, int h, HDC originDC) {
+void PTB(int sx, int sy, int w, int h, HDC originDC) {
     BitBlt(ConsoleDC, sx, sy, w, h, BlankDC, w, h, SRCCOPY);
     TransparentBlt(ConsoleDC, sx, sy, w, h, originDC, 0, 0, w, h, RGB(255, 0, 255));
 }
 
-void PIO(int sx, int sy, int ox, int oy, int w, int h, HDC originDC) {
+void PO(int sx, int sy, int ox, int oy, int w, int h, HDC originDC) {
     BitBlt(ConsoleDC, sx, sy, w, h, originDC, ox, oy, SRCCOPY);
 }
 

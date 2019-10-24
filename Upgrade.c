@@ -9,7 +9,7 @@ int UpgradeSelect() {
         if( UpgradeUpdate(&selected) )
             return 2;
         UpgradeRender(selected);
-        Sleep(200);
+        Sleep(300);
     }    
 }
 
@@ -31,11 +31,11 @@ void UpgradeRender(int selected) {
     for(int i=0 ; i<gang.characterNum ; i++)
     {
         if(selected == i) {
-            PTIB( 20 + (20 + 100) * i, 100, 100, 100, 
-                       gang.characters[i].CharacterWalkSpriteDC[(gang.characters[i].CharacterWalkSpriteCnt++)%gang.characters[i].CharacterWalkSpriteNum]);
+            PTB( 20 + (20 + 100) * i, 100, 100, 100, 
+                       gang.characters[i].CharacterDieSpriteDC[(gang.characters[i].CharacterDieSpriteCnt++)%gang.characters[i].CharacterDieSpriteNum]);
         }
         else {
-            PTIB( 20 + (20 + 100) * i, 100, 100, 100, 
+            PTB( 20 + (20 + 100) * i, 100, 100, 100, 
                        gang.characters[i].CharacterWalkSpriteDC[0]);
         }
     }

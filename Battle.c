@@ -13,6 +13,7 @@ void BattleMain(int EnemyCode) {
 
 void BattleInit() {
     ScreenX = 0;
+    Ally = gang;
 }
 
 void BattleUpdate() {
@@ -62,7 +63,14 @@ void BattleKeyin() {
 void BattleRender() {
     // Render Background
 
-    PIO(0, 0, ScreenX, 0, 500, 400, BattleBackgroundDC);
+    PO(0, 0, ScreenX, 0, 500, 400, BattleBackgroundDC);
+
+    // Render Select Menu
+
+    for(int i = 0 ; i<Ally.characterNum ; i++) {
+        PT(380 - (110+5) * (i), 5, 110, 110, BattleCharacterSelectBoxDC);
+        PTB(385 - (110+5) * (i), 10, 100, 100, Ally.characters[i].CharacterWalkSpriteDC[(Ally.characters[i].CharacterWalkSpriteCnt++)%Ally.characters[i].CharacterWalkSpriteNum]);
+    }
 
     // Render Allys
 
