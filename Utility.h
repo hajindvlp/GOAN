@@ -12,8 +12,8 @@
 HWND ConsoleWindow;
 HINSTANCE ConsoleInstance;
 
-HDC     ConsoleDC, MenuUpgradeDC,  MenuMapDC,  BlankDC,  BattleBackgroundDC,  BattleCharacterSelectBoxDC;
-HBITMAP            MenuUpgradeMap, MenuMapMap, BlankMap, BattleBackgroundMap, BattleCharacterSelectBoxMap;
+HDC     ConsoleDC, MenuUpgradeDC,  MenuMapDC,  BlankDC,  BattleBackgroundDC,  BattleCharacterSelectBoxDC,  MenuSelectDC;
+HBITMAP            MenuUpgradeMap, MenuMapMap, BlankMap, BattleBackgroundMap, BattleCharacterSelectBoxMap, MenuSelectMap;
 
 void gotoxy(int x, int y);
 int kp(int key);

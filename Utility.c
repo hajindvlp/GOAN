@@ -35,6 +35,7 @@ void UtilityInit() {
     LI(&BlankDC, &BlankMap, "./resources/Blank.bmp");
     LI(&BattleBackgroundDC, &BattleBackgroundMap, "./resources/BattleBackground.bmp");
     LI(&BattleCharacterSelectBoxDC, &BattleCharacterSelectBoxMap, "./resources/BattleCharacterBox.bmp");
+    LI(&MenuSelectDC, &MenuSelectMap, "./resources/SelectMenu.bmp");
     
     mciSendString("open resources/Sounds/music.mp3 type mpegvideo", NULL,0,0);
 }

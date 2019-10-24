@@ -14,7 +14,7 @@
 void MainInit();
 void MainGame();
 void MainUpdate();
-void MainRender();
+void MainRender(int selected);
 
 HDC StartScreenDC;
 HBITMAP StartScreenMap;
