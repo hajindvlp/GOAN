@@ -23,8 +23,7 @@ void MapInit() {
 int MapSelect() {
 
     int selected = 0;
-
-    PrintBackground(2);
+    
     while(1) {
         if(MapUpdate(&selected))
             return 1;
@@ -48,7 +47,7 @@ int MapUpdate(int* selected) {
 }
 
 void MapRender(int selected) {
-    PI(5, 78, 490, 320, MapDC);
+    PI(0, 0, 800, 450, MapDC);
     PT(map.countries[selected].MapX, map.countries[selected].MapX, 69, 56, SelectedBraketDC);
 }
 
