@@ -10,12 +10,6 @@ void MainGame() {
     MainInit();
     UtilityInit();
     MapInit();
-    mciSendString("play resources/Sounds/music.mp3", NULL, 0, 0);
-    
-    HANDLE hInput;
-    DWORD prev_mode;
-    GetConsoleMode(hInput, &prev_mode); 
-    SetConsoleMode(hInput, prev_mode & ~ENABLE_QUICK_EDIT_MODE);
     
     MainRender(0);
     MainUpdate();
@@ -30,9 +24,6 @@ void MainInit() {
     LI(&StartScreenDC, &StartScreenMap, "./resources/StartScreen.bmp");
 
     Load();
-
-    Sleep(1000);
-    system("cls");
 }
 
 void MainUpdate() {
@@ -67,7 +58,11 @@ void MainUpdate() {
 }
 
 void MainRender(int selected) {
+
+    // render background
     PI(0, 0, 800, 450, StartScreenDC);
+
+    // render selection bar
     if(selected == 0) {
         PT(42, 250, 250, 30, MenuSelectDC);
     } else if(selected == 1) {

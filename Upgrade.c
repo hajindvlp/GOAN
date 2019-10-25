@@ -4,7 +4,6 @@ int UpgradeSelect() {
     
     int selected = 0;
 
-    PrintBackground(1);
     while(1) {
         if( UpgradeUpdate(&selected) )
             return 2;
@@ -30,7 +29,11 @@ int UpgradeUpdate(int *selected) {
 }
 
 void UpgradeRender(int selected) {
-    // printf("%d %d\n", GMX(), GMY());
+
+    // render store background
+    PI(0, 0, 800, 450, MenuUpgradeDC);
+
+    // render character Sprite
     for(int i=0 ; i<gang.characterNum ; i++)
     {
         if(selected == i) {

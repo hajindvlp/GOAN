@@ -72,13 +72,6 @@ void Debug() {
         printf("%s\n", gang.characters[i].name);
         printf("%d\n", gang.characters[i].hp);
         printf("%d\n", gang.characters[i].dg);
-        printf("%d\n", gang.characters[i].cost);
-        printf("%d\n", gang.characters[i].width);
-        printf("%d\n", gang.characters[i].height);
-        printf("%d\n", gang.characters[i].speed);
-        printf("%c\n", gang.characters[i].shortcut);
-        printf("%d\n", gang.characters[i].CharacterWalkSpriteNum);
-        printf("%d\n", gang.characters[i].CharacterAttackSpriteNum);
     }
 }
 

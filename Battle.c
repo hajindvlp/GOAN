@@ -21,7 +21,7 @@ void BattleUpdate() {
     for(int i=0 ; i<OutAllyCnt ; i++) {
         if(!OutAlly[i].BattleDead && OutAlly[i].BattleHp > 0) {
             if(!Collided) 
-                OutAlly[i].BattleX += OutAlly[i].speed;
+                OutAlly[i].BattleX += OutAlly[i].ms;
             OutAllyXMax = (OutAllyXMax > OutAlly[i].BattleX) ? OutAllyXMax : OutAlly[i].BattleX;
         } else {
             OutAlly[i].BattleDead = 1;
@@ -29,7 +29,7 @@ void BattleUpdate() {
     } 
     for(int i=0 ; i<OutEnemyCnt ; i++) {
         if(!OutEnemy[i].BattleDead && OutEnemy[i].BattleHp > 0 && OutEnemy[i].BattleX) {
-            OutEnemy[i].BattleX -= OutEnemy[i].speed;
+            OutEnemy[i].BattleX -= OutEnemy[i].ms;
         } else {
             OutEnemy[i].BattleDead = 1;
         }

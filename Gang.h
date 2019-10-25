@@ -12,10 +12,10 @@ typedef struct {
     char name[101];
     int hp;
     int dg;
+    int df;
     int cost;
-    int width;
-    int height;
-    int speed;
+    int ms;
+    int as;
 
     char path[101];
 
@@ -31,8 +31,6 @@ typedef struct {
     int CharacterAttackSpriteCnt;
     int CharacterDieSpriteNum;
     int CharacterDieSpriteCnt;
-
-    char shortcut;
 
     int BattleHp;
     int BattleDg;

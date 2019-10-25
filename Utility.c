@@ -30,11 +30,13 @@ void LI(HDC* DC, HBITMAP* Map, char* path) {
 }
 
 void UtilityInit() {
-    LI(&MenuUpgradeDC, &MenuUpgradeMap, "./resources/Menu_Upgrade.bmp");
-    LI(&MenuMapDC, &MenuMapMap, "./resources/Menu_Map.bmp");
+    LI(&MenuUpgradeDC, &MenuUpgradeMap, "./resources/Upgrade.bmp");
+    LI(&MenuMapDC, &MenuMapMap, "./resources/Map.bmp");
     LI(&BlankDC, &BlankMap, "./resources/Blank.bmp");
+
     LI(&BattleBackgroundDC, &BattleBackgroundMap, "./resources/BattleBackground.bmp");
     LI(&BattleCharacterSelectBoxDC, &BattleCharacterSelectBoxMap, "./resources/BattleCharacterBox.bmp");
+
     LI(&MenuSelectDC, &MenuSelectMap, "./resources/SelectMenu.bmp");
     
     mciSendString("open resources/Sounds/music.mp3 type mpegvideo", NULL,0,0);
@@ -69,10 +71,4 @@ void PO(int sx, int sy, int ox, int oy, int w, int h, HDC originDC) {
 
 void PI(int sx, int sy, int w, int h, HDC originDC) {
     BitBlt(ConsoleDC, sx, sy, w, h, originDC, 0, 0, SRCCOPY);
-}
-
-void PrintBackground(int UMCode) {
-    if(UMCode == 1) {
-        BitBlt(ConsoleDC, 0, 0, 800, 450, MenuUpgradeDC, 0, 0, SRCCOPY);
-    }
 }

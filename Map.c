@@ -1,23 +1,6 @@
 #include "Map.h"
 
 void MapInit() {
-    MapDC = CreateCompatibleDC(ConsoleDC);
-    MapMap = (HBITMAP) LoadImage(NULL,
-                                 TEXT("./resources/Map.bmp"),
-                                 IMAGE_BITMAP,
-                                 0,
-                                 0,
-                                 LR_LOADFROMFILE | LR_CREATEDIBSECTION);
-    SelectObject(MapDC, MapMap);
-
-    SelectedBraketDC = CreateCompatibleDC(ConsoleDC);
-    SelectedBraketMap = (HBITMAP) LoadImage(NULL,
-                                 TEXT("./resources/Select.bmp"),
-                                 IMAGE_BITMAP,
-                                 0,
-                                 0,
-                                 LR_LOADFROMFILE | LR_CREATEDIBSECTION);
-    SelectObject(SelectedBraketDC, SelectedBraketMap);
 }
 
 int MapSelect() {
@@ -49,6 +32,9 @@ int MapUpdate(int* selected) {
 }
 
 void MapRender(int selected) {
+
+    PI(0, 0, 800, 450, MenuMapDC);
+    /*
     int oldX, oldY, X, Y;
 
     X = GMX();
@@ -58,6 +44,7 @@ void MapRender(int selected) {
         PT(X+23, Y+28, 69, 56, SelectedBraketDC);
         oldX = X, oldY = Y;
     }
+    */
 }
 
 void startBattle(int selected) {
