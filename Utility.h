@@ -6,14 +6,57 @@
 #include <conio.h>
 #include <stdlib.h>
 #include <gdiplus.h>
-
-#include "Battle.h"
  
 HWND ConsoleWindow;
 HINSTANCE ConsoleInstance;
 
 HDC     ConsoleDC, MenuUpgradeDC,  MenuMapDC,  BlankDC,  BattleBackgroundDC,  BattleCharacterSelectBoxDC,  MenuSelectDC;
 HBITMAP            MenuUpgradeMap, MenuMapMap, BlankMap, BattleBackgroundMap, BattleCharacterSelectBoxMap, MenuSelectMap;
+
+typedef struct {
+    char name[101];
+    int hp;
+    int dg;
+    int df;
+    int cost;
+    int ms;
+    int as;
+
+    char path[101];
+
+    HDC IconDC;
+    HBITMAP IconMap;
+
+    HDC WalkSpriteDC[101];
+    HDC AttackSpriteDC[101];
+    HDC DieSpriteDC[101];
+    HBITMAP WalkSpriteMap[101];
+    HBITMAP AttackSpriteMap[101];
+    HBITMAP DieSpriteMap[101];
+    int WalkSpriteNum;
+    int WalkSpriteCnt;
+    int AttackSpriteNum;
+    int AttackSpriteCnt;
+    int DieSpriteNum;
+    int DieSpriteCnt;
+
+    int BattleHp;
+    int BattleDg;
+    int BattleX;
+    int BattleDead;
+} Character;
+
+typedef struct {
+    int characterNum;
+    Character characters[100];
+} Gang;
+
+typedef struct {
+    int hp;
+} Castle;
+
+Gang gang;
+int PlayerExp;
 
 void gotoxy(int x, int y);
 int kp(int key);

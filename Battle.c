@@ -92,14 +92,14 @@ void BattleRender() {
 
     for(int i = 0 ; i<Ally.characterNum ; i++) {
         PT(380 - (110+5) * (i), 5, 110, 110, BattleCharacterSelectBoxDC);
-        PTB(385 - (110+5) * (i), 10, 100, 100, Ally.characters[i].CharacterWalkSpriteDC[(Ally.characters[i].CharacterWalkSpriteCnt++)%Ally.characters[i].CharacterWalkSpriteNum]);
+        PTB(385 - (110+5) * (i), 10, 100, 100, Ally.characters[i].WalkSpriteDC[(Ally.characters[i].WalkSpriteCnt++)%Ally.characters[i].WalkSpriteNum]);
     }
 
     // Render Allys
 
     for(int i=0 ; i<OutAllyCnt ; i++) {
         if(OutAlly[i].BattleX -ScreenX >= 0) {
-            PTB(OutAlly[i].BattleX -ScreenX, BattleGround-100, 100, 100, Ally.characters[i].CharacterWalkSpriteDC[(Ally.characters[i].CharacterWalkSpriteCnt++)%Ally.characters[i].CharacterWalkSpriteNum]);
+            PTB(OutAlly[i].BattleX -ScreenX, BattleGround-100, 100, 100, Ally.characters[i].WalkSpriteDC[(Ally.characters[i].WalkSpriteCnt++)%Ally.characters[i].WalkSpriteNum]);
         }
     }
 

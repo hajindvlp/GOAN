@@ -4,7 +4,6 @@
 #include <stdio.h>
 #include <windows.h>
 
-#include "Gang.h"
 #include "Map.h"
 #include "Upgrade.h"
 #include "Battle.h"

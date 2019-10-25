@@ -38,11 +38,11 @@ void UpgradeRender(int selected) {
     {
         if(selected == i) {
             PTB( 20 + (20 + 100) * i, 100, 100, 100, 
-                       gang.characters[i].CharacterWalkSpriteDC[(gang.characters[i].CharacterWalkSpriteCnt++)%gang.characters[i].CharacterWalkSpriteNum]);
+                       gang.characters[i].WalkSpriteDC[(gang.characters[i].WalkSpriteCnt++)%gang.characters[i].WalkSpriteNum]);
         }
         else {
             PTB( 20 + (20 + 100) * i, 100, 100, 100, 
-                       gang.characters[i].CharacterWalkSpriteDC[0]);
+                       gang.characters[i].WalkSpriteDC[0]);
         }
     }
 }

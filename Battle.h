@@ -2,7 +2,6 @@
 #define BATTLE_H
 
 #include "Map.h"
-#include "Gang.h"
 #include "Utility.h"
 
 #include <stdio.h>

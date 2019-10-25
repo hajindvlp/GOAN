@@ -4,7 +4,6 @@
 #include <stdio.h>
 #include <conio.h>
 #include "Player.h"
-#include "Gang.h"
 #include "Battle.h"
 
 int UpgradeSelect();

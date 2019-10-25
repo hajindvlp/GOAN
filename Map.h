@@ -2,7 +2,6 @@
 #define MAP_H
 
 #include <stdio.h>
-#include "Gang.h"
 #include "Battle.h"
 #include "Utility.h"
 #include "Upgrade.h"

@@ -20,47 +20,45 @@ void Load() {
 
             sprintf(gang.characters[i].path, "./resources/%s/sprites", gang.characters[i].name);
 
-            fscanf(ConfigureFile, "%d", &gang.characters[i].CharacterWalkSpriteNum);
-            fscanf(ConfigureFile, "%d", &gang.characters[i].CharacterAttackSpriteNum);
-            fscanf(ConfigureFile, "%d", &gang.characters[i].CharacterDieSpriteNum);
+            fscanf(ConfigureFile, "%d", &gang.characters[i].WalkSpriteNum);
+            fscanf(ConfigureFile, "%d", &gang.characters[i].AttackSpriteNum);
+            fscanf(ConfigureFile, "%d", &gang.characters[i].DieSpriteNum);
 
-            for(int j=0 ; j<gang.characters[i].CharacterWalkSpriteNum ; j++) {
+            for(int j=0 ; j<gang.characters[i].WalkSpriteNum ; j++) {
                 char path[101];
                 sprintf(path, "%s/Walk/%d.bmp", gang.characters[i].path, j);
                 gotoxy(39, 30);
 
-                LI(&gang.characters[i].CharacterWalkSpriteDC[j], 
-                   &gang.characters[i].CharacterWalkSpriteMap[j],
+                LI(&gang.characters[i].WalkSpriteDC[j], 
+                   &gang.characters[i].WalkSpriteMap[j],
                    path);
             }
 
-            for(int j=0 ; j<gang.characters[i].CharacterAttackSpriteNum ; j++) {
+            for(int j=0 ; j<gang.characters[i].AttackSpriteNum ; j++) {
                 char path[101];
                 sprintf(path, "%s/Attack/%d.bmp", gang.characters[i].path, j);
 
-                LI(&gang.characters[i].CharacterAttackSpriteDC[j], 
-                   &gang.characters[i].CharacterAttackSpriteMap[j],
+                LI(&gang.characters[i].AttackSpriteDC[j], 
+                   &gang.characters[i].AttackSpriteMap[j],
                    path);
             }
 
-            for(int j=0 ; j<gang.characters[i].CharacterDieSpriteNum ; j++) {
+            for(int j=0 ; j<gang.characters[i].DieSpriteNum ; j++) {
                 char path[101];
                 sprintf(path, "%s/Die/%d.bmp", gang.characters[i].path, j);
 
-                LI(&gang.characters[i].CharacterDieSpriteDC[j], 
-                   &gang.characters[i].CharacterDieSpriteMap[j],
+                LI(&gang.characters[i].DieSpriteDC[j], 
+                   &gang.characters[i].DieSpriteMap[j],
                    path);
             }
+
+            char path[101];
+            sprintf(path, "./resources/%s/icon.bmp", gang.characters[i].name);
+            LI(&gang.chacaters[i].IconDC,
+               &gang.chacaters[i].IconMap,
+               path);
         }
-
-        // fscanf(ConfigureFile, "%d %d", &AllyCastle.hp, &EnemyCastle.hp);
-
-        // fscanf(ConfigureFile, "%d", &map.countriesNum);
-        // for(int i=0 ; i<map.countriesNum ; i++) {
-        //     fscanf(ConfigureFile, "%d %d", &map.countries[i].MapX, &map.countries[i].MapY);
-        // }
     }
-    // Debug();
 }
 
 void Debug() {
