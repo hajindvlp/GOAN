@@ -38,7 +38,7 @@ void UpgradeRender(int selected) {
     {
         if(selected == i) {
             PTB( 20 + (20 + 100) * i, 100, 100, 100, 
-                       gang.characters[i].CharacterDieSpriteDC[(gang.characters[i].CharacterDieSpriteCnt++)%gang.characters[i].CharacterDieSpriteNum]);
+                       gang.characters[i].CharacterWalkSpriteDC[(gang.characters[i].CharacterWalkSpriteCnt++)%gang.characters[i].CharacterWalkSpriteNum]);
         }
         else {
             PTB( 20 + (20 + 100) * i, 100, 100, 100, 
