@@ -17,7 +17,10 @@ int UpgradeSelect() {
 int UpgradeUpdate(int *selected) {
     if(kp('O')) {
         return 1;
-    } 
+    }
+    if(GMX() >= 100 && GMX() <= 196 && GMY() >= 14 && GMY() <= 47 && kp(VK_LBUTTON)) {
+        return 1;
+    }
     if(kp(VK_RIGHT)) {
         (*selected) ++;
     }
@@ -28,6 +31,7 @@ int UpgradeUpdate(int *selected) {
 }
 
 void UpgradeRender(int selected) {
+    // printf("%d %d\n", GMX(), GMY());
     for(int i=0 ; i<gang.characterNum ; i++)
     {
         if(selected == i) {
