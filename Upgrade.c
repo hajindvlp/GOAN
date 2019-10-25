@@ -2,7 +2,6 @@
 
 int UpgradeSelect() {
     
-
     int selected = 0;
 
     PrintBackground(1);

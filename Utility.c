@@ -73,8 +73,6 @@ void PI(int sx, int sy, int w, int h, HDC originDC) {
 
 void PrintBackground(int UMCode) {
     if(UMCode == 1) {
-        BitBlt(ConsoleDC, 0, 0, 500, 400, MenuUpgradeDC, 0, 0, SRCCOPY);
-    } else if(UMCode == 2) {
-        BitBlt(ConsoleDC, 0, 0, 500, 400, MenuMapDC, 0, 0, SRCCOPY);
+        BitBlt(ConsoleDC, 0, 0, 800, 450, MenuUpgradeDC, 0, 0, SRCCOPY);
     }
 }

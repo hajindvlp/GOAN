@@ -49,8 +49,15 @@ int MapUpdate(int* selected) {
 }
 
 void MapRender(int selected) {
-    PI(0, 0, 800, 450, MapDC);
-    PT(GMX()+23, GMY()+28, 69, 56, SelectedBraketDC);
+    int oldX, oldY, X, Y;
+
+    X = GMX();
+    Y = GMY();
+    if(X!=oldX && Y!=oldY) {
+        PI(0, 0, 800, 450, MapDC);
+        PT(X+23, Y+28, 69, 56, SelectedBraketDC);
+        oldX = X, oldY = Y;
+    }
 }
 
 void startBattle(int selected) {

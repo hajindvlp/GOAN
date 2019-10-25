@@ -1,0 +1,18 @@
+Player Exp
+
+character Number
+
+{
+    Name
+    Attack
+    Defense
+    Health
+    Attack Speed
+    Move Speed
+    cost
+
+    Walk Sprite Number
+    Attack Sprite Number
+    Die Sprite Number
+}
+

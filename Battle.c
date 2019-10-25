@@ -35,11 +35,11 @@ void BattleUpdate() {
         }
     }
 
-    // collision check Ally<->Enemy / Ally<->EnemyCastle / Enemy<->AllyCastle
+    //collision check Ally<->Enemy / Ally<->EnemyCastle / Enemy<->AllyCastle
 
-    // attack
+    //attack
     
-    // Sumon Enemy randomly
+    //Sumon Enemy randomly
 }
 
 void BattleKeyin() {
@@ -54,9 +54,12 @@ void BattleKeyin() {
     // icon click
 
     int x = GMX(), y = GMY();
+
+    gotoxy(30, 39);
+    printf("%d %d\n", x, y);
     for(int i=0 ; i<Ally.characterNum ; i++) {
         if( x >= 385 - (110+5) * (i) && x <= 385 - (110+5) * (i) + 110 && 
-            y >= 5                   && y <= 115 && kp(VK_LBUTTON) &&
+            y >= 5                   && y <= 90 && kp(VK_LBUTTON) &&
             OutAllyCnt < 100 ) {
                 OutAlly[OutAllyCnt] = gang.characters[i];
                 OutAlly[OutAllyCnt].BattleHp = OutAlly[OutAllyCnt].hp;

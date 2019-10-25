@@ -56,9 +56,9 @@ void MainUpdate() {
             if(kp(VK_UP) && selected > 0) selected --, MainRender(selected); 
             if(kp(VK_DOWN) && selected < 2) selected ++, MainRender(selected); 
             else if(GMX() >= 42 && GMX() <= 42+250) {
-                if(GMY() >= 175 && GMY() <= 215 ) selected = 0, MainRender(selected);
-                if(GMY() >= 230 && GMY() <= 265 ) selected = 1, MainRender(selected);
-                if(GMY() >= 270 && GMY() <= 330 ) selected = 2, MainRender(selected);
+                if(GMY() >= 175 && GMY() <= 215 && selected != 0) selected = 0, MainRender(selected);
+                if(GMY() >= 230 && GMY() <= 265 && selected != 1) selected = 1, MainRender(selected);
+                if(GMY() >= 270 && GMY() <= 330 && selected != 2) selected = 2, MainRender(selected);
 
                 if(kp(VK_LBUTTON)) key = selected+1;
             }

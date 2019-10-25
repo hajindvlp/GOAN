@@ -11,13 +11,12 @@ void Load() {
         for(int i=0 ; i<gang.characterNum ; i++) {
 
             fscanf(ConfigureFile, "%s", gang.characters[i].name);
-            fscanf(ConfigureFile, "%d", &gang.characters[i].hp);
             fscanf(ConfigureFile, "%d", &gang.characters[i].dg);
+            fscanf(ConfigureFile, "%d", &gang.characters[i].df);
+            fscanf(ConfigureFile, "%d", &gang.characters[i].hp);
+            fscanf(ConfigureFile, "%d", &gang.characters[i].as);
+            fscanf(ConfigureFile, "%d", &gang.characters[i].ms);
             fscanf(ConfigureFile, "%d", &gang.characters[i].cost);
-            fscanf(ConfigureFile, "%d", &gang.characters[i].width);
-            fscanf(ConfigureFile, "%d", &gang.characters[i].height);
-            fscanf(ConfigureFile, "%d", &gang.characters[i].speed);
-            fscanf(ConfigureFile, " %c", &gang.characters[i].shortcut);
 
             sprintf(gang.characters[i].path, "./resources/%s/sprites", gang.characters[i].name);
 
@@ -54,12 +53,12 @@ void Load() {
             }
         }
 
-        fscanf(ConfigureFile, "%d %d", &AllyCastle.hp, &EnemyCastle.hp);
+        // fscanf(ConfigureFile, "%d %d", &AllyCastle.hp, &EnemyCastle.hp);
 
-        fscanf(ConfigureFile, "%d", &map.countriesNum);
-        for(int i=0 ; i<map.countriesNum ; i++) {
-            fscanf(ConfigureFile, "%d %d", &map.countries[i].MapX, &map.countries[i].MapY);
-        }
+        // fscanf(ConfigureFile, "%d", &map.countriesNum);
+        // for(int i=0 ; i<map.countriesNum ; i++) {
+        //     fscanf(ConfigureFile, "%d %d", &map.countries[i].MapX, &map.countries[i].MapY);
+        // }
     }
     // Debug();
 }
