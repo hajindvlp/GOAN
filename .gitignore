@@ -1,6 +1,5 @@
-./a.exe
-
-./libgdi32.a
-./compile.bat
+*.exe
+*.a
+*.bat
 
 test
