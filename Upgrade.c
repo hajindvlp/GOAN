@@ -2,7 +2,7 @@
 
 int UpgradeSelect() {
     
-    int selected = 0;
+    int selected = -1;
 
     while(1) {
         if( UpgradeUpdate(&selected) )
@@ -16,7 +16,7 @@ int UpgradeUpdate(int *selected) {
     if(kp('O')) {
         return 1;
     }
-    if(GMX() >= 100 && GMX() <= 196 && GMY() >= 14 && GMY() <= 47 && kp(VK_LBUTTON)) {
+    if( MIA(100, 14, 96, 33) && kp(VK_LBUTTON)) {
         return 1;
     }
     if(kp(VK_RIGHT)) {
@@ -25,6 +25,8 @@ int UpgradeUpdate(int *selected) {
     if(kp(VK_LEFT)) {
         (*selected) --;
     }
+    if(MIA(434, 65, 80, 80) && kp(VK_LBUTTON)) (*selected) = 0;
+    if(MIA(505, 65, 80, 80) && kp(VK_LBUTTON)) (*selected) = 1;
     return 0;
 }
 
@@ -33,16 +35,13 @@ void UpgradeRender(int selected) {
     // render store background
     PI(0, 0, 800, 450, MenuUpgradeDC);
 
+    // render character icons
+    // first one
+    PT( 540, 100, 80, 80, gang.characters[0].UpgradeIconDC );
+    PT( 630, 100, 80, 80, gang.characters[1].UpgradeIconDC );
+
     // render character Sprite
-    for(int i=0 ; i<gang.characterNum ; i++)
-    {
-        if(selected == i) {
-            PTB( 20 + (20 + 100) * i, 100, 100, 100, 
-                       gang.characters[i].WalkSpriteDC[(gang.characters[i].WalkSpriteCnt++)%gang.characters[i].WalkSpriteNum]);
-        }
-        else {
-            PTB( 20 + (20 + 100) * i, 100, 100, 100, 
-                       gang.characters[i].WalkSpriteDC[0]);
-        }
-    }
+    if(selected >= 0)
+        PT( 130, 195, 100, 100, 
+               gang.characters[selected].WalkSpriteDC[(gang.characters[selected].WalkSpriteCnt++)%gang.characters[selected].WalkSpriteNum]);
 }

@@ -13,6 +13,15 @@ HINSTANCE ConsoleInstance;
 HDC     ConsoleDC, MenuUpgradeDC,  MenuMapDC,  BlankDC,  BattleBackgroundDC,  BattleCharacterSelectBoxDC,  MenuSelectDC;
 HBITMAP            MenuUpgradeMap, MenuMapMap, BlankMap, BattleBackgroundMap, BattleCharacterSelectBoxMap, MenuSelectMap;
 
+HDC AlphabetDC[27], NumberDC[10];
+HBITMAP AlphabetMap[27], NumberMap[10];
+
+// typedef struct {
+//     HDC* DC;
+//     HBITMAP* Map;
+//     char* path;
+// } Object;
+
 typedef struct {
     char name[101];
     int hp;
@@ -24,8 +33,8 @@ typedef struct {
 
     char path[101];
 
-    HDC IconDC;
-    HBITMAP IconMap;
+    HDC BattleIconDC, UpgradeIconDC;
+    HBITMAP BattleIconMap, UpgradeIconMap;
 
     HDC WalkSpriteDC[101];
     HDC AttackSpriteDC[101];
@@ -33,6 +42,7 @@ typedef struct {
     HBITMAP WalkSpriteMap[101];
     HBITMAP AttackSpriteMap[101];
     HBITMAP DieSpriteMap[101];
+
     int WalkSpriteNum;
     int WalkSpriteCnt;
     int AttackSpriteNum;
@@ -63,8 +73,10 @@ int kp(int key);
 int kpw(int key);
 int GMX();
 int GMY();
+int MIA(int sx, int sy, int w, int h);
 void HideCursor();
 void LI(HDC* DC, HBITMAP* Map, char* path);
+// void LO(Object object);
 void UtilityInit();
 void PT(int sx, int sy, int w, int h, HDC originDC);
 void PTB(int sx, int sy, int w, int h, HDC originDC);

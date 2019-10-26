@@ -51,11 +51,16 @@ void Load() {
                    &gang.characters[i].DieSpriteMap[j],
                    path);
             }
-
+            
             char path[101];
-            sprintf(path, "./resources/%s/icon.bmp", gang.characters[i].name);
-            LI(&gang.chacaters[i].IconDC,
-               &gang.chacaters[i].IconMap,
+            sprintf(path, "./resources/%s/BattleIcon.bmp", gang.characters[i].name);
+            LI(&gang.characters[i].BattleIconDC,
+               &gang.characters[i].BattleIconMap,
+               path);
+
+            sprintf(path, "./resources/%s/UpgradeIcon.bmp", gang.characters[i].name);
+            LI(&gang.characters[i].UpgradeIconDC,
+               &gang.characters[i].UpgradeIconMap,
                path);
         }
     }
