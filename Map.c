@@ -37,10 +37,21 @@ int MapUpdate(int* selected) {
 
 void MapRender(int selected) {
 
-    PI(0, 0, 800, 450, MenuMapDC);
+    int BracketCoord[6][4] = {
+        {457, 300, 602, 300},
+        {553, 130, 643, 130},
+        {380, 215, 460, 215},
+        {270, 110, 376, 110},
+        {105, 279, 274, 279}
+    };
+    int oldSelected;
 
-    PT(BracketCoord[selected][0], BracketCoord[selected][1], 9, 43, BracketLeftDC);
-    PT(BracketCoord[selected][2], BracketCoord[selected][3], 9, 43, BracketRightDC);
+    if(oldSelected != selected) {
+        PI(0, 0, 800, 450, MenuMapDC);
+        PT(BracketCoord[selected][0], BracketCoord[selected][1], 9, 43, BracketLeftDC);
+        PT(BracketCoord[selected][2], BracketCoord[selected][3], 9, 43, BracketRightDC);
+        oldSelected = selected;
+    }
 
     /*
     int oldX, oldY, X, Y;

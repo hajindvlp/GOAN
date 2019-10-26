@@ -3,8 +3,8 @@
 
 #include <stdio.h>
 #include "Battle.h"
-#include "Utility.h"
 #include "Upgrade.h"
+#include "Utility.h"
 
 HDC MapDC;
 
