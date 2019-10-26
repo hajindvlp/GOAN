@@ -6,6 +6,28 @@ void MapInit() {
 
     // hard code things -- hate this
     oldSelected = -1;
+
+    int BracktTmp[6][4] = { 
+        {457, 300, 602, 300},
+        {553, 130, 643, 130},
+        {380, 215, 460, 215},
+        {270, 110, 376, 110},
+        {105, 279, 274, 279}
+    }, EnemyTmp[6][4]  = {
+        {370, 245, 140, 25},
+        {450, 115, 85 , 20},
+        {310, 180, 80 , 20},
+        {230, 100, 95 , 20},
+        {100, 215, 145, 55}
+    };
+
+    for(int i=0 ; i<6 ; i++) 
+        for(int j=0 ; j<4 ; j++) 
+            BracketCoord[i][j] = BracktTmp[i][j];
+
+    for(int i=0 ; i<6 ; i++) 
+        for(int j=0 ; j<4 ; j++) 
+            EnemyCoord[i][j] = EnemyTmp[i][j];
 }
 
 int MapSelect() {
@@ -30,12 +52,11 @@ int MapUpdate(int* selected) {
         startBattle(*selected);
     } 
 
-    // printf("%d %d\n", GMX(), GMY());
-    if     (MIA(370, 245, 140, 25) && *selected != 0) *selected = 0, MapRender(0);
-    else if(MIA(450, 115, 85, 20)  && *selected != 1) *selected = 1, MapRender(1);
-    else if(MIA(310, 180, 80, 20)  && *selected != 2) *selected = 2, MapRender(2);
-    else if(MIA(230, 100, 95, 20)  && *selected != 3) *selected = 3, MapRender(3);
-    else if(MIA(100, 215, 145, 55) && *selected != 4) *selected = 4, MapRender(4);
+    for(int i=0 ; i<5 ; i++) 
+        if(MIA(EnemyCoord[i][0], EnemyCoord[i][1], EnemyCoord[i][2], EnemyCoord[i][3])) {
+            if(*selected != i) *selected = i, MapRender(i);
+            if(kp(VK_LBUTTON)) startBattle(*selected);
+        }
 
     // Goes To Upgrade Menu
     if(kp('I')) {

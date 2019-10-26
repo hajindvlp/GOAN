@@ -16,9 +16,6 @@ HBITMAP            MenuUpgradeMap, MenuMapMap, BlankMap, BattleBackgroundMap, Ba
 HDC AlphabetDC[27], NumberDC[10];
 HBITMAP AlphabetMap[27], NumberMap[10];
 
-
-int BracketCoord[6][4];
-
 // typedef struct {
 //     HDC* DC;
 //     HBITMAP* Map;

@@ -55,19 +55,6 @@ void UtilityInit() {
         sprintf(path, "./resources/Number/%d.bmp", i);
         LI(&NumberDC[i], &NumberMap[i], path);
     }
-    
-    int Arr[6][4] = { 
-        {457, 300, 602, 300},
-        {553, 130, 643, 130},
-        {380, 215, 460, 215},
-        {270, 110, 376, 110},
-        {105, 279, 274, 279}
-    };
-
-    for(int i=0 ; i<6 ; i++) 
-        for(int j=0 ; j<4 ; j++) 
-            BracketCoord[i][j] = Arr[i][j];
-
 
     mciSendString("open resources/Sounds/music.mp3 type mpegvideo", NULL,0,0);
 }
