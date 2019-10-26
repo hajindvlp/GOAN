@@ -5,6 +5,7 @@ void MapInit() {
     LI(&BracketRightDC, &BracketRightMap, "./resources/BracketRight.bmp");
 
     // hard code things -- hate this
+    oldSelected = -1;
 }
 
 int MapSelect() {
@@ -27,7 +28,17 @@ int MapUpdate(int* selected) {
         MapRender((*selected));
     } else if(kp(VK_RETURN)) {
         startBattle(*selected);
-    } else if(kp('I')) {
+    } 
+
+    // printf("%d %d\n", GMX(), GMY());
+    if     (MIA(370, 245, 140, 25) && *selected != 0) *selected = 0, MapRender(0);
+    else if(MIA(450, 115, 85, 20)  && *selected != 1) *selected = 1, MapRender(1);
+    else if(MIA(310, 180, 80, 20)  && *selected != 2) *selected = 2, MapRender(2);
+    else if(MIA(230, 100, 95, 20)  && *selected != 3) *selected = 3, MapRender(3);
+    else if(MIA(100, 215, 145, 55) && *selected != 4) *selected = 4, MapRender(4);
+
+    // Goes To Upgrade Menu
+    if(kp('I')) {
         return 1;
     } else if(GMX() >= 12 && GMX() <= 98 && GMY() >= 14 && GMY() <= 47 && kp(VK_LBUTTON)) {
         return 1;
@@ -36,15 +47,6 @@ int MapUpdate(int* selected) {
 }
 
 void MapRender(int selected) {
-
-    int BracketCoord[6][4] = {
-        {457, 300, 602, 300},
-        {553, 130, 643, 130},
-        {380, 215, 460, 215},
-        {270, 110, 376, 110},
-        {105, 279, 274, 279}
-    };
-    int oldSelected;
 
     if(oldSelected != selected) {
         PI(0, 0, 800, 450, MenuMapDC);

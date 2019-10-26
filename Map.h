@@ -21,6 +21,7 @@ typedef struct {
 } Map;
 
 Map map;
+int oldSelected;
 
 HDC MapDC, BracketLeftDC, BracketRightDC;
 HBITMAP MapMap, BracketLeftMap, BracketRightMap;
