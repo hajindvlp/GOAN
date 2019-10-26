@@ -23,7 +23,7 @@ typedef struct {
 Map map;
 
 HDC MapDC, BracketLeftDC, BracketRightDC;
-HBITMAP MapMap, BracketLeftMap, BracketRIghtMap;
+HBITMAP MapMap, BracketLeftMap, BracketRightMap;
 
 void MapInit();
 int MapSelect();

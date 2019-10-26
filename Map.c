@@ -1,6 +1,10 @@
 #include "Map.h"
 
 void MapInit() {
+    LI(&BracketLeftDC, &BracketLeftMap, "./resources/BracketLeft.bmp");
+    LI(&BracketRightDC, &BracketRightMap, "./resources/BracketRight.bmp");
+
+    // hard code things -- hate this
 }
 
 int MapSelect() {
@@ -34,6 +38,10 @@ int MapUpdate(int* selected) {
 void MapRender(int selected) {
 
     PI(0, 0, 800, 450, MenuMapDC);
+
+    PT(BracketCoord[selected][0], BracketCoord[selected][1], 9, 43, BracketLeftDC);
+    PT(BracketCoord[selected][2], BracketCoord[selected][3], 9, 43, BracketRightDC);
+
     /*
     int oldX, oldY, X, Y;
 
