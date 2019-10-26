@@ -95,8 +95,8 @@ void PI(int sx, int sy, int w, int h, HDC originDC) {
     BitBlt(ConsoleDC, sx, sy, w, h, originDC, 0, 0, SRCCOPY);
 }
 
-void PS(int w, int h, char* Str) {
-    for(int i=0 ; Str[i] ; i++) {
-        PT()
-    }
-}
+// void PS(int w, int h, char* Str) {
+//     for(int i=0 ; Str[i] ; i++) {
+//         PT()
+//     }
+// }
