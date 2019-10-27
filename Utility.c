@@ -42,6 +42,8 @@ void UtilityInit() {
     LI(&BattleBackgroundDC, &BattleBackgroundMap, "./resources/BattleBackground.bmp");
 
     LI(&MenuSelectDC, &MenuSelectMap, "./resources/SelectMenu.bmp");
+    LI(&ArrowLeftDC, &ArrowLeftMap, "./resources/ArrowLeft.bmp");
+    LI(&ArrowRightDC, &ArrowRightMap, "./resources/ArrowRight.bmp");
     
     for(int i=0 ; i<26 ; i++) {
         char path[101];

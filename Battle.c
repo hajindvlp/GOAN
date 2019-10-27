@@ -20,11 +20,12 @@ void BattleInit() {
 }
 
 void BattleUpdate() {
-    // move characters
 
-    for(int i=0 ; i<OutAllyCnt ; i++) {
-        OutAlly[i].bX += OutAlly[i].ms;
-    }
+    // move characters
+    for(int i=0 ; i<OutAllyCnt  ; i++) OutAlly[i].bX  += OutAlly[i].ms;
+    for(int i=0 ; i<OutEnemyCnt ; i++) OutEnemy[i].bX += OutEnemy[i].ms;
+
+    // Make Enemy
 
     //collision check Ally<->Enemy / Ally<->EnemyCastle / Enemy<->AllyCastle
 
@@ -37,7 +38,7 @@ void BattleKeyin() {
 
     // screen movement
 
-    // printf("%d\n", GMX());
+    // Move Battle Background
     if(GMX() <= 100 && ScreenX >= 3) ScreenX -= (100-GMX());
     else if(GMX() >= 540 && ScreenX < 2109 - 800) ScreenX += (GMX()-540); 
     if(ScreenX < 0) ScreenX = 0;
@@ -84,9 +85,13 @@ void BattleRender() {
             if(fcnt % 3 == 0) OutAlly[i].WalkSpriteCnt++;
             PT(OutAlly[i].bX-ScreenX, 340, 100, 100, OutAlly[i].WalkSpriteDC[OutAlly[i].WalkSpriteCnt%OutAlly[i].WalkSpriteNum]);
         }
-            
     }
 
     // Render Enemy
+
+    // Render Arrows
+    
+    if(GMX() <= 100 && ScreenX >= 3)         PI(10, 215, 20, 20, ArrowLeftDC);
+    if(GMX() >= 540 && ScreenX < 2109 - 800) PI(780, 215, 20, 20, ArrowLeftDC);
 
 }
