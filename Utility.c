@@ -6,7 +6,7 @@ void gotoxy(int x, int y) {
 }
 
 int kp(int key) {
-    return (GetAsyncKeyState(key) & 0x8000 != 0);
+    return (GetAsyncKeyState(key) & 0x8000);
 }
 
 int kpw(int key) {
@@ -40,7 +40,6 @@ void UtilityInit() {
     LI(&BlankDC, &BlankMap, "./resources/Blank.bmp");
 
     LI(&BattleBackgroundDC, &BattleBackgroundMap, "./resources/BattleBackground.bmp");
-    LI(&BattleCharacterSelectBoxDC, &BattleCharacterSelectBoxMap, "./resources/BattleCharacterBox.bmp");
 
     LI(&MenuSelectDC, &MenuSelectMap, "./resources/SelectMenu.bmp");
     

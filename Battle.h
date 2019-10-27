@@ -32,6 +32,9 @@ int OutEnemyXMax;
 int Collided;
 
 int ScreenX;
+int Cost;
+
+int fcnt;
 
 Gang Enemy;
 Gang Ally;
