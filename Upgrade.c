@@ -43,5 +43,5 @@ void UpgradeRender(int selected) {
     // render character Sprite
     if(selected >= 0)
         PT( 130, 195, 100, 100, 
-               gang.characters[selected].WalkSpriteDC[(gang.characters[selected].WalkSpriteCnt++)%gang.characters[selected].WalkSpriteNum]);
+               gang.characters[selected].AttackSpriteDC[(gang.characters[selected].AttackSpriteCnt++)%gang.characters[selected].AttackSpriteNum]);
 }
