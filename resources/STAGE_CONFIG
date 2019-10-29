@@ -1,0 +1,18 @@
+{
+    enemy_hp
+    enemy character number
+
+    {
+        name   
+        Attack
+        Defense
+        Health
+        Attack Speed
+        Move Speed
+        Rate
+
+        Walk Sprite Number
+        Attack Sprite Number
+        Die Sprite Number
+    }
+}
