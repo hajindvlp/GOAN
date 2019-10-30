@@ -31,7 +31,7 @@ void UtilityInit() {
 
 int RR(int ratio) {
     int r = rand();
-    return (r%100 <= ratio);
+    return ((r%100+100)%100 <= ratio);
 }
 
 void gotoxy(int x, int y) {

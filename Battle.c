@@ -44,6 +44,7 @@ void BattleUpdate() {
                 OutEnemy[OutEnemyCnt].bX = 1700; // Enemy Castle Entrence
                 OutEnemy[OutEnemyCnt].bd = 0;
                 OutEnemyCnt++;
+                break;
             }
         }
     }
