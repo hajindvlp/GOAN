@@ -36,7 +36,6 @@ typedef struct {
     int bd;    // battle is Dead
     int ba;    // 
     int bX;    // battle X coord
-    int b
 
     char path[101];
 

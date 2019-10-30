@@ -58,9 +58,22 @@ void BattleUpdate() {
     //attack
     for(int i=0 ; i<OutAllyCnt ; i++) {
         for(int j=0 ; j<OutEnemyCnt ; j++) {
-            if(OutAlly[i].bX + 100 >= OutEnemy[j].bX) { // collided
-                OutAlly[i].hp -=  (OutEnemy[j].dg - OutAlly[i].df);
+            if(OutAlly[i].bd == 0 && OutEnemy[j].bd == 0 && OutAlly[i].bX + 100 >= OutEnemy[j].bX) { // collided
                 OutEnemy[j].hp -= (OutAlly[i].dg  - OutEnemy[j].df);
+                OutEnemy[j].bX -= OutEnemy[j].ms;
+                OutAlly[i].bX  = OutEnemy[j].bX - 100;
+                break;
+            }
+        }
+    }
+
+    for(int j=0 ; j<OutEnemyCnt ; j++) {
+        for(int i=0 ; i<OutAllyCnt ; i++) {
+            if(OutAlly[i].bd == 0 && OutEnemy[j].bd == 0 && OutAlly[i].bX + 100 >= OutEnemy[j].bX) { // collided
+                OutAlly[i].hp  -= (OutEnemy[j].dg - OutAlly[i].df);
+                OutEnemy[j].bX -= OutEnemy[j].ms;
+                OutAlly[i].bX = OutEnemy[j].bX - 100;
+                break;
             }
         }
     }
@@ -86,7 +99,7 @@ void BattleKeyin() {
 }
 
 void BattleRender() {
-    
+
     // Render Background
 
     PO(0, 0, ScreenX, 0, 800, 450, BattleBackgroundDC);
