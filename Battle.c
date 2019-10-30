@@ -34,11 +34,11 @@ void BattleUpdate() {
 
     // move characters & check characters health
     for(int i=0 ; i<OutAllyCnt  ; i++) {
-        if(OutAlly[i].hp <= 0) OutAlly[i].hp = 0, OutAlly[i].bd = 1; 
+        if(OutAlly[i].bd == 0 && OutAlly[i].hp <= 0) OutAlly[i].hp = 0, OutAlly[i].bd = 1; 
         if(OutAlly[i].bd == 0) OutAlly[i].bX  += OutAlly[i].ms;
     }
     for(int i=0 ; i<OutEnemyCnt ; i++) {
-        if(OutEnemy[i].hp <= 0) OutEnemy[i].hp = 0, OutEnemy[i].bd = 1;
+        if(OutEnemy[i].bd == 0 && OutEnemy[i].hp <= 0) OutEnemy[i].hp = 0, OutEnemy[i].bd = 1;
         if(OutEnemy[i].bd == 0) OutEnemy[i].bX += OutEnemy[i].ms;
     }
 
