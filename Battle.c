@@ -41,7 +41,7 @@ void BattleUpdate() {
         for(int i=0 ; i<Enemy.characterNum ; i++) {
             if(RR(Enemy.characters[i].ratio)) {
                 OutEnemy[OutEnemyCnt] = Enemy.characters[i];
-                OutEnemy[OutEnemyCnt].bX = 400; // Enemy Castle Entrence
+                OutEnemy[OutEnemyCnt].bX = 1700; // Enemy Castle Entrence
                 OutEnemy[OutEnemyCnt].bd = 0;
                 OutEnemyCnt++;
             }
@@ -67,7 +67,7 @@ void BattleKeyin() {
     // icon click
     for(int i=0 ; i<Ally.characterNum ; i++) {
         if( MIA(640-(100+10)*(i+1), 10, 80, 80) && kp(VK_LBUTTON) && Cost-Ally.characters[i].cost > 0 ) {
-            printf("Clicked %d\n", i);
+            // printf("Clicked %d\n", i);
             OutAlly[OutAllyCnt]     = Ally.characters[i];
             OutAlly[OutAllyCnt].bX  = 400; // Ally castle Entrence
             OutAlly[OutAllyCnt].bd  = 0;
@@ -88,7 +88,7 @@ void BattleKeyin() {
 }
 
 void BattleRender() {
-    printf("render in\n");
+    // printf("render in\n");
     // Render Background
 
     PO(0, 0, ScreenX, 0, 800, 450, BattleBackgroundDC);
@@ -101,7 +101,7 @@ void BattleRender() {
 
     // Render Allys
 
-    printf("render Ally\n");
+    // printf("render Ally\n");
     for(int i=0 ; i<OutAllyCnt ; i++) {
         if(OutAlly[i].bX+100 > ScreenX && OutAlly[i].bX < ScreenX + 800) {
             if(fcnt % 3 == 0) OutAlly[i].WalkSpriteCnt++;
@@ -111,7 +111,7 @@ void BattleRender() {
 
     // Render Enemy
 
-    printf("render Enemy %d\n", OutEnemyCnt);
+    // printf("render Enemy %d\n", OutEnemyCnt);
     for(int i=0 ; i<OutEnemyCnt ; i++) {
         if(OutEnemy[i].bX+100 > ScreenX && OutEnemy[i].bX < ScreenX + 800) {
             if(fcnt % 3 == 0) OutEnemy[i].WalkSpriteCnt++;
@@ -123,5 +123,5 @@ void BattleRender() {
     
     if(GMX() <= 100 && ScreenX >= 3)         PI(10, 215, 20, 20, ArrowLeftDC);
     if(GMX() >= 540 && ScreenX < 2109 - 800) PI(780, 215, 20, 20, ArrowLeftDC);
-    printf("render out\n");
+    // printf("render out\n");
 }
