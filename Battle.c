@@ -47,7 +47,7 @@ void BattleUpdate() {
             }
         }
     }
-    printf("out\n");
+    // printf("out\n");
 
     //collision check Ally<->Enemy / Ally<->EnemyCastle / Enemy<->AllyCastle
 
