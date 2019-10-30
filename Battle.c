@@ -32,9 +32,15 @@ void BattleUpdate() {
     // refresh frame cound for int overflow
     fcnt = fcnt%1110;
 
-    // move characters
-    for(int i=0 ; i<OutAllyCnt  ; i++) OutAlly[i].bX  += OutAlly[i].ms;
-    for(int i=0 ; i<OutEnemyCnt ; i++) OutEnemy[i].bX += OutEnemy[i].ms;
+    // move characters & check characters health
+    for(int i=0 ; i<OutAllyCnt  ; i++) {
+        if(OutAlly[i].hp <= 0) OutAlly[i].hp = 0, OutAlly[i].bd = 1; 
+        if(OutAlly[i].bd == 0) OutAlly[i].bX  += OutAlly[i].ms;
+    }
+    for(int i=0 ; i<OutEnemyCnt ; i++) {
+        if(OutEnemy[i].hp <= 0) OutEnemy[i].hp = 0, OutEnemy[i].bd = 1;
+        if(OutEnemy[i].bd == 0) OutEnemy[i].bX += OutEnemy[i].ms;
+    }
 
     // Make Enemy
     if(fcnt % 30 == 0) {
@@ -48,16 +54,19 @@ void BattleUpdate() {
             }
         }
     }
-    // printf("out\n");
-
-    //collision check Ally<->Enemy / Ally<->EnemyCastle / Enemy<->AllyCastle
 
     //attack
+    for(int i=0 ; i<OutAllyCnt ; i++) {
+        for(int j=0 ; j<OutEnemyCnt ; j++) {
+            if(OutAlly[i].bX + 100 >= OutEnemy[j].bX) { // collided
+                OutAlly[i].hp -=  (OutEnemy[j].dg - OutAlly[i].df);
+                OutEnemy[j].hp -= (OutAlly[i].dg  - OutEnemy[j].df);
+            }
+        }
+    }
 }
 
 void BattleKeyin() {
-
-    // screen movement
 
     // Move Battle Background
     if(GMX() <= 100 && ScreenX >= 3) ScreenX -= (100-GMX());
@@ -68,28 +77,16 @@ void BattleKeyin() {
     // icon click
     for(int i=0 ; i<Ally.characterNum ; i++) {
         if( MIA(640-(100+10)*(i+1), 10, 80, 80) && kp(VK_LBUTTON) && Cost-Ally.characters[i].cost > 0 ) {
-            // printf("Clicked %d\n", i);
             OutAlly[OutAllyCnt]     = Ally.characters[i];
             OutAlly[OutAllyCnt].bX  = 400; // Ally castle Entrence
             OutAlly[OutAllyCnt].bd  = 0;
             OutAllyCnt++;
         }
     }
-
-    // char tmp = getch();
-    // for(int i=0 ; i< Ally.characterNum ; i++) 
-    //     if(Ally.characters[i].shortcut == tmp && OutAllyCnt < 100) {
-    //         OutAlly[OutAllyCnt] = Ally.characters[i];
-    //         OutAlly[OutAllyCnt].BattleHp = OutAlly[OutAllyCnt].hp;
-    //         OutAlly[OutAllyCnt].BattleDg = OutAlly[OutAllyCnt].dg;
-    //         OutAlly[OutAllyCnt].BattleX = 30; // Ally castle Entrence
-    //         OutAlly[OutAllyCnt].BattleDead = 0;
-    //         OutAllyCnt++;
-    //     }
 }
 
 void BattleRender() {
-    // printf("render in\n");
+    
     // Render Background
 
     PO(0, 0, ScreenX, 0, 800, 450, BattleBackgroundDC);
@@ -102,9 +99,8 @@ void BattleRender() {
 
     // Render Allys
 
-    // printf("render Ally\n");
     for(int i=0 ; i<OutAllyCnt ; i++) {
-        if(OutAlly[i].bX+100 > ScreenX && OutAlly[i].bX < ScreenX + 800) {
+        if(OutAlly[i].bd == 0 && OutAlly[i].bX+100 > ScreenX && OutAlly[i].bX < ScreenX + 800) {
             if(fcnt % 3 == 0) OutAlly[i].WalkSpriteCnt++;
             PT(OutAlly[i].bX-ScreenX, 340, 100, 100, OutAlly[i].WalkSpriteDC[OutAlly[i].WalkSpriteCnt%OutAlly[i].WalkSpriteNum]);
         }
@@ -112,9 +108,8 @@ void BattleRender() {
 
     // Render Enemy
 
-    // printf("render Enemy %d\n", OutEnemyCnt);
     for(int i=0 ; i<OutEnemyCnt ; i++) {
-        if(OutEnemy[i].bX+100 > ScreenX && OutEnemy[i].bX < ScreenX + 800) {
+        if(OutEnemy[i].bd == 0 && OutEnemy[i].bX+100 > ScreenX && OutEnemy[i].bX < ScreenX + 800) {
             if(fcnt % 3 == 0) OutEnemy[i].WalkSpriteCnt++;
             PT(OutEnemy[i].bX-ScreenX, 340, 100, 100, OutEnemy[i].WalkSpriteDC[OutEnemy[i].WalkSpriteCnt%OutEnemy[i].WalkSpriteNum]);
         }

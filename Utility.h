@@ -25,15 +25,18 @@ HBITMAP AlphabetMap[27], NumberMap[10];
 
 typedef struct {
     char name[101];
-    int hp;
-    int df;
-    int dg;
-    int cost;
-    int ratio;
-    int ms;
-    int as;
-    int bd;
-    int bX;
+    int hp;    // health point
+    int df;    // defense
+    int dg;    // damage 
+    int cost;  // cost
+    int ratio; // sumon rate
+    int ms;    // move speed
+    int as;    // attack speed
+
+    int bd;    // battle is Dead
+    int ba;    // 
+    int bX;    // battle X coord
+    int b
 
     char path[101];
 
