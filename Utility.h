@@ -6,6 +6,7 @@
 #include <conio.h>
 #include <stdlib.h>
 #include <gdiplus.h>
+#include <time.h>
  
 HWND ConsoleWindow;
 HINSTANCE ConsoleInstance;
@@ -28,6 +29,7 @@ typedef struct {
     int df;
     int dg;
     int cost;
+    int ratio;
     int ms;
     int as;
     int bd;
@@ -65,7 +67,9 @@ typedef struct {
 Gang gang;
 int PlayerExp;
 
+void UtilityInit();
 void gotoxy(int x, int y);
+int RR(int ratio);
 int kp(int key);
 int kpw(int key);
 int GMX();
@@ -74,7 +78,6 @@ int MIA(int sx, int sy, int w, int h);
 void HideCursor();
 void LI(HDC* DC, HBITMAP* Map, char* path);
 // void LO(Object object);
-void UtilityInit();
 void PT(int sx, int sy, int w, int h, HDC originDC);
 void PTB(int sx, int sy, int w, int h, HDC originDC);
 void PO(int sx, int sy, int ox, int oy, int w, int h, HDC originDC);

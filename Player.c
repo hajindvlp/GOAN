@@ -66,6 +66,67 @@ void Load() {
     }
 }
 
+void EnemyLoad(int Ecode) {
+    char FileName[101];
+    sprintf(FileName, "./resources/STAGE%d", Ecode);
+    ConfigureFile = fopen(FileName, "r+");
+
+    if(ConfigureFile != NULL) {
+        fscanf(ConfigureFile, "%d", &EnemyCastle.hp);
+        fscanf(ConfigureFile, "%d", &Enemy.characterNum);
+        for(int i=0 ; i<Enemy.characterNum ; i++) {
+            
+            fscanf(ConfigureFile, "%s", Enemy.characters[i].name);
+            fscanf(ConfigureFile, "%d", &Enemy.characters[i].dg);
+            fscanf(ConfigureFile, "%d", &Enemy.characters[i].df);
+            fscanf(ConfigureFile, "%d", &Enemy.characters[i].hp);
+            fscanf(ConfigureFile, "%d", &Enemy.characters[i].as);
+            fscanf(ConfigureFile, "%d", &Enemy.characters[i].ms);
+            fscanf(ConfigureFile, "%d", &Enemy.characters[i].ratio);
+
+            sprintf(Enemy.characters[i].path, "./resources/%s/sprites", Enemy.characters[i].name);
+
+            fscanf(ConfigureFile, "%d", &Enemy.characters[i].WalkSpriteNum);
+            fscanf(ConfigureFile, "%d", &Enemy.characters[i].AttackSpriteNum);
+            fscanf(ConfigureFile, "%d", &Enemy.characters[i].DieSpriteNum);
+
+            for(int j=0 ; j<Enemy.characters[i].WalkSpriteNum ; j++) {
+                char path[101];
+                sprintf(path, "%s/Walk/%d.bmp", Enemy.characters[i].path, j);
+                gotoxy(39, 30);
+
+                LI(&Enemy.characters[i].WalkSpriteDC[j], 
+                   &Enemy.characters[i].WalkSpriteMap[j],
+                   path);
+            }
+
+            for(int j=0 ; j<Enemy.characters[i].AttackSpriteNum ; j++) {
+                char path[101];
+                sprintf(path, "%s/Attack/%d.bmp", Enemy.characters[i].path, j);
+
+                LI(&Enemy.characters[i].AttackSpriteDC[j], 
+                   &Enemy.characters[i].AttackSpriteMap[j],
+                   path);
+            }
+
+            for(int j=0 ; j<Enemy.characters[i].DieSpriteNum ; j++) {
+                char path[101];
+                sprintf(path, "%s/Die/%d.bmp", Enemy.characters[i].path, j);
+
+                LI(&Enemy.characters[i].DieSpriteDC[j], 
+                   &Enemy.characters[i].DieSpriteMap[j],
+                   path);
+            }
+
+        }
+    }
+
+    printf("%d\n", Enemy.characterNum);
+    for(int i=0 ; i<Enemy.characterNum ; i++) {
+        printf("%s\n", Enemy.characters[i].name);
+    }
+}
+
 void Debug() {
     gotoxy(10, 25);
     printf("%d\n", PlayerExp); // player exp

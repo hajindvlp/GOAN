@@ -90,5 +90,5 @@ void MapRender(int selected) {
 }
 
 void startBattle(int selected) {
-    BattleMain(selected);
+    BattleMain(selected+1);
 }

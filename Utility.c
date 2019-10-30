@@ -1,5 +1,39 @@
 #include "Utility.h"
 
+void UtilityInit() {
+
+    srand(time(0)); 
+
+    LI(&MenuUpgradeDC, &MenuUpgradeMap, "./resources/Upgrade.bmp");
+    LI(&MenuMapDC, &MenuMapMap, "./resources/Map.bmp");
+    LI(&BlankDC, &BlankMap, "./resources/Blank.bmp");
+
+    LI(&BattleBackgroundDC, &BattleBackgroundMap, "./resources/BattleBackground.bmp");
+
+    LI(&MenuSelectDC, &MenuSelectMap, "./resources/SelectMenu.bmp");
+    LI(&ArrowLeftDC, &ArrowLeftMap, "./resources/ArrowLeft.bmp");
+    LI(&ArrowRightDC, &ArrowRightMap, "./resources/ArrowRight.bmp");
+    
+    for(int i=0 ; i<26 ; i++) {
+        char path[101];
+        sprintf(path, "./resources/Alphabet/%d.bmp", i);
+        LI(&AlphabetDC[i], &AlphabetMap[i], path);
+    }
+
+    for(int i=0 ; i<10 ; i++) {
+        char path[101];
+        sprintf(path, "./resources/Number/%d.bmp", i);
+        LI(&NumberDC[i], &NumberMap[i], path);
+    }
+
+    mciSendString("open resources/Sounds/music.mp3 type mpegvideo", NULL,0,0);
+}
+
+int RR(int ratio) {
+    int r = rand();
+    return (r%100 <= ratio);
+}
+
 void gotoxy(int x, int y) {
     COORD pos={x,y};
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos); 
@@ -34,31 +68,6 @@ void LI(HDC* DC, HBITMAP* Map, char* path) {
 //     SelectObject(object.(*DC), object.(*DC));
 // }
 
-void UtilityInit() {
-    LI(&MenuUpgradeDC, &MenuUpgradeMap, "./resources/Upgrade.bmp");
-    LI(&MenuMapDC, &MenuMapMap, "./resources/Map.bmp");
-    LI(&BlankDC, &BlankMap, "./resources/Blank.bmp");
-
-    LI(&BattleBackgroundDC, &BattleBackgroundMap, "./resources/BattleBackground.bmp");
-
-    LI(&MenuSelectDC, &MenuSelectMap, "./resources/SelectMenu.bmp");
-    LI(&ArrowLeftDC, &ArrowLeftMap, "./resources/ArrowLeft.bmp");
-    LI(&ArrowRightDC, &ArrowRightMap, "./resources/ArrowRight.bmp");
-    
-    for(int i=0 ; i<26 ; i++) {
-        char path[101];
-        sprintf(path, "./resources/Alphabet/%d.bmp", i);
-        LI(&AlphabetDC[i], &AlphabetMap[i], path);
-    }
-
-    for(int i=0 ; i<10 ; i++) {
-        char path[101];
-        sprintf(path, "./resources/Number/%d.bmp", i);
-        LI(&NumberDC[i], &NumberMap[i], path);
-    }
-
-    mciSendString("open resources/Sounds/music.mp3 type mpegvideo", NULL,0,0);
-}
 
 int GMX() {
 	POINT pt;

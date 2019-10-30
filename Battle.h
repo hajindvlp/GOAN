@@ -3,6 +3,7 @@
 
 #include "Map.h"
 #include "Utility.h"
+#include "Player.h"
 
 #include <stdio.h>
 #include <stdlib.h>

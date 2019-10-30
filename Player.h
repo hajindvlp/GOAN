@@ -10,6 +10,7 @@
 FILE * ConfigureFile;
 
 void Load();
+void EnemyLoad(int Ecode);
 void Save();
 void Debug();
 
