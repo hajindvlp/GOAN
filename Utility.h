@@ -30,11 +30,13 @@ typedef struct {
     int dg;    // damage 
     int cost;  // cost
     int ratio; // sumon rate
-    int ms;    // move speed
     int as;    // attack speed
+    int ms;    // move speed
+    int sc;    // summon cool time
 
     int bd;    // battle is Dead
-    int ba;    // 
+    int bw;    // battle is Walking
+    int ba;    // battle is Attacking
     int bX;    // battle X coord
 
     char path[101];

@@ -3,13 +3,14 @@ Player Exp
 character Number
 
 {
-    Name        // Gang.name
-    Attack      // Gang.dg
-    Defense     // Gang.df
-    Health      // Gang.hp
-    Attack Speed // Gang.as
-    Move Speed   // Gang.ms
-    cost         // Gang.cost
+    Name             // Gang.name
+    Attack           // Gang.dg
+    Defense          // Gang.df
+    Health           // Gang.hp
+    Attack Speed     // Gang.as
+    Move Speed       // Gang.ms
+    Summon Cool Time // Gang.sc
+    cost             // Gang.cost
 
     Walk Sprite Number
     Attack Sprite Number

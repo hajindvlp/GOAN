@@ -32,9 +32,8 @@ void BattleUpdate() {
     // refresh frame cound to avoid int overflow
     fcnt = fcnt%1110;
 
-    // move characters & check charactres health & attack
-
-    for(int i=0 ; i<OutAllyCnt  ; i++) { 
+    // move & check Die & attack
+    for(int i=0 ; i<OutAllyCnt  ; i++) {  // Ally's perspective
 
         int isCollided = 0;
 
@@ -51,7 +50,7 @@ void BattleUpdate() {
         if(!isCollided && OutAlly[i].bd == 0) OutAlly[i].bX  += OutAlly[i].ms;
     }
 
-    for(int i=0 ; i<OutEnemyCnt ; i++) {
+    for(int i=0 ; i<OutEnemyCnt ; i++) { // Enemy's perspective
 
         int isCollided = 0;
 
@@ -91,7 +90,7 @@ void BattleKeyin() {
 
     // icon click
     for(int i=0 ; i<Ally.characterNum ; i++) {
-        if( MIA(640-(100+10)*(i+1), 10, 80, 80) && kp(VK_LBUTTON) && Cost-Ally.characters[i].cost > 0 ) {
+        if(fcnt % Ally.characters[i].sc == 0 && MIA(640-(100+10)*(i+1), 10, 80, 80) && kp(VK_LBUTTON) && Cost-Ally.characters[i].cost > 0 ) {
             OutAlly[OutAllyCnt]     = Ally.characters[i];
             OutAlly[OutAllyCnt].bX  = 400; // Ally castle Entrence
             OutAlly[OutAllyCnt].bd  = 0;

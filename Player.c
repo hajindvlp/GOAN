@@ -16,6 +16,7 @@ void Load() {
             fscanf(ConfigureFile, "%d", &gang.characters[i].hp);
             fscanf(ConfigureFile, "%d", &gang.characters[i].as);
             fscanf(ConfigureFile, "%d", &gang.characters[i].ms);
+            fscanf(ConfigureFile, "%d", &gang.characters[i].sc);
             fscanf(ConfigureFile, "%d", &gang.characters[i].cost);
 
             sprintf(gang.characters[i].path, "./resources/%s/sprites", gang.characters[i].name);
