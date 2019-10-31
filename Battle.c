@@ -27,20 +27,44 @@ void BattleInit() {
     EnemyLoad(ECode);
 }
 
+void BattleKeyin() {
+
+    // Move Battle Background
+    if(GMX() <= 100 && ScreenX >= 3) ScreenX -= (100-GMX());
+    else if(GMX() >= 540 && ScreenX < 2109 - 800) ScreenX += (GMX()-540); 
+    if(ScreenX < 0) ScreenX = 0;
+    else if(ScreenX > 2109 - 800) ScreenX = 2109 - 800;
+
+    // icon click
+    for(int i=0 ; i<Ally.characterNum ; i++) {
+        if(fcnt % Ally.characters[i].sc == 0 && MIA(640-(100+10)*(i+1), 10, 80, 80) && kp(VK_LBUTTON) && Cost-Ally.characters[i].cost > 0 ) {
+            OutAlly[OutAllyCnt]     = Ally.characters[i];
+            OutAlly[OutAllyCnt].bX  = 400; // Ally castle Entrence
+            OutAlly[OutAllyCnt].bd  = 0;
+            OutAllyCnt++;
+        }
+    }
+}
+
 void BattleUpdate() {
 
-    // refresh frame cound to avoid int overflow
+    // refresh frame cound to avoid integer overflow
     fcnt = fcnt%1110;
 
     // move & check Die & attack
     for(int i=0 ; i<OutAllyCnt  ; i++) {  // Ally's perspective
 
+        OutAlly[i].bw = 1; // Ally is Walking by default
+
         int isCollided = 0;
 
         for(int j=0 ; j<OutEnemyCnt ; j++) { // Ally -> Enemy
             if(OutAlly[i].bd == 0 && OutEnemy[j].bd == 0 && OutAlly[i].bX + 100 >= OutEnemy[j].bX) { // collided
-                if(fcnt % OutAlly[i].as == 0) OutEnemy[j].hp -= (OutAlly[i].dg - OutEnemy[j].df); // attack if attack speed is on time
-                // OutAlly[i].bX  = OutEnemy[j].bX - 100;
+                if(fcnt % OutAlly[i].as == 0) {
+                    OutEnemy[j].hp -= (OutAlly[i].dg - OutEnemy[j].df); // attack if attack speed is on time
+                } 
+                OutAlly[i].bw = 0;
+                OutAlly[i].ba = 1;
                 isCollided = 1;
                 break;
             }
@@ -52,11 +76,17 @@ void BattleUpdate() {
 
     for(int i=0 ; i<OutEnemyCnt ; i++) { // Enemy's perspective
 
+        OutEnemy[i].bw = 1; // Ally is Walking by default
+
         int isCollided = 0;
 
         for(int j=0 ; j<OutAllyCnt ; j++) { // Enemy -> Ally
             if(OutEnemy[i].bd == 0 && OutAlly[j].bd == 0 && OutAlly[j].bX + 100 >= OutEnemy[i].bX) {
-                if(fcnt % OutEnemy[i].as == 0) OutAlly[j].hp -= (OutEnemy[i].dg - OutAlly[j].df);
+                if(fcnt % OutEnemy[i].as == 0) {
+                    OutAlly[j].hp -= (OutEnemy[i].dg - OutAlly[j].df);
+                } 
+                OutEnemy[i].bw = 0;
+                OutEnemy[i].ba = 1;
                 isCollided = 1;
                 break;
             }
@@ -80,25 +110,6 @@ void BattleUpdate() {
     }
 }
 
-void BattleKeyin() {
-
-    // Move Battle Background
-    if(GMX() <= 100 && ScreenX >= 3) ScreenX -= (100-GMX());
-    else if(GMX() >= 540 && ScreenX < 2109 - 800) ScreenX += (GMX()-540); 
-    if(ScreenX < 0) ScreenX = 0;
-    else if(ScreenX > 2109 - 800) ScreenX = 2109 - 800;
-
-    // icon click
-    for(int i=0 ; i<Ally.characterNum ; i++) {
-        if(fcnt % Ally.characters[i].sc == 0 && MIA(640-(100+10)*(i+1), 10, 80, 80) && kp(VK_LBUTTON) && Cost-Ally.characters[i].cost > 0 ) {
-            OutAlly[OutAllyCnt]     = Ally.characters[i];
-            OutAlly[OutAllyCnt].bX  = 400; // Ally castle Entrence
-            OutAlly[OutAllyCnt].bd  = 0;
-            OutAllyCnt++;
-        }
-    }
-}
-
 void BattleRender() {
 
     // Render Background
@@ -115,8 +126,13 @@ void BattleRender() {
 
     for(int i=0 ; i<OutAllyCnt ; i++) {
         if(OutAlly[i].bd == 0 && OutAlly[i].bX+100 > ScreenX && OutAlly[i].bX < ScreenX + 800) {
-            if(fcnt % 3 == 0) OutAlly[i].WalkSpriteCnt++;
-            PT(OutAlly[i].bX-ScreenX, 340, 100, 100, OutAlly[i].WalkSpriteDC[OutAlly[i].WalkSpriteCnt%OutAlly[i].WalkSpriteNum]);
+            if(OutAlly[i].bw) {   
+                if(fcnt % 3 == 0) OutAlly[i].WalkSpriteCnt++;
+                PT(OutAlly[i].bX-ScreenX, 340, 100, 100, OutAlly[i].WalkSpriteDC[OutAlly[i].WalkSpriteCnt%OutAlly[i].WalkSpriteNum]);
+            } else if(OutAlly[i].ba) {
+                if(fcnt % 3 == 0) OutAlly[i].AttackSpriteCnt++;
+                PT(OutAlly[i].bX-ScreenX, 340, 100, 100, OutAlly[i].AttackSpriteDC[OutAlly[i].AttackSpriteCnt%OutAlly[i].AttackSpriteNum]);
+            }
         }
     }
 
@@ -124,14 +140,19 @@ void BattleRender() {
 
     for(int i=0 ; i<OutEnemyCnt ; i++) {
         if(OutEnemy[i].bd == 0 && OutEnemy[i].bX+100 > ScreenX && OutEnemy[i].bX < ScreenX + 800) {
-            if(fcnt % 3 == 0) OutEnemy[i].WalkSpriteCnt++;
-            PT(OutEnemy[i].bX-ScreenX, 340, 100, 100, OutEnemy[i].WalkSpriteDC[OutEnemy[i].WalkSpriteCnt%OutEnemy[i].WalkSpriteNum]);
+            if(OutEnemy[i].bw) {
+                if(fcnt % 3 == 0) OutEnemy[i].WalkSpriteCnt++;
+                PT(OutEnemy[i].bX-ScreenX, 340, 100, 100, OutEnemy[i].WalkSpriteDC[OutEnemy[i].WalkSpriteCnt%OutEnemy[i].WalkSpriteNum]);
+            } else if(OutEnemy[i].ba) {
+                if(fcnt % 3 == 0) OutEnemy[i].AttackSpriteCnt++;
+                PT(OutEnemy[i].bX-ScreenX, 340, 100, 100, OutEnemy[i].AttackSpriteDC[OutEnemy[i].AttackSpriteCnt%OutEnemy[i].AttackSpriteNum]);
+            }
         }
     }
 
     // Render Arrows
     
-    if(GMX() <= 100 && ScreenX >= 3)         PI(10, 215, 20, 20, ArrowLeftDC);
-    if(GMX() >= 540 && ScreenX < 2109 - 800) PI(780, 215, 20, 20, ArrowLeftDC);
+    // if(GMX() <= 100 && ScreenX >= 3)         PI(10, 215, 20, 20, ArrowLeftDC);
+    // if(GMX() >= 540 && ScreenX < 2109 - 800) PI(780, 215, 20, 20, ArrowLeftDC);
     // printf("render out\n");
 }
