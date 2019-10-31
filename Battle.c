@@ -29,17 +29,43 @@ void BattleInit() {
 
 void BattleUpdate() {
 
-    // refresh frame cound for int overflow
+    // refresh frame cound to avoid int overflow
     fcnt = fcnt%1110;
 
-    // move characters & check characters health
-    for(int i=0 ; i<OutAllyCnt  ; i++) {
-        if(OutAlly[i].bd == 0 && OutAlly[i].hp <= 0) OutAlly[i].hp = 0, OutAlly[i].bd = 1; 
-        if(OutAlly[i].bd == 0) OutAlly[i].bX  += OutAlly[i].ms;
+    // move characters & check charactres health & attack
+
+    for(int i=0 ; i<OutAllyCnt  ; i++) { 
+
+        int isCollided = 0;
+
+        for(int j=0 ; j<OutEnemyCnt ; j++) { // Ally -> Enemy
+            if(OutAlly[i].bd == 0 && OutEnemy[j].bd == 0 && OutAlly[i].bX + 100 >= OutEnemy[j].bX) { // collided
+                OutEnemy[j].hp -= (OutAlly[i].dg - OutEnemy[j].df);
+                OutAlly[i].bX  = OutEnemy[j].bX - 100;
+                isCollided = 1;
+                break;
+            }
+        }
+
+        if(OutAlly[i].bd == 0 && OutAlly[i].hp < 0) OutAlly[i].hp = 0, OutAlly[i].bd = 1; 
+        if(!isCollided && OutAlly[i].bd == 0) OutAlly[i].bX  += OutAlly[i].ms;
     }
+
     for(int i=0 ; i<OutEnemyCnt ; i++) {
-        if(OutEnemy[i].bd == 0 && OutEnemy[i].hp <= 0) OutEnemy[i].hp = 0, OutEnemy[i].bd = 1;
-        if(OutEnemy[i].bd == 0) OutEnemy[i].bX += OutEnemy[i].ms;
+
+        int isCollided = 0;
+
+        for(int j=0 ; j<OutAllyCnt ; j++) { // Enemy -> Ally
+            if(OutEnemy[i].bd == 0 && OutAlly[j].bd == 0 && OutAlly[j].bX + 100 >= OutEnemy[j].bX) {
+                OutAlly[j].hp -= (OutEnemy[i].dg - OutAlly[j].df);
+                OutAlly[j].bX  = OutEnemy[i].bX - 100;
+                isCollided = 1;
+                break;
+            }
+        }
+
+        if(OutEnemy[i].bd == 0 && OutEnemy[i].hp <= 0) OutEnemy[i].hp = 0, OutEnemy[i].bd = 1; // death check
+        if(!isCollided && OutEnemy[i].bd == 0) OutEnemy[i].bX += OutEnemy[i].ms; // forward if not collided
     }
 
     // Make Enemy
@@ -50,29 +76,6 @@ void BattleUpdate() {
                 OutEnemy[OutEnemyCnt].bX = 1700; // Enemy Castle Entrence
                 OutEnemy[OutEnemyCnt].bd = 0;
                 OutEnemyCnt++;
-                break;
-            }
-        }
-    }
-
-    //attack
-    for(int i=0 ; i<OutAllyCnt ; i++) {
-        for(int j=0 ; j<OutEnemyCnt ; j++) {
-            if(OutAlly[i].bd == 0 && OutEnemy[j].bd == 0 && OutAlly[i].bX + 100 >= OutEnemy[j].bX) { // collided
-                OutEnemy[j].hp -= (OutAlly[i].dg  - OutEnemy[j].df);
-                OutEnemy[j].bX -= OutEnemy[j].ms;
-                OutAlly[i].bX  = OutEnemy[j].bX - 100;
-                break;
-            }
-        }
-    }
-
-    for(int j=0 ; j<OutEnemyCnt ; j++) {
-        for(int i=0 ; i<OutAllyCnt ; i++) {
-            if(OutAlly[i].bd == 0 && OutEnemy[j].bd == 0 && OutAlly[i].bX + 100 >= OutEnemy[j].bX) { // collided
-                OutAlly[i].hp  -= (OutEnemy[j].dg - OutAlly[i].df);
-                OutEnemy[j].bX -= OutEnemy[j].ms;
-                OutAlly[i].bX = OutEnemy[j].bX - 100;
                 break;
             }
         }

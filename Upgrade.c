@@ -39,6 +39,7 @@ void UpgradeRender(int selected) {
     // first one
     PT( 540, 100, 80, 80, gang.characters[0].UpgradeIconDC );
     PT( 630, 100, 80, 80, gang.characters[1].UpgradeIconDC );
+    PT( 540, 200, 80, 80, gang.characters[2].UpgradeIconDC );
 
     // render character Sprite
     if(selected >= 0)
