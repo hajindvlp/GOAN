@@ -40,8 +40,8 @@ void BattleUpdate() {
 
         for(int j=0 ; j<OutEnemyCnt ; j++) { // Ally -> Enemy
             if(OutAlly[i].bd == 0 && OutEnemy[j].bd == 0 && OutAlly[i].bX + 100 >= OutEnemy[j].bX) { // collided
-                OutEnemy[j].hp -= (OutAlly[i].dg - OutEnemy[j].df);
-                OutAlly[i].bX  = OutEnemy[j].bX - 100;
+                if(fcnt % OutAlly[i].as == 0) OutEnemy[j].hp -= (OutAlly[i].dg - OutEnemy[j].df); // attack if attack speed is on time
+                // OutAlly[i].bX  = OutEnemy[j].bX - 100;
                 isCollided = 1;
                 break;
             }
@@ -56,9 +56,8 @@ void BattleUpdate() {
         int isCollided = 0;
 
         for(int j=0 ; j<OutAllyCnt ; j++) { // Enemy -> Ally
-            if(OutEnemy[i].bd == 0 && OutAlly[j].bd == 0 && OutAlly[j].bX + 100 >= OutEnemy[j].bX) {
-                OutAlly[j].hp -= (OutEnemy[i].dg - OutAlly[j].df);
-                OutAlly[j].bX  = OutEnemy[i].bX - 100;
+            if(OutEnemy[i].bd == 0 && OutAlly[j].bd == 0 && OutAlly[j].bX + 100 >= OutEnemy[i].bX) {
+                if(fcnt % OutEnemy[i].as == 0) OutAlly[j].hp -= (OutEnemy[i].dg - OutAlly[j].df);
                 isCollided = 1;
                 break;
             }
