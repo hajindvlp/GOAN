@@ -25,8 +25,8 @@ void HideCursor();
 
 int ECode;
 
-Character OutAlly[101];
-Character OutEnemy[101];
+Character OutAlly[10000];
+Character OutEnemy[10000];
 int OutAllyCnt;
 int OutEnemyCnt;
 
