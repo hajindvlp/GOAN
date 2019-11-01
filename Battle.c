@@ -59,7 +59,7 @@ void BattleUpdate() {
         int isCollided = 0;
 
         for(int j=0 ; j<OutEnemyCnt ; j++) { // Ally -> Enemy
-            if(OutAlly[i].bd == 0 && OutEnemy[j].bd == 0 && OutAlly[i].bX + 100 >= OutEnemy[j].bX) { // collided
+            if(OutAlly[i].bd == 0 && OutEnemy[j].bd == 0 && OutAlly[i].bX + 70 >= OutEnemy[j].bX) { // collided
                 if(fcnt % OutAlly[i].as == 0) {
                     OutEnemy[j].hp -= (OutAlly[i].dg - OutEnemy[j].df); // attack if attack speed is on time
                 } 
@@ -70,7 +70,13 @@ void BattleUpdate() {
             }
         }
 
-        if(OutAlly[i].bd == 0 && OutAlly[i].hp < 0) OutAlly[i].hp = 0, OutAlly[i].bd = 1; 
+        if(OutAlly[i].bd == 0 && OutAlly[i].hp < 0) { // check death
+            OutAlly[i].hp = 0;
+            OutAlly[i].bd = 1; 
+            OutAlly[i].ba = 0;
+            OutAlly[i].bw = 0;
+            OutAlly[i].DieSpriteCnt = 0;
+        }
         if(!isCollided && OutAlly[i].bd == 0) OutAlly[i].bX  += OutAlly[i].ms;
     }
 
@@ -81,7 +87,7 @@ void BattleUpdate() {
         int isCollided = 0;
 
         for(int j=0 ; j<OutAllyCnt ; j++) { // Enemy -> Ally
-            if(OutEnemy[i].bd == 0 && OutAlly[j].bd == 0 && OutAlly[j].bX + 100 >= OutEnemy[i].bX) {
+            if(OutEnemy[i].bd == 0 && OutAlly[j].bd == 0 && OutAlly[j].bX + 70 >= OutEnemy[i].bX) {
                 if(fcnt % OutEnemy[i].as == 0) {
                     OutAlly[j].hp -= (OutEnemy[i].dg - OutAlly[j].df);
                 } 
@@ -92,7 +98,13 @@ void BattleUpdate() {
             }
         }
 
-        if(OutEnemy[i].bd == 0 && OutEnemy[i].hp <= 0) OutEnemy[i].hp = 0, OutEnemy[i].bd = 1; // death check
+        if(OutEnemy[i].bd == 0 && OutEnemy[i].hp <= 0) { // death check
+            OutEnemy[i].hp = 0;
+            OutEnemy[i].bd = 1; 
+            OutEnemy[i].bw = 0;
+            OutEnemy[i].ba = 0;
+            OutEnemy[i].DieSpriteCnt = 0;
+        } 
         if(!isCollided && OutEnemy[i].bd == 0) OutEnemy[i].bX += OutEnemy[i].ms; // forward if not collided
     }
 
@@ -132,6 +144,9 @@ void BattleRender() {
             } else if(OutAlly[i].ba) {
                 if(fcnt % 3 == 0) OutAlly[i].AttackSpriteCnt++;
                 PT(OutAlly[i].bX-ScreenX, 340, 100, 100, OutAlly[i].AttackSpriteDC[OutAlly[i].AttackSpriteCnt%OutAlly[i].AttackSpriteNum]);
+            } else if(OutAlly[i].DieSpriteCnt < OutAlly[i].DieSpriteNum && OutAlly[i].bd) {
+                if(fcnt % 3 == 0) OutAlly[i].DieSpriteCnt++;
+                PT(OutAlly[i].bX-ScreenX, 340, 100, 100, OutAlly[i].DieSpriteDC[OutAlly[i].DieSpriteCnt%OutAlly[i].DieSpriteNum]);
             }
         }
     }
@@ -146,6 +161,9 @@ void BattleRender() {
             } else if(OutEnemy[i].ba) {
                 if(fcnt % 3 == 0) OutEnemy[i].AttackSpriteCnt++;
                 PT(OutEnemy[i].bX-ScreenX, 340, 100, 100, OutEnemy[i].AttackSpriteDC[OutEnemy[i].AttackSpriteCnt%OutEnemy[i].AttackSpriteNum]);
+            } else if(OutEnemy[i].DieSpriteCnt < OutEnemy[i].DieSpriteNum && OutEnemy[i].bd) {
+                if(fcnt % 3 == 0) OutEnemy[i].DieSpriteCnt++;
+                PT(OutEnemy[i].bX-ScreenX, 340, 100, 100, OutEnemy[i].DieSpriteDC[OutEnemy[i].DieSpriteCnt%OutEnemy[i].DieSpriteNum]);
             }
         }
     }
