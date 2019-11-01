@@ -5,6 +5,7 @@ int UpgradeSelect() {
     int selected = -1;
 
     while(1) {
+        printf("%d %d\n", GMX(), GMY());
         if( UpgradeUpdate(&selected) )
             return 2;
         UpgradeRender(selected);

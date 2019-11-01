@@ -26,7 +26,7 @@ void UtilityInit() {
         char path[101];
         sprintf(path, "./resources/Number/%d.bmp", i);
         LI(&NumberDC[i], &NumberMap[i], path);
-    }
+    }//640 360
 
     mciSendString("open resources/Sounds/music.mp3 type mpegvideo", NULL,0,0);
 }

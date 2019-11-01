@@ -58,6 +58,14 @@ void BattleUpdate() {
         OutAlly[i].bw = 1; // Ally is Walking by default
 
         int isCollided = 0;
+        
+        if(OutAlly[i].bd == 0 && (OutAlly[i].hp < 0 || OutAlly[i].bX > 2109) ) { // check death
+            OutAlly[i].hp = 0;
+            OutAlly[i].bd = 1; 
+            OutAlly[i].ba = 0;
+            OutAlly[i].bw = 0;
+            OutAlly[i].DieSpriteCnt = 0;
+        }
 
         for(int j=0 ; j<OutEnemyCnt ; j++) { // Ally -> Enemy
             if(OutAlly[i].bd == 0 && OutEnemy[j].bd == 0 && OutAlly[i].bX + 70 >= OutEnemy[j].bX) { // collided
@@ -71,13 +79,6 @@ void BattleUpdate() {
             }
         }
 
-        if(OutAlly[i].bd == 0 && OutAlly[i].hp < 0) { // check death
-            OutAlly[i].hp = 0;
-            OutAlly[i].bd = 1; 
-            OutAlly[i].ba = 0;
-            OutAlly[i].bw = 0;
-            OutAlly[i].DieSpriteCnt = 0;
-        }
         if(!isCollided && OutAlly[i].bd == 0) OutAlly[i].bX  += OutAlly[i].ms;
     }
 
@@ -86,6 +87,17 @@ void BattleUpdate() {
         OutEnemy[i].bw = 1; // Ally is Walking by default
 
         int isCollided = 0;
+        
+        if(OutEnemy[i].bd == 0 && (OutEnemy[i].hp <= 0 || OutEnemy[i].bX < 0)) { // death check
+            OutEnemy[i].hp = 0;
+            OutEnemy[i].bd = 1; 
+            OutEnemy[i].bw = 0;
+            OutEnemy[i].ba = 0;
+            OutEnemy[i].DieSpriteCnt = 0;
+
+            coin[coinNum].x = OutEnemy[i].bX;
+            coinNum++;
+        } 
 
         for(int j=0 ; j<OutAllyCnt ; j++) { // Enemy -> Ally
             if(OutEnemy[i].bd == 0 && OutAlly[j].bd == 0 && OutAlly[j].bX + 70 >= OutEnemy[i].bX) {
@@ -99,17 +111,7 @@ void BattleUpdate() {
             }
         }
 
-        if(OutEnemy[i].bd == 0 && OutEnemy[i].hp <= 0) { // death check
-            OutEnemy[i].hp = 0;
-            OutEnemy[i].bd = 1; 
-            OutEnemy[i].bw = 0;
-            OutEnemy[i].ba = 0;
-            OutEnemy[i].DieSpriteCnt = 0;
-
-            coin[coinNum].x = OutEnemy[i].bX;
-            coinNum++;
-        } 
-        if(!isCollided && OutEnemy[i].bd == 0) OutEnemy[i].bX += OutEnemy[i].ms; // forward if not collided
+        if(!isCollided && OutEnemy[i].bd == 0) OutEnemy[i].bX += OutEnemy[i].ms;
     }
 
     // Make Enemy
