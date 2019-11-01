@@ -24,16 +24,17 @@ void BattleRender();
 void HideCursor();
 
 int ECode;
+
 Character OutAlly[101];
 Character OutEnemy[101];
 int OutAllyCnt;
 int OutEnemyCnt;
-int OutAllyXMax;
-int OutEnemyXMax;
-int Collided;
 
 int ScreenX;
 int Cost;
+
+Coin coin[101];
+int coinNum;
 
 int fcnt;
 

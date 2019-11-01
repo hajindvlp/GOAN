@@ -22,6 +22,7 @@ void BattleInit() {
     fcnt = 0;
 
     Cost = 100;
+    coinNum = 0;
 
     Ally = gang;
     EnemyLoad(ECode);
@@ -39,7 +40,7 @@ void BattleKeyin() {
     for(int i=0 ; i<Ally.characterNum ; i++) {
         if(fcnt % Ally.characters[i].sc == 0 && MIA(640-(100+10)*(i+1), 10, 80, 80) && kp(VK_LBUTTON) && Cost-Ally.characters[i].cost > 0 ) {
             OutAlly[OutAllyCnt]     = Ally.characters[i];
-            OutAlly[OutAllyCnt].bX  = 400; // Ally castle Entrence
+            OutAlly[OutAllyCnt].bX  = 175; // Ally castle Entrence
             OutAlly[OutAllyCnt].bd  = 0;
             OutAllyCnt++;
         }
@@ -104,6 +105,9 @@ void BattleUpdate() {
             OutEnemy[i].bw = 0;
             OutEnemy[i].ba = 0;
             OutEnemy[i].DieSpriteCnt = 0;
+
+            coin[coinNum].x = OutEnemy[i].bX;
+            coinNum++;
         } 
         if(!isCollided && OutEnemy[i].bd == 0) OutEnemy[i].bX += OutEnemy[i].ms; // forward if not collided
     }
@@ -113,7 +117,7 @@ void BattleUpdate() {
         for(int i=0 ; i<Enemy.characterNum ; i++) {
             if(RR(Enemy.characters[i].ratio)) {
                 OutEnemy[OutEnemyCnt] = Enemy.characters[i];
-                OutEnemy[OutEnemyCnt].bX = 1700; // Enemy Castle Entrence
+                OutEnemy[OutEnemyCnt].bX = 1960; // Enemy Castle Entrence
                 OutEnemy[OutEnemyCnt].bd = 0;
                 OutEnemyCnt++;
                 break;
@@ -165,6 +169,14 @@ void BattleRender() {
                 if(fcnt % 3 == 0) OutEnemy[i].DieSpriteCnt++;
                 PT(OutEnemy[i].bX-ScreenX, 340, 100, 100, OutEnemy[i].DieSpriteDC[OutEnemy[i].DieSpriteCnt%OutEnemy[i].DieSpriteNum]);
             }
+        }
+    }
+
+    // Render Coin
+
+    for(int i=0 ; i<coinNum ; i++) {
+        if(coin[i].x+40 > ScreenX) {
+            PT(coin[i].x-ScreenX, 400, 40, 40, CoinDC);
         }
     }
 

@@ -11,8 +11,10 @@
 HWND ConsoleWindow;
 HINSTANCE ConsoleInstance;
 
-HDC ConsoleDC, MenuUpgradeDC,  MenuMapDC,  BlankDC,  BattleBackgroundDC,  MenuSelectDC,  ArrowLeftDC,  ArrowRightDC ;
-HBITMAP        MenuUpgradeMap, MenuMapMap, BlankMap, BattleBackgroundMap, MenuSelectMap, ArrowLeftMap, ArrowRightMap;
+HDC ConsoleDC, MenuUpgradeDC,  MenuMapDC,  BlankDC,  BattleBackgroundDC,  
+    MenuSelectDC,  ArrowLeftDC,  ArrowRightDC,  CoinDC;
+HBITMAP MenuUpgradeMap, MenuMapMap, BlankMap, BattleBackgroundMap, 
+    MenuSelectMap, ArrowLeftMap, ArrowRightMap, CoinMap;
 
 HDC AlphabetDC[27], NumberDC[10];
 HBITMAP AlphabetMap[27], NumberMap[10];
@@ -58,6 +60,10 @@ typedef struct {
     int DieSpriteNum;
     int DieSpriteCnt;
 } Character;
+
+typedef struct {
+    int x;
+} Coin;
 
 typedef struct {
     int characterNum;

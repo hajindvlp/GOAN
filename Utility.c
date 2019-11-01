@@ -13,6 +13,8 @@ void UtilityInit() {
     LI(&MenuSelectDC, &MenuSelectMap, "./resources/SelectMenu.bmp");
     LI(&ArrowLeftDC, &ArrowLeftMap, "./resources/ArrowLeft.bmp");
     LI(&ArrowRightDC, &ArrowRightMap, "./resources/ArrowRight.bmp");
+
+    LI(&CoinDC, &CoinMap, "./resources/Coin.bmp");
     
     for(int i=0 ; i<26 ; i++) {
         char path[101];
