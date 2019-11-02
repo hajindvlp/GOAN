@@ -12,16 +12,19 @@
 #include <windows.h>
 #include <conio.h>
 
-#define SCREEN_WIDTH 200
-#define SCREEN_HEIGHT 200
+#define SCREEN_WIDTH 800
+#define SCREEN_HEIGHT 600
+#define GROUND 590
 #define FPS 30
 
-void BattleMain(int EnemyCode);
+int BattleMain(int EnemyCode);
 void BattleInit();
-void BattleUpdate();
+int BattleUpdate();
 void BattleKeyin();
 void BattleRender();
-void HideCursor();
+int RenderLoose();
+int RenderWin();
+
 
 int ECode;
 

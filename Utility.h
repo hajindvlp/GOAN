@@ -12,9 +12,11 @@ HWND ConsoleWindow;
 HINSTANCE ConsoleInstance;
 
 HDC ConsoleDC, MenuUpgradeDC,  MenuMapDC,  BlankDC,  BattleBackgroundDC,  
-    MenuSelectDC,  ArrowLeftDC,  ArrowRightDC,  CoinDC, NumberRawDC;
+    MenuSelectDC,  ArrowLeftDC,  ArrowRightDC,  CoinDC, NumberRawDC,
+    WinScreenDC, LooseScreenDC;
 HBITMAP MenuUpgradeMap, MenuMapMap, BlankMap, BattleBackgroundMap, 
-    MenuSelectMap, ArrowLeftMap, ArrowRightMap, CoinMap, NumberRawMap;
+    MenuSelectMap, ArrowLeftMap, ArrowRightMap, CoinMap, NumberRawMap,
+    WinScreenMap, LooseScreenMap;
 
 HDC AlphabetDC[27], NumbersDC[10];
 HBITMAP AlphabetMap[27], NumbersMap[10];

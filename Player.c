@@ -78,8 +78,10 @@ void EnemyLoad(int Ecode) {
     ConfigureFile = fopen(FileName, "r+");
 
     if(ConfigureFile != NULL) {
+        fscanf(ConfigureFile, "%d", &AllyCastle.hp);
         fscanf(ConfigureFile, "%d", &EnemyCastle.hp);
         fscanf(ConfigureFile, "%d", &Enemy.characterNum);
+
         for(int i=0 ; i<Enemy.characterNum ; i++) {
             
             fscanf(ConfigureFile, "%s", Enemy.characters[i].name);

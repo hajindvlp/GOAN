@@ -1,11 +1,14 @@
 #include "Battle.h"
 
-void BattleMain(int EnemyCode) {
+int BattleMain(int EnemyCode) {
+    int key;
+
     ECode = EnemyCode;
     BattleInit();
     while(1) {
         fcnt++;
-        BattleUpdate();
+        key = BattleUpdate();
+        if(key != 0) return key;
         BattleKeyin();
         BattleRender();
         Sleep(1000/FPS);
@@ -47,10 +50,18 @@ void BattleKeyin() {
     }
 }
 
-void BattleUpdate() {
+int BattleUpdate() {
 
     // refresh frame cound to avoid integer overflow
     fcnt = fcnt%1110;
+
+    // check Lose Win
+    
+    if(AllyCastle.hp <= 0) {
+        return RenderLoose();
+    } else if(EnemyCastle.hp <= 0) {
+        return RenderWin();
+    }
 
     // move & check Die & attack
     for(int i=0 ; i<OutAllyCnt  ; i++) {  // Ally's perspective
@@ -77,6 +88,15 @@ void BattleUpdate() {
                 isCollided = 1;
                 break;
             }
+        }
+
+        if(!isCollided && OutAlly[i].bX + OutAlly[i].Width - 30 >= 1960) {
+            if(fcnt % OutAlly[i].as == 0) {
+                EnemyCastle.hp -= OutAlly[i].dg;
+            }
+            OutAlly[i].bw = 0;
+            OutAlly[i].ba = 1;
+            isCollided = 1;
         }
 
         if(!isCollided && OutAlly[i].bd == 0) OutAlly[i].bX  += OutAlly[i].ms;
@@ -113,6 +133,15 @@ void BattleUpdate() {
             }
         }
 
+        if(!isCollided && OutEnemy[i].bX - OutEnemy[i].Width + 30 <= 175) {
+            if(fcnt % OutEnemy[i].as == 0) {
+                AllyCastle.hp -= OutEnemy[i].dg;
+            }
+            OutEnemy[i].bw = 0;
+            OutEnemy[i].ba = 1;
+            isCollided = 1;
+        }
+
         if(!isCollided && OutEnemy[i].bd == 0) OutEnemy[i].bX += OutEnemy[i].ms;
     }
 
@@ -128,37 +157,38 @@ void BattleUpdate() {
             }
         }
     }
+    return 0;
 }
 
 void BattleRender() {
 
     // Render Background
 
-    PO(0, 0, ScreenX, 0, 800, 450, BattleBackgroundDC);
+    PO(0, 0, ScreenX, 0, SCREEN_WIDTH, 600, BattleBackgroundDC);
 
     // Render icons
 
     for(int i=0 ; i<Ally.characterNum ; i++) {
-        PT(800-(10+60)*(i+1), 10, 60, 60, Ally.characters[i].BattleIconDC);
+        PT(SCREEN_WIDTH-(10+60)*(i+1), 10, 60, 60, Ally.characters[i].BattleIconDC);
     }
 
     // Render Enemy
 
     for(int i=0 ; i<OutEnemyCnt ; i++) {
-        if(OutEnemy[i].bd == 0 && OutEnemy[i].bX+100 > ScreenX && OutEnemy[i].bX < ScreenX + 800) {
+        if(OutEnemy[i].bd == 0 && OutEnemy[i].bX+100 > ScreenX && OutEnemy[i].bX < ScreenX + SCREEN_WIDTH) {
             if(OutEnemy[i].bw) {
                 if(fcnt % 3 == 0) OutEnemy[i].WalkSpriteCnt++, OutEnemy[i].WalkSpriteCnt%=OutEnemy[i].WalkSpriteNum;
-                PT(OutEnemy[i].bX-ScreenX, 440 - OutEnemy[i].Height, OutEnemy[i].Width, OutEnemy[i].Height,
+                PT(OutEnemy[i].bX-ScreenX, GROUND - OutEnemy[i].Height, OutEnemy[i].Width, OutEnemy[i].Height,
                    OutEnemy[i].WalkSpriteDC[OutEnemy[i].WalkSpriteCnt]);
             } else if(OutEnemy[i].ba) {
                 if(fcnt % 3 == 0) OutEnemy[i].AttackSpriteCnt++, OutEnemy[i].AttackSpriteCnt%=OutEnemy[i].AttackSpriteNum;
-                PT(OutEnemy[i].bX-ScreenX, 440 - OutEnemy[i].Height, OutEnemy[i].Width, OutEnemy[i].Height,
+                PT(OutEnemy[i].bX-ScreenX, GROUND - OutEnemy[i].Height, OutEnemy[i].Width, OutEnemy[i].Height,
                    OutEnemy[i].AttackSpriteDC[OutEnemy[i].AttackSpriteCnt]);
             }
         }
         else if(OutEnemy[i].bd == 1 && OutEnemy[i].DieSpriteCnt < OutEnemy[i].DieSpriteNum) {
             if(fcnt % 3 == 0) OutEnemy[i].DieSpriteCnt++;
-            PT(OutEnemy[i].bX-ScreenX, 440 - OutEnemy[i].Height, OutEnemy[i].Width, OutEnemy[i].Height,
+            PT(OutEnemy[i].bX-ScreenX, GROUND - OutEnemy[i].Height, OutEnemy[i].Width, OutEnemy[i].Height,
                OutEnemy[i].DieSpriteDC[OutEnemy[i].DieSpriteCnt]);
         }
     }
@@ -169,32 +199,51 @@ void BattleRender() {
         if(OutAlly[i].bd == 0 && OutAlly[i].bX+100 > ScreenX && OutAlly[i].bX < ScreenX + 800) {
             if(OutAlly[i].bw) {   
                 if(fcnt % 3 == 0) OutAlly[i].WalkSpriteCnt++, OutAlly[i].WalkSpriteCnt%=OutAlly[i].WalkSpriteNum;
-                PT(OutAlly[i].bX-ScreenX, 440 - OutAlly[i].Height, OutAlly[i].Width, OutAlly[i].Height, 
+                PT(OutAlly[i].bX-ScreenX, GROUND - OutAlly[i].Height, OutAlly[i].Width, OutAlly[i].Height, 
                    OutAlly[i].WalkSpriteDC[OutAlly[i].WalkSpriteCnt]);
             } else if(OutAlly[i].ba) {
                 if(fcnt % 3 == 0) OutAlly[i].AttackSpriteCnt++, OutAlly[i].AttackSpriteCnt%=OutAlly[i].AttackSpriteNum;
-                PT(OutAlly[i].bX-ScreenX, 440 - OutAlly[i].Height, OutAlly[i].Width, OutAlly[i].Height,
+                PT(OutAlly[i].bX-ScreenX, GROUND - OutAlly[i].Height, OutAlly[i].Width, OutAlly[i].Height,
                    OutAlly[i].AttackSpriteDC[OutAlly[i].AttackSpriteCnt]);
             } 
         }
         else if(OutAlly[i].bd == 1 && OutAlly[i].DieSpriteCnt < OutAlly[i].DieSpriteNum) {
             if(fcnt % 3 == 0) OutAlly[i].DieSpriteCnt++;
-            PT(OutAlly[i].bX-ScreenX, 440 - OutAlly[i].Height, OutAlly[i].Width, OutAlly[i].Height,
+            PT(OutAlly[i].bX-ScreenX, GROUND - OutAlly[i].Height, OutAlly[i].Width, OutAlly[i].Height,
                OutAlly[i].DieSpriteDC[OutAlly[i].DieSpriteCnt]);
         }
     }
 
     // Render Coin
 
-    for(int i=0 ; i<coinNum ; i++) {
-        if(coin[i].x+40 > ScreenX) {
-            PT(coin[i].x-ScreenX, 400, 40, 40, CoinDC);
-        }
-    }
+    // for(int i=0 ; i<coinNum ; i++) {
+    //     if(coin[i].x+40 > ScreenX) {
+    //         PT(coin[i].x-ScreenX, 400, 40, 40, CoinDC);
+    //     }
+    // }
 
     // Render Arrows
     
     // if(GMX() <= 100 && ScreenX >= 3)         PI(10, 215, 20, 20, ArrowLeftDC);
     // if(GMX() >= 540 && ScreenX < 2109 - 800) PI(780, 215, 20, 20, ArrowLeftDC);
     // printf("render out\n");
+}
+
+int RenderLoose() {
+
+    while(1) {
+        PI(0, 0, 800, 600, LooseScreenDC);
+
+        // get Mouse click
+    }
+}
+
+int RenderWin() {
+
+    Conquered[ECode] = 1;
+    while(1) {
+        PI(0, 0, 800, 600, WinScreenDC);
+
+        // get Mouse click
+    }
 }

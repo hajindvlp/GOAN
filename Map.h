@@ -25,6 +25,8 @@ int oldSelected;
 int BracketCoord[6][4];
 int EnemyCoord[6][4];
 
+int Conquered[10];
+
 HDC MapDC, BracketLeftDC, BracketRightDC;
 HBITMAP MapMap, BracketLeftMap, BracketRightMap;
 

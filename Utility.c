@@ -16,6 +16,9 @@ void UtilityInit() {
     LI(&ArrowRightDC, &ArrowRightMap, "./resources/ArrowRight.bmp");
 
     LI(&NumberRawDC, &NumberRawMap, "./resources/number.bmp");
+
+    LI(&LooseScreenDC, &LooseScreenMap, "./resources/Loose.bmp");
+    LI(&WinScreenDC, &WinScreenMap, "./resources/Win.bmp");
     
     for(int i=0 ; i<26 ; i++) {
         char path[101];
