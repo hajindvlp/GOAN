@@ -7,31 +7,44 @@
 #include <stdlib.h>
 #include <gdiplus.h>
 #include <time.h>
+
+void UtilityInit();
+void gotoxy(int x, int y);
+int RR(int ratio);
+int kp(int key);
+int kpw(int key);
+int GMX();
+int GMY();
+int MIA(int sx, int sy, int w, int h);
+void HideCursor();
+void LI(HDC* DC, HBITMAP* Map, char* path);
+// void LO(Object object);
+void PT(int sx, int sy, int w, int h, HDC originDC);
+void PO(int sx, int sy, int ox, int oy, int w, int h, HDC originDC);
+void PI(int sx, int sy, int w, int h, HDC originDC);
+void PrintBackground(int UMCode);
  
 HWND ConsoleWindow;
 HINSTANCE ConsoleInstance;
+HDC ConsoleDC;
 
-HDC ConsoleDC, MenuUpgradeDC,  MenuMapDC,  BattleBackgroundDC,  
-    MenuSelectDC,  ArrowLeftDC,  ArrowRightDC,  CoinDC, NumberRawDC,
-    WinScreenDC, LooseScreenDC;
-HBITMAP MenuUpgradeMap, MenuMapMap, BlankMap, BattleBackgroundMap, 
-    MenuSelectMap, ArrowLeftMap, ArrowRightMap, CoinMap, NumberRawMap,
-    WinScreenMap, LooseScreenMap;
-    
-HDC StartScreenDC;
-HBITMAP StartScreenMap;
+HDC     StartScreenDC,  MenuSelectDC;
+HBITMAP StartScreenMap, MenuSelectMap;
 
-HDC MapDC, BracketLeftDC, BracketRightDC;
-HBITMAP MapMap, BracketLeftMap, BracketRightMap;
+HDC     MenuUpgradeDC;
+HBITMAP MenuUpgradeMap;
 
-HDC AlphabetDC[27], NumbersDC[10];
+HDC     MenuMapDC,  BracketLeftDC, BracketRightDC;
+HBITMAP MenuMapMap, BracketLeftMap, BracketRightMap;
+
+HDC     BattleBackgroundDC,  CoinDC,  LooseScreenDC,  WinScreenDC;
+HBITMAP BattleBackgroundMap, CoinMap, LooseScreenMap, WinScreenMap;
+
+HDC     NumberRawDC;
+HBITMAP NumberRawMap;
+
+HDC     AlphabetDC[27],  NumbersDC[10];
 HBITMAP AlphabetMap[27], NumbersMap[10];
-
-// typedef struct {
-//     HDC* DC;
-//     HBITMAP* Map;
-//     char* path;
-// } Object;
 
 typedef struct {
 
@@ -90,21 +103,5 @@ typedef struct {
 
 Gang gang;
 int PlayerExp;
-
-void UtilityInit();
-void gotoxy(int x, int y);
-int RR(int ratio);
-int kp(int key);
-int kpw(int key);
-int GMX();
-int GMY();
-int MIA(int sx, int sy, int w, int h);
-void HideCursor();
-void LI(HDC* DC, HBITMAP* Map, char* path);
-// void LO(Object object);
-void PT(int sx, int sy, int w, int h, HDC originDC);
-void PO(int sx, int sy, int ox, int oy, int w, int h, HDC originDC);
-void PI(int sx, int sy, int w, int h, HDC originDC);
-void PrintBackground(int UMCode);
 
 #endif

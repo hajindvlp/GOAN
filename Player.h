@@ -1,17 +1,17 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include "Map.h"
-#include "Battle.h"
-
 #include <stdio.h>
 #include <string.h>
 
-FILE * ConfigureFile;
+#include "Map.h"
+#include "Battle.h"
 
 void Load();
 void EnemyLoad(int Ecode);
 void Save();
 void Debug();
+
+FILE * ConfigureFile;
 
 #endif
