@@ -232,7 +232,7 @@ void BattleRender() {
 int RenderLoose() {
 
     while(1) {
-        PI(0, 0, 800, 600, LooseScreenDC);
+        PI(0, 75, 800, 450, LooseScreenDC);
 
         // get Mouse click
     }
@@ -242,7 +242,7 @@ int RenderWin() {
 
     Conquered[ECode] = 1;
     while(1) {
-        PI(0, 0, 800, 600, WinScreenDC);
+        PI(0, 75, 800, 450, WinScreenDC);
 
         // get Mouse click
     }
