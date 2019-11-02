@@ -12,12 +12,12 @@ HWND ConsoleWindow;
 HINSTANCE ConsoleInstance;
 
 HDC ConsoleDC, MenuUpgradeDC,  MenuMapDC,  BlankDC,  BattleBackgroundDC,  
-    MenuSelectDC,  ArrowLeftDC,  ArrowRightDC,  CoinDC;
+    MenuSelectDC,  ArrowLeftDC,  ArrowRightDC,  CoinDC, NumberRawDC;
 HBITMAP MenuUpgradeMap, MenuMapMap, BlankMap, BattleBackgroundMap, 
-    MenuSelectMap, ArrowLeftMap, ArrowRightMap, CoinMap;
+    MenuSelectMap, ArrowLeftMap, ArrowRightMap, CoinMap, NumberRawMap;
 
-HDC AlphabetDC[27], NumberDC[10];
-HBITMAP AlphabetMap[27], NumberMap[10];
+HDC AlphabetDC[27], NumbersDC[10];
+HBITMAP AlphabetMap[27], NumbersMap[10];
 
 // typedef struct {
 //     HDC* DC;
@@ -26,15 +26,20 @@ HBITMAP AlphabetMap[27], NumberMap[10];
 // } Object;
 
 typedef struct {
+
     char name[101];
     int hp;    // health point
     int df;    // defense
     int dg;    // damage 
-    int cost;  // cost
-    int ratio; // sumon rate
+
     int as;    // attack speed
     int ms;    // move speed
     int sc;    // summon cool time
+    int cost;  // cost
+    int ratio; // sumon rate
+
+    int Width;
+    int Height;
 
     int bd;    // battle is Dead
     int bw;    // battle is Walking
@@ -63,6 +68,7 @@ typedef struct {
 
 typedef struct {
     int x;
+    int vx, vy;
 } Coin;
 
 typedef struct {

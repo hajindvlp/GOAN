@@ -14,9 +14,14 @@ void Load() {
             fscanf(ConfigureFile, "%d", &gang.characters[i].dg);
             fscanf(ConfigureFile, "%d", &gang.characters[i].df);
             fscanf(ConfigureFile, "%d", &gang.characters[i].hp);
+
             fscanf(ConfigureFile, "%d", &gang.characters[i].as);
             fscanf(ConfigureFile, "%d", &gang.characters[i].ms);
             fscanf(ConfigureFile, "%d", &gang.characters[i].sc);
+
+            fscanf(ConfigureFile, "%d", &gang.characters[i].Width);
+            fscanf(ConfigureFile, "%d", &gang.characters[i].Height);
+
             fscanf(ConfigureFile, "%d", &gang.characters[i].cost);
 
             sprintf(gang.characters[i].path, "./resources/%s/sprites", gang.characters[i].name);
@@ -81,8 +86,13 @@ void EnemyLoad(int Ecode) {
             fscanf(ConfigureFile, "%d", &Enemy.characters[i].dg);
             fscanf(ConfigureFile, "%d", &Enemy.characters[i].df);
             fscanf(ConfigureFile, "%d", &Enemy.characters[i].hp);
+            
             fscanf(ConfigureFile, "%d", &Enemy.characters[i].as);
             fscanf(ConfigureFile, "%d", &Enemy.characters[i].ms);
+
+            fscanf(ConfigureFile, "%d", &Enemy.characters[i].Width);
+            fscanf(ConfigureFile, "%d", &Enemy.characters[i].Height);
+
             fscanf(ConfigureFile, "%d", &Enemy.characters[i].ratio);
 
             sprintf(Enemy.characters[i].path, "./resources/%s/sprites", Enemy.characters[i].name);
@@ -122,22 +132,13 @@ void EnemyLoad(int Ecode) {
         }
     }
 
-    printf("%d\n", Enemy.characterNum);
-    for(int i=0 ; i<Enemy.characterNum ; i++) {
-        printf("%s\n", Enemy.characters[i].name);
-    }
 }
 
 void Debug() {
-    gotoxy(10, 25);
-    printf("%d\n", PlayerExp); // player exp
-
-    printf("%d\n", gang.characterNum);
     for(int i=0 ; i<gang.characterNum ; i++) {
-        printf("%s\n", gang.characters[i].name);
-        printf("%d\n", gang.characters[i].hp);
-        printf("%d\n", gang.characters[i].dg);
+        printf("%d %d %d\n", gang.characters[i].WalkSpriteNum, gang.characters[i].AttackSpriteNum, gang.characters[i].DieSpriteNum);
     }
+    getch();
 }
 
 void Save() {

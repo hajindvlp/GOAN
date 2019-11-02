@@ -68,7 +68,7 @@ void BattleUpdate() {
         }
 
         for(int j=0 ; j<OutEnemyCnt ; j++) { // Ally -> Enemy
-            if(OutAlly[i].bd == 0 && OutEnemy[j].bd == 0 && OutAlly[i].bX + 70 >= OutEnemy[j].bX) { // collided
+            if(OutAlly[i].bd == 0 && OutEnemy[j].bd == 0 && OutAlly[i].bX + OutAlly[i].Width - 30 >= OutEnemy[j].bX) { // collided
                 if(fcnt % OutAlly[i].as == 0) {
                     OutEnemy[j].hp -= (OutAlly[i].dg - OutEnemy[j].df); // attack if attack speed is on time
                 } 
@@ -89,18 +89,20 @@ void BattleUpdate() {
         int isCollided = 0;
         
         if(OutEnemy[i].bd == 0 && (OutEnemy[i].hp <= 0 || OutEnemy[i].bX < 0)) { // death check
+            // Make Enemy Die
             OutEnemy[i].hp = 0;
             OutEnemy[i].bd = 1; 
             OutEnemy[i].bw = 0;
             OutEnemy[i].ba = 0;
             OutEnemy[i].DieSpriteCnt = 0;
 
-            coin[coinNum].x = OutEnemy[i].bX;
+            // Set Coin
+            coin[coinNum].x = OutEnemy[i].bX;   // Add vx, vy for animation
             coinNum++;
         } 
 
         for(int j=0 ; j<OutAllyCnt ; j++) { // Enemy -> Ally
-            if(OutEnemy[i].bd == 0 && OutAlly[j].bd == 0 && OutAlly[j].bX + 70 >= OutEnemy[i].bX) {
+            if(OutEnemy[i].bd == 0 && OutAlly[j].bd == 0 && OutAlly[j].bX + OutAlly[j].Width - 30 >= OutEnemy[i].bX) {
                 if(fcnt % OutEnemy[i].as == 0) {
                     OutAlly[j].hp -= (OutEnemy[i].dg - OutAlly[j].df);
                 } 
@@ -145,14 +147,17 @@ void BattleRender() {
     for(int i=0 ; i<OutAllyCnt ; i++) {
         if(OutAlly[i].bd == 0 && OutAlly[i].bX+100 > ScreenX && OutAlly[i].bX < ScreenX + 800) {
             if(OutAlly[i].bw) {   
-                if(fcnt % 3 == 0) OutAlly[i].WalkSpriteCnt++;
-                PT(OutAlly[i].bX-ScreenX, 340, 100, 100, OutAlly[i].WalkSpriteDC[OutAlly[i].WalkSpriteCnt%OutAlly[i].WalkSpriteNum]);
+                if(fcnt % 3 == 0) OutAlly[i].WalkSpriteCnt++, OutAlly[i].WalkSpriteCnt%=OutAlly[i].WalkSpriteNum;
+                PT(OutAlly[i].bX-ScreenX, 340, OutAlly[i].Width, OutAlly[i].Height, 
+                   OutAlly[i].WalkSpriteDC[OutAlly[i].WalkSpriteCnt]);
             } else if(OutAlly[i].ba) {
-                if(fcnt % 3 == 0) OutAlly[i].AttackSpriteCnt++;
-                PT(OutAlly[i].bX-ScreenX, 340, 100, 100, OutAlly[i].AttackSpriteDC[OutAlly[i].AttackSpriteCnt%OutAlly[i].AttackSpriteNum]);
+                if(fcnt % 3 == 0) OutAlly[i].AttackSpriteCnt++, OutAlly[i].AttackSpriteCnt%=OutAlly[i].AttackSpriteNum;
+                PT(OutAlly[i].bX-ScreenX, 340, OutAlly[i].Width, OutAlly[i].Height,
+                   OutAlly[i].AttackSpriteDC[OutAlly[i].AttackSpriteCnt]);
             } else if(OutAlly[i].DieSpriteCnt < OutAlly[i].DieSpriteNum && OutAlly[i].bd) {
-                if(fcnt % 3 == 0) OutAlly[i].DieSpriteCnt++;
-                PT(OutAlly[i].bX-ScreenX, 340, 100, 100, OutAlly[i].DieSpriteDC[OutAlly[i].DieSpriteCnt%OutAlly[i].DieSpriteNum]);
+                if(fcnt % 3 == 0) OutAlly[i].DieSpriteCnt++, OutAlly[i].DieSpriteCnt%=OutAlly[i].DieSpriteNum;
+                PT(OutAlly[i].bX-ScreenX, 340, OutAlly[i].Width, OutAlly[i].Height,
+                   OutAlly[i].DieSpriteDC[OutAlly[i].DieSpriteCnt]);
             }
         }
     }
@@ -162,14 +167,17 @@ void BattleRender() {
     for(int i=0 ; i<OutEnemyCnt ; i++) {
         if(OutEnemy[i].bd == 0 && OutEnemy[i].bX+100 > ScreenX && OutEnemy[i].bX < ScreenX + 800) {
             if(OutEnemy[i].bw) {
-                if(fcnt % 3 == 0) OutEnemy[i].WalkSpriteCnt++;
-                PT(OutEnemy[i].bX-ScreenX, 340, 100, 100, OutEnemy[i].WalkSpriteDC[OutEnemy[i].WalkSpriteCnt%OutEnemy[i].WalkSpriteNum]);
+                if(fcnt % 3 == 0) OutEnemy[i].WalkSpriteCnt++, OutEnemy[i].WalkSpriteCnt%=OutEnemy[i].WalkSpriteNum;
+                PT(OutEnemy[i].bX-ScreenX, 340, OutEnemy[i].Width, OutEnemy[i].Height,
+                   OutEnemy[i].WalkSpriteDC[OutEnemy[i].WalkSpriteCnt]);
             } else if(OutEnemy[i].ba) {
-                if(fcnt % 3 == 0) OutEnemy[i].AttackSpriteCnt++;
-                PT(OutEnemy[i].bX-ScreenX, 340, 100, 100, OutEnemy[i].AttackSpriteDC[OutEnemy[i].AttackSpriteCnt%OutEnemy[i].AttackSpriteNum]);
+                if(fcnt % 3 == 0) OutEnemy[i].AttackSpriteCnt++, OutEnemy[i].AttackSpriteCnt%=OutEnemy[i].AttackSpriteNum;
+                PT(OutEnemy[i].bX-ScreenX, 340, OutEnemy[i].Width, OutEnemy[i].Height,
+                   OutEnemy[i].AttackSpriteDC[OutEnemy[i].AttackSpriteCnt]);
             } else if(OutEnemy[i].DieSpriteCnt < OutEnemy[i].DieSpriteNum && OutEnemy[i].bd) {
-                if(fcnt % 3 == 0) OutEnemy[i].DieSpriteCnt++;
-                PT(OutEnemy[i].bX-ScreenX, 340, 100, 100, OutEnemy[i].DieSpriteDC[OutEnemy[i].DieSpriteCnt%OutEnemy[i].DieSpriteNum]);
+                if(fcnt % 3 == 0) OutEnemy[i].DieSpriteCnt++, OutEnemy[i].DieSpriteCnt%=OutEnemy[i].DieSpriteNum;
+                PT(OutEnemy[i].bX-ScreenX, 340, OutEnemy[i].Width, OutEnemy[i].Height,
+                   OutEnemy[i].DieSpriteDC[OutEnemy[i].DieSpriteCnt]);
             }
         }
     }
