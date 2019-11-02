@@ -1,8 +1,6 @@
 #include "Map.h"
 
 void MapInit() {
-    LI(&BracketLeftDC, &BracketLeftMap, "./resources/BracketLeft.bmp");
-    LI(&BracketRightDC, &BracketRightMap, "./resources/BracketRight.bmp");
 
     // hard code things -- hate this
     oldSelected = -1;

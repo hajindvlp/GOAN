@@ -11,12 +11,18 @@
 HWND ConsoleWindow;
 HINSTANCE ConsoleInstance;
 
-HDC ConsoleDC, MenuUpgradeDC,  MenuMapDC,  BlankDC,  BattleBackgroundDC,  
+HDC ConsoleDC, MenuUpgradeDC,  MenuMapDC,  BattleBackgroundDC,  
     MenuSelectDC,  ArrowLeftDC,  ArrowRightDC,  CoinDC, NumberRawDC,
     WinScreenDC, LooseScreenDC;
 HBITMAP MenuUpgradeMap, MenuMapMap, BlankMap, BattleBackgroundMap, 
     MenuSelectMap, ArrowLeftMap, ArrowRightMap, CoinMap, NumberRawMap,
     WinScreenMap, LooseScreenMap;
+    
+HDC StartScreenDC;
+HBITMAP StartScreenMap;
+
+HDC MapDC, BracketLeftDC, BracketRightDC;
+HBITMAP MapMap, BracketLeftMap, BracketRightMap;
 
 HDC AlphabetDC[27], NumbersDC[10];
 HBITMAP AlphabetMap[27], NumbersMap[10];
@@ -97,7 +103,6 @@ void HideCursor();
 void LI(HDC* DC, HBITMAP* Map, char* path);
 // void LO(Object object);
 void PT(int sx, int sy, int w, int h, HDC originDC);
-void PTB(int sx, int sy, int w, int h, HDC originDC);
 void PO(int sx, int sy, int ox, int oy, int w, int h, HDC originDC);
 void PI(int sx, int sy, int w, int h, HDC originDC);
 void PrintBackground(int UMCode);

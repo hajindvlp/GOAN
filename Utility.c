@@ -3,28 +3,36 @@
 void UtilityInit() {
 
     srand(time(0)); 
-
-    LI(&MenuUpgradeDC, &MenuUpgradeMap, "./resources/Upgrade.bmp");
-    LI(&MenuMapDC, &MenuMapMap, "./resources/Map.bmp");
-    LI(&BlankDC, &BlankMap, "./resources/Blank.bmp");
-    LI(&CoinDC, &CoinMap, "./resources/Coin.bmp");
-
-    LI(&BattleBackgroundDC, &BattleBackgroundMap, "./resources/BattleBackground.bmp");
-
-    LI(&MenuSelectDC, &MenuSelectMap, "./resources/SelectMenu.bmp");
-    LI(&ArrowLeftDC, &ArrowLeftMap, "./resources/ArrowLeft.bmp");
-    LI(&ArrowRightDC, &ArrowRightMap, "./resources/ArrowRight.bmp");
-
-    LI(&NumberRawDC, &NumberRawMap, "./resources/number.bmp");
-
-    LI(&LooseScreenDC, &LooseScreenMap, "./resources/Loose.bmp");
-    LI(&WinScreenDC, &WinScreenMap, "./resources/Win.bmp");
     
-    for(int i=0 ; i<26 ; i++) {
-        char path[101];
-        sprintf(path, "./resources/Alphabet/%d.bmp", i);
-        LI(&AlphabetDC[i], &AlphabetMap[i], path);
-    }
+    ConsoleInstance = GetModuleHandle(NULL);
+    ConsoleWindow = GetConsoleWindow();
+    ConsoleDC = GetDC(ConsoleWindow);
+
+    LI(&StartScreenDC, &StartScreenMap, "./resources/Main/StartScreen.bmp");
+    LI(&MenuSelectDC, &MenuSelectMap,   "./resources/Main/SelectMenu.bmp");
+
+    LI(&MenuUpgradeDC, &MenuUpgradeMap, "./resources/Upgrade/Upgrade.bmp");
+
+    LI(&MenuMapDC, &MenuMapMap,           "./resources/Map/Map.bmp");
+    LI(&BracketLeftDC, &BracketLeftMap,   "./resources/Map/BracketLeft.bmp");
+    LI(&BracketRightDC, &BracketRightMap, "./resources/Map/BracketRight.bmp");
+
+    LI(&BattleBackgroundDC, &BattleBackgroundMap, "./resources/Battle/BattleBackground.bmp");
+    LI(&CoinDC, &CoinMap,                         "./resources/Battle/Coin.bmp");
+    LI(&LooseScreenDC, &LooseScreenMap,           "./resources/Battle/Loose.bmp");
+    LI(&WinScreenDC, &WinScreenMap,               "./resources/Battle/Win.bmp");
+
+    LI(&NumberRawDC, &NumberRawMap, "./resources/Number/number.bmp");
+
+
+    // LI(&ArrowLeftDC, &ArrowLeftMap, "./resources/ArrowLeft.bmp");
+    // LI(&ArrowRightDC, &ArrowRightMap, "./resources/ArrowRight.bmp");
+    
+    // for(int i=0 ; i<26 ; i++) {
+    //     char path[101];
+    //     sprintf(path, "./resources/Alphabet/%d.bmp", i);
+    //     LI(&AlphabetDC[i], &AlphabetMap[i], path);
+    // }
 
     for(int i=0 ; i<10 ; i++) TransparentBlt(NumbersDC[i], 0, 0, 32, 50, NumberRawDC, i*32, 0, 32, 50, RGB(255, 0, 255));
 
@@ -91,11 +99,6 @@ int MIA(int sx, int sy, int w, int h) {
 }
 
 void PT(int sx, int sy, int w, int h, HDC originDC) {
-    TransparentBlt(ConsoleDC, sx, sy, w, h, originDC, 0, 0, w, h, RGB(255, 0, 255));
-}
-
-void PTB(int sx, int sy, int w, int h, HDC originDC) {
-    BitBlt(ConsoleDC, sx, sy, w, h, BlankDC, w, h, SRCCOPY);
     TransparentBlt(ConsoleDC, sx, sy, w, h, originDC, 0, 0, w, h, RGB(255, 0, 255));
 }
 

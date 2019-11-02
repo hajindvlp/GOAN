@@ -8,22 +8,15 @@ int main() {
 
 void MainGame() {    
     MainInit();
-    UtilityInit();
-    MapInit();
     
     MainRender(0);
     MainUpdate();
 }
 
 void MainInit() {
-    
-    ConsoleInstance = GetModuleHandle(NULL);
-    ConsoleWindow = GetConsoleWindow();
-    ConsoleDC = GetDC(ConsoleWindow);
-
-    LI(&StartScreenDC, &StartScreenMap, "./resources/StartScreen.bmp");
-
     Load();
+    UtilityInit();
+    MapInit();
 }
 
 void MainUpdate() {

@@ -1,7 +1,7 @@
 #include "Player.h"
 
 void Load() {
-    ConfigureFile = fopen("./resources/DATA", "r+");
+    ConfigureFile = fopen("./resources/Files/DATA", "r+");
 
     if(ConfigureFile != NULL) {
 
@@ -24,7 +24,7 @@ void Load() {
 
             fscanf(ConfigureFile, "%d", &gang.characters[i].cost);
 
-            sprintf(gang.characters[i].path, "./resources/%s/sprites", gang.characters[i].name);
+            sprintf(gang.characters[i].path, "./resources/Character/Ally/%s/sprites", gang.characters[i].name);
 
             fscanf(ConfigureFile, "%d", &gang.characters[i].WalkSpriteNum);
             fscanf(ConfigureFile, "%d", &gang.characters[i].AttackSpriteNum);
@@ -59,12 +59,12 @@ void Load() {
             }
             
             char path[101];
-            sprintf(path, "./resources/%s/BattleIcon.bmp", gang.characters[i].name);
+            sprintf(path, "./resources/Character/Ally/%s/BattleIcon.bmp", gang.characters[i].name);
             LI(&gang.characters[i].BattleIconDC,
                &gang.characters[i].BattleIconMap,
                path);
 
-            sprintf(path, "./resources/%s/UpgradeIcon.bmp", gang.characters[i].name);
+            sprintf(path, "./resources/Character/Ally/%s/UpgradeIcon.bmp", gang.characters[i].name);
             LI(&gang.characters[i].UpgradeIconDC,
                &gang.characters[i].UpgradeIconMap,
                path);
@@ -74,7 +74,7 @@ void Load() {
 
 void EnemyLoad(int Ecode) {
     char FileName[101];
-    sprintf(FileName, "./resources/STAGE%d", Ecode);
+    sprintf(FileName, "./resources/Files/STAGE%d", Ecode);
     ConfigureFile = fopen(FileName, "r+");
 
     if(ConfigureFile != NULL) {
@@ -97,7 +97,7 @@ void EnemyLoad(int Ecode) {
 
             fscanf(ConfigureFile, "%d", &Enemy.characters[i].ratio);
 
-            sprintf(Enemy.characters[i].path, "./resources/%s/sprites", Enemy.characters[i].name);
+            sprintf(Enemy.characters[i].path, "./resources/Character/Enemy/%s/sprites", Enemy.characters[i].name);
 
             fscanf(ConfigureFile, "%d", &Enemy.characters[i].WalkSpriteNum);
             fscanf(ConfigureFile, "%d", &Enemy.characters[i].AttackSpriteNum);
