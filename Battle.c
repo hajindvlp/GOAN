@@ -97,12 +97,12 @@ void BattleUpdate() {
             OutEnemy[i].DieSpriteCnt = 0;
 
             // Set Coin
-            coin[coinNum].x = OutEnemy[i].bX;   // Add vx, vy for animation
-            coinNum++;
+            // coin[coinNum].x = OutEnemy[i].bX;   // Add vx, vy for animation
+            // coinNum++;
         } 
 
         for(int j=0 ; j<OutAllyCnt ; j++) { // Enemy -> Ally
-            if(OutEnemy[i].bd == 0 && OutAlly[j].bd == 0 && OutAlly[j].bX + OutAlly[j].Width - 30 >= OutEnemy[i].bX) {
+            if(OutEnemy[i].bd == 0 && OutAlly[j].bd == 0 && OutEnemy[i].bX - OutEnemy[i].Width + 30 <= OutAlly[j].bX) {
                 if(fcnt % OutEnemy[i].as == 0) {
                     OutAlly[j].hp -= (OutEnemy[i].dg - OutAlly[j].df);
                 } 
@@ -142,43 +142,45 @@ void BattleRender() {
         PT(800-(10+60)*(i+1), 10, 60, 60, Ally.characters[i].BattleIconDC);
     }
 
-    // Render Allys
-
-    for(int i=0 ; i<OutAllyCnt ; i++) {
-        if(OutAlly[i].bd == 0 && OutAlly[i].bX+100 > ScreenX && OutAlly[i].bX < ScreenX + 800) {
-            if(OutAlly[i].bw) {   
-                if(fcnt % 3 == 0) OutAlly[i].WalkSpriteCnt++, OutAlly[i].WalkSpriteCnt%=OutAlly[i].WalkSpriteNum;
-                PT(OutAlly[i].bX-ScreenX, 340, OutAlly[i].Width, OutAlly[i].Height, 
-                   OutAlly[i].WalkSpriteDC[OutAlly[i].WalkSpriteCnt]);
-            } else if(OutAlly[i].ba) {
-                if(fcnt % 3 == 0) OutAlly[i].AttackSpriteCnt++, OutAlly[i].AttackSpriteCnt%=OutAlly[i].AttackSpriteNum;
-                PT(OutAlly[i].bX-ScreenX, 340, OutAlly[i].Width, OutAlly[i].Height,
-                   OutAlly[i].AttackSpriteDC[OutAlly[i].AttackSpriteCnt]);
-            } else if(OutAlly[i].DieSpriteCnt < OutAlly[i].DieSpriteNum && OutAlly[i].bd) {
-                if(fcnt % 3 == 0) OutAlly[i].DieSpriteCnt++, OutAlly[i].DieSpriteCnt%=OutAlly[i].DieSpriteNum;
-                PT(OutAlly[i].bX-ScreenX, 340, OutAlly[i].Width, OutAlly[i].Height,
-                   OutAlly[i].DieSpriteDC[OutAlly[i].DieSpriteCnt]);
-            }
-        }
-    }
-
     // Render Enemy
 
     for(int i=0 ; i<OutEnemyCnt ; i++) {
         if(OutEnemy[i].bd == 0 && OutEnemy[i].bX+100 > ScreenX && OutEnemy[i].bX < ScreenX + 800) {
             if(OutEnemy[i].bw) {
                 if(fcnt % 3 == 0) OutEnemy[i].WalkSpriteCnt++, OutEnemy[i].WalkSpriteCnt%=OutEnemy[i].WalkSpriteNum;
-                PT(OutEnemy[i].bX-ScreenX, 340, OutEnemy[i].Width, OutEnemy[i].Height,
+                PT(OutEnemy[i].bX-ScreenX, 440 - OutEnemy[i].Height, OutEnemy[i].Width, OutEnemy[i].Height,
                    OutEnemy[i].WalkSpriteDC[OutEnemy[i].WalkSpriteCnt]);
             } else if(OutEnemy[i].ba) {
                 if(fcnt % 3 == 0) OutEnemy[i].AttackSpriteCnt++, OutEnemy[i].AttackSpriteCnt%=OutEnemy[i].AttackSpriteNum;
-                PT(OutEnemy[i].bX-ScreenX, 340, OutEnemy[i].Width, OutEnemy[i].Height,
+                PT(OutEnemy[i].bX-ScreenX, 440 - OutEnemy[i].Height, OutEnemy[i].Width, OutEnemy[i].Height,
                    OutEnemy[i].AttackSpriteDC[OutEnemy[i].AttackSpriteCnt]);
-            } else if(OutEnemy[i].DieSpriteCnt < OutEnemy[i].DieSpriteNum && OutEnemy[i].bd) {
-                if(fcnt % 3 == 0) OutEnemy[i].DieSpriteCnt++, OutEnemy[i].DieSpriteCnt%=OutEnemy[i].DieSpriteNum;
-                PT(OutEnemy[i].bX-ScreenX, 340, OutEnemy[i].Width, OutEnemy[i].Height,
-                   OutEnemy[i].DieSpriteDC[OutEnemy[i].DieSpriteCnt]);
             }
+        }
+        else if(OutEnemy[i].DieSpriteCnt < OutEnemy[i].DieSpriteNum && OutEnemy[i].bd) {
+            if(fcnt % 3 == 0) OutEnemy[i].DieSpriteCnt++, OutEnemy[i].DieSpriteCnt%=OutEnemy[i].DieSpriteNum;
+            PT(OutEnemy[i].bX-ScreenX, 440 - OutEnemy[i].Height, OutEnemy[i].Width, OutEnemy[i].Height,
+               OutEnemy[i].DieSpriteDC[OutEnemy[i].DieSpriteCnt]);
+        }
+    }
+
+    // Render Allys
+
+    for(int i=0 ; i<OutAllyCnt ; i++) {
+        if(OutAlly[i].bd == 0 && OutAlly[i].bX+100 > ScreenX && OutAlly[i].bX < ScreenX + 800) {
+            if(OutAlly[i].bw) {   
+                if(fcnt % 3 == 0) OutAlly[i].WalkSpriteCnt++, OutAlly[i].WalkSpriteCnt%=OutAlly[i].WalkSpriteNum;
+                PT(OutAlly[i].bX-ScreenX, 440 - OutAlly[i].Height, OutAlly[i].Width, OutAlly[i].Height, 
+                   OutAlly[i].WalkSpriteDC[OutAlly[i].WalkSpriteCnt]);
+            } else if(OutAlly[i].ba) {
+                if(fcnt % 3 == 0) OutAlly[i].AttackSpriteCnt++, OutAlly[i].AttackSpriteCnt%=OutAlly[i].AttackSpriteNum;
+                PT(OutAlly[i].bX-ScreenX, 440 - OutAlly[i].Height, OutAlly[i].Width, OutAlly[i].Height,
+                   OutAlly[i].AttackSpriteDC[OutAlly[i].AttackSpriteCnt]);
+            } 
+        }
+        else if(OutAlly[i].DieSpriteCnt < OutAlly[i].DieSpriteNum && OutAlly[i].bd) {
+            if(fcnt % 3 == 0) OutAlly[i].DieSpriteCnt++, OutAlly[i].DieSpriteCnt%=OutAlly[i].DieSpriteNum;
+            PT(OutAlly[i].bX-ScreenX, 440 - OutAlly[i].Height, OutAlly[i].Width, OutAlly[i].Height,
+               OutAlly[i].DieSpriteDC[OutAlly[i].DieSpriteCnt]);
         }
     }
 
