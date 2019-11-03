@@ -21,8 +21,14 @@ void UtilityInit() {
     LI(&CoinDC, &CoinMap,                         "./resources/Battle/Coin.bmp");
     LI(&LooseScreenDC, &LooseScreenMap,           "./resources/Battle/Loose.bmp");
     LI(&WinScreenDC, &WinScreenMap,               "./resources/Battle/Win.bmp");
+    LI(&BlackDC, &BlackMap,                       "./resources/Battle/Black.bmp");
 
     LI(&NumberRawDC, &NumberRawMap, "./resources/Number/number.bmp");
+
+    BattleBackBldFunc.BlendOp = AC_SRC_OVER;
+    BattleBackBldFunc.BlendFlags = 0;
+    BattleBackBldFunc.SourceConstantAlpha = 0;
+    BattleBackBldFunc.AlphaFormat = 0;
 
 
     // LI(&ArrowLeftDC, &ArrowLeftMap, "./resources/ArrowLeft.bmp");

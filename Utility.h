@@ -37,14 +37,16 @@ HBITMAP MenuUpgradeMap;
 HDC     MenuMapDC,  BracketLeftDC, BracketRightDC;
 HBITMAP MenuMapMap, BracketLeftMap, BracketRightMap;
 
-HDC     BattleBackgroundDC,  CoinDC,  LooseScreenDC,  WinScreenDC;
-HBITMAP BattleBackgroundMap, CoinMap, LooseScreenMap, WinScreenMap;
+HDC     BattleBackgroundDC,  CoinDC,  LooseScreenDC,  WinScreenDC,  BlackDC;
+HBITMAP BattleBackgroundMap, CoinMap, LooseScreenMap, WinScreenMap, BlackMap;
 
 HDC     NumberRawDC;
 HBITMAP NumberRawMap;
 
 HDC     AlphabetDC[27],  NumbersDC[10];
 HBITMAP AlphabetMap[27], NumbersMap[10];
+
+BLENDFUNCTION BattleBackBldFunc;
 
 typedef struct {
 

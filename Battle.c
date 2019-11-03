@@ -168,7 +168,7 @@ void BattleRender() {
 
     // Render icons
 
-    for(int i=0 ; i<Ally.characterNum ; i++) {
+    for(int i=Ally.characterNum-1 ; i>=0 ; i--) {
         PT(SCREEN_WIDTH-(10+60)*(i+1), 10, 60, 60, Ally.characters[i].BattleIconDC);
     }
 
@@ -232,6 +232,9 @@ void BattleRender() {
 int RenderLoose() {
 
     while(1) {
+        if(BlackMap == NULL) printf("d");
+        getch();
+        AlphaBlend(ConsoleDC, 0, 0, 800, 600, BlackDC, 0, 0, 800, 600, BattleBackBldFunc);
         PI(0, 75, 800, 450, LooseScreenDC);
 
         // get Mouse click
@@ -239,11 +242,21 @@ int RenderLoose() {
 }
 
 int RenderWin() {
+    int BackTransparency = 0x7f;
+    int ScreenTransparency = 0;
+
+    BattleBackBldFunc.SourceConstantAlpha = BackTransparency;
+    AlphaBlend(ConsoleDC, 0, 0, 800, 600, BlackDC, 0, 0, 800, 600, BattleBackBldFunc);
 
     Conquered[ECode] = 1;
     while(1) {
-        PI(0, 75, 800, 450, WinScreenDC);
 
+        if(ScreenTransparency < 256 ) ScreenTransparency++;
+        BattleBackBldFunc.SourceConstantAlpha = ScreenTransparency;
+        AlphaBlend(ConsoleDC, 0, 75, 800, 450, WinScreenDC, 0, 0, 800, 450, BattleBackBldFunc);
+
+        // getch();
+        // Sleep(100);
         // get Mouse click
     }
 }
