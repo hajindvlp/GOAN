@@ -6,7 +6,7 @@ int UpgradeSelect() {
 
     UpgradeInit();
     while(1) {
-        printf("%d %d\n", GMX(), GMY());
+        Debug();
         if( UpgradeUpdate(&selected) )
             return 2;
         UpgradeRender(selected);
@@ -30,7 +30,7 @@ int UpgradeUpdate(int *selected) {
     if(kp('O')) {
         return 1;
     }
-    if( MIA(100, 14, 96, 33) && kp(VK_LBUTTON)) {
+    if( MIA(460, 308, 92, 20) && kp(VK_LBUTTON)) {
         return 1;
     }
     if(kp(VK_RIGHT)) {
@@ -57,10 +57,10 @@ void UpgradeRender(int selected) {
     PT( 630, 190, 80, 80, gang.characters[3].UpgradeIconDC );
     PT( 540, 280, 80, 80, gang.characters[4].UpgradeIconDC );
     PT( 630, 280, 80, 80, gang.characters[5].UpgradeIconDC );
-    // 566 378
+    // 566 378 
 
     ToMapCnt %= 3;
-    PT(566, 378, 154, 52, ToMapDC[ToMapCnt++]);
+    PT(566, 378, 153, 52, ToMapDC[ToMapCnt++]);
 
     // render character Sprite
     if(selected >= 0)

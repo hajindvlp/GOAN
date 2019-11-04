@@ -10,6 +10,7 @@ int MapSelect() {
         if(MapUpdate(&selected))
             return 1;
         MapRender(selected);
+        Sleep(100);
     }
 }
 
@@ -71,28 +72,14 @@ int MapUpdate(int* selected) {
 void MapRender(int selected) {
 
     if(oldSelected != selected) {
-        PI(0, 0, 800, 450, MenuMapDC);
-
-        PT(BracketCoord[selected][0], BracketCoord[selected][1], 9, 43, BracketLeftDC);
-        PT(BracketCoord[selected][2], BracketCoord[selected][3], 9, 43, BracketRightDC);
-        oldSelected = selected;
     }
+    PI(0, 0, 800, 450, MenuMapDC);
+    PT(BracketCoord[selected][0], BracketCoord[selected][1], 9, 43, BracketLeftDC);
+    PT(BracketCoord[selected][2], BracketCoord[selected][3], 9, 43, BracketRightDC);
+    oldSelected = selected;
 
-    // 15 15
     ToUpgradeCnt %= 3;
     PT(15, 15, 153, 52, ToUpgradeDC[ToUpgradeCnt++]);
-
-    /*
-    int oldX, oldY, X, Y;
-
-    X = GMX();
-    Y = GMY();
-    if(X!=oldX && Y!=oldY) {
-        PI(0, 0, 800, 450, MapDC);
-        PT(X+23, Y+28, 69, 56, SelectedBraketDC);
-        oldX = X, oldY = Y;
-    }
-    */
 }
 
 void startBattle(int selected) {
