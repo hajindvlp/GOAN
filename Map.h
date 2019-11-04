@@ -11,7 +11,7 @@ void MapInit();
 int MapSelect();
 int MapUpdate();
 void MapRender(int selected);
-void startBattle(int selected);
+int startBattle(int selected);
 
 typedef struct {
     char name;

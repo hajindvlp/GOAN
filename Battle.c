@@ -9,7 +9,10 @@ int BattleMain(int EnemyCode) {
     while(1) {
         fcnt++;
         key = BattleUpdate();
-        if(key != 0) return key;
+        if(key != 0) {
+            if(key == -1) return 1;
+            else if(key == 1) return 0;
+        }
         BattleKeyin();
         BattleRender();
         Sleep(1000/FPS);
@@ -264,8 +267,13 @@ int RenderWin() {
 
         // get Mouse click
         Debug();
-        if(MIA(210, 325, 150, 35)) tmp = 1;
-        else if(MIA(340, 325, 150, 35)) tmp = 2;
+        if (MIA(210, 325, 150, 35)) {
+            tmp = 1;
+            if(kp(VK_LBUTTON)) return 1;
+        } else if (MIA(340, 325, 150, 35)) {
+            tmp = 2;
+            if(kp(VK_LBUTTON)) return -1;
+        } 
         else tmp = 0;
         
         // Map 210 325

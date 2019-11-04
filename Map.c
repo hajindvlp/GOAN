@@ -51,13 +51,15 @@ int MapUpdate(int* selected) {
         (*selected)--;
         MapRender((*selected));
     } else if(kp(VK_RETURN)) {
-        startBattle(*selected);
+        return startBattle(*selected);
     } 
 
     for(int i=0 ; i<5 ; i++) 
         if(MIA(EnemyCoord[i][0], EnemyCoord[i][1], EnemyCoord[i][2], EnemyCoord[i][3])) {
             if(*selected != i) *selected = i, MapRender(i);
-            if(kp(VK_LBUTTON)) startBattle(*selected);
+            if(kp(VK_LBUTTON)) {
+                return startBattle(*selected);
+            } 
         }
 
     // Goes To Upgrade Menu
@@ -82,6 +84,6 @@ void MapRender(int selected) {
     PT(15, 15, 153, 52, ToUpgradeDC[ToUpgradeCnt++]);
 }
 
-void startBattle(int selected) {
-    BattleMain(selected+1);
+int startBattle(int selected) {
+    return BattleMain(selected+1);
 }
