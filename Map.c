@@ -31,6 +31,8 @@ void MapInit() {
 int MapSelect() {
 
     int selected = 0;
+    
+    SetConsoleTitle("Map Screen");
 
     while(1) {
         if(MapUpdate(&selected))

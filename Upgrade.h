@@ -8,9 +8,16 @@
 #include "Battle.h"
 
 int UpgradeSelect();
+void UpgradeInit();
 int UpgradeUpdate(int *selected);
 void UpgradeRender(int selected);
 
 int x, y;
+
+typedef struct {
+    int sx, sy, w, h;
+} UpgradeCharacter;
+
+UpgradeCharacter UC[6];
 
 #endif

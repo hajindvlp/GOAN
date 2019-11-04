@@ -14,6 +14,7 @@ void MainGame() {
 }
 
 void MainInit() {
+    SetConsoleTitle("Main Screen");
     Load();
     UtilityInit();
     MapInit();

@@ -4,6 +4,7 @@ int UpgradeSelect() {
     
     int selected = -1;
 
+    UpgradeInit();
     while(1) {
         printf("%d %d\n", GMX(), GMY());
         if( UpgradeUpdate(&selected) )
@@ -11,6 +12,18 @@ int UpgradeSelect() {
         UpgradeRender(selected);
         Sleep(300);
     }    
+}
+
+void UpgradeInit() {
+
+    SetConsoleTitle("Upgrade Screen");
+
+    // UC[0] = { 107, 175, 100, 100 };
+    // UC[1] = { 107, 175, 100, 100 };
+    // UC[2] = { 100, 135, 150, 150 };
+    // UC[3] = { 100, 135, 150, 150 };
+    // UC[4] = { 100, 135, 150, 150 };
+    // UC[5] = { 100, 135, 150, 150 };
 }
 
 int UpgradeUpdate(int *selected) {
@@ -40,10 +53,13 @@ void UpgradeRender(int selected) {
     // first one
     PT( 540, 100, 80, 80, gang.characters[0].UpgradeIconDC );
     PT( 630, 100, 80, 80, gang.characters[1].UpgradeIconDC );
-    PT( 540, 200, 80, 80, gang.characters[2].UpgradeIconDC );
+    PT( 540, 190, 80, 80, gang.characters[2].UpgradeIconDC );
+    PT( 630, 190, 80, 80, gang.characters[3].UpgradeIconDC );
+    PT( 540, 280, 80, 80, gang.characters[4].UpgradeIconDC );
+    PT( 630, 280, 80, 80, gang.characters[5].UpgradeIconDC );
 
     // render character Sprite
     if(selected >= 0)
-        PT( 130, 195, 100, 100, 
+        PT( 100, 146, 150, 150, 
                gang.characters[selected].AttackSpriteDC[(gang.characters[selected].AttackSpriteCnt++)%gang.characters[selected].AttackSpriteNum]);
 }

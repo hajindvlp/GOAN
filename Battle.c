@@ -4,6 +4,7 @@ int BattleMain(int EnemyCode) {
     int key;
 
     ECode = EnemyCode;
+    SetConsoleTitle("Battle Screen");
     BattleInit();
     while(1) {
         fcnt++;
