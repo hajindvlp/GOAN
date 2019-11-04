@@ -34,8 +34,8 @@ void UtilityInit() {
     LI(&WinStoreDC, &WinStoreMap,                 "./resources/Battle/Win/clickStore.bmp");
     LI(&LoseScreenDC, &LoseScreenMap,             "./resources/Battle/Lose/Lose.bmp");
     LI(&LoseMapDC, &LoseMapMap,                   "./resources/Battle/Lose/clickMap.bmp");
-    LI(&LoseStoreDC, &LoseStoreMap,               "./resources/Battle/Lose/clickRetry.bmp");
-    LI(&LoseRetryDC, &LoseRetryMap,               "./resources/Battle/Lose/clickStore.bmp");
+    LI(&LoseStoreDC, &LoseStoreMap,               "./resources/Battle/Lose/clickStore.bmp");
+    LI(&LoseRetryDC, &LoseRetryMap,               "./resources/Battle/Lose/clickRetry.bmp");
     LI(&BlackDC, &BlackMap,                       "./resources/Battle/Black.bmp");
 
     LI(&NumberRawDC, &NumberRawMap, "./resources/Number/number.bmp");

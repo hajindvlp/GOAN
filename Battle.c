@@ -235,14 +235,34 @@ void BattleRender() {
 
 int RenderLose() {
     int BackTransparency = 0x7f;
-    int ScreenTransparency = 0;
+    int tmp = 0, oldTmp = -1;
     
     BattleBackBldFunc.SourceConstantAlpha = BackTransparency;
     AlphaBlend(ConsoleDC, 0, 0, 800, 600, BlackDC, 0, 0, 800, 600, BattleBackBldFunc);
 
     while(1) {
-        PI(0, 75, 800, 450, LoseScreenDC);
 
+        if(oldTmp != tmp) {
+            PI(0, 75, 800, 450, LoseScreenDC);
+            if     (tmp == 1) PT(0, 75, 800, 450, LoseMapDC);
+            else if(tmp == 2) PT(0, 75, 800, 450, LoseStoreDC);
+            else if(tmp == 3) PT(0, 75, 800, 450, LoseRetryDC);
+            oldTmp = tmp;
+        }
+
+        // get Mouse click
+        Debug();
+        if (MIA(210, 240, 117, 26)) {
+            tmp = 1;
+            if(kp(VK_LBUTTON)) return 1;
+        } else if (MIA(340, 240, 117, 26)) {
+            tmp = 2;
+            if(kp(VK_LBUTTON)) return -1;
+        } else if (MIA(252, 288, 157, 60)) {
+            tmp = 3;
+            if(kp(VK_LBUTTON)) return BattleMain(ECode);
+        }
+        else tmp = 0;
         // get Mouse click
         Debug();
     }
@@ -269,10 +289,10 @@ int RenderWin() {
         Debug();
         if (MIA(210, 325, 150, 35)) {
             tmp = 1;
-            if(kp(VK_LBUTTON)) return 1;
+            if(kp(VK_LBUTTON)) return -1;
         } else if (MIA(340, 325, 150, 35)) {
             tmp = 2;
-            if(kp(VK_LBUTTON)) return -1;
+            if(kp(VK_LBUTTON)) return 1;
         } 
         else tmp = 0;
         
