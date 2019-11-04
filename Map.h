@@ -27,6 +27,7 @@ typedef struct {
 
 Map map;
 int oldSelected;
+int ToUpgradeCnt;
 int BracketCoord[6][4];
 int EnemyCoord[6][4];
 

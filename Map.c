@@ -1,9 +1,23 @@
 #include "Map.h"
 
+int MapSelect() {
+
+    int selected = 0;
+    
+    SetConsoleTitle("Map Screen");
+
+    while(1) {
+        if(MapUpdate(&selected))
+            return 1;
+        MapRender(selected);
+    }
+}
+
 void MapInit() {
 
     // hard code things -- hate this
     oldSelected = -1;
+    ToUpgradeCnt = 0;
 
     int BracktTmp[6][4] = { 
         {457, 300, 602, 300},
@@ -26,19 +40,6 @@ void MapInit() {
     for(int i=0 ; i<6 ; i++) 
         for(int j=0 ; j<4 ; j++) 
             EnemyCoord[i][j] = EnemyTmp[i][j];
-}
-
-int MapSelect() {
-
-    int selected = 0;
-    
-    SetConsoleTitle("Map Screen");
-
-    while(1) {
-        if(MapUpdate(&selected))
-            return 1;
-        MapRender(selected);
-    }
 }
 
 int MapUpdate(int* selected) {
@@ -76,6 +77,10 @@ void MapRender(int selected) {
         PT(BracketCoord[selected][2], BracketCoord[selected][3], 9, 43, BracketRightDC);
         oldSelected = selected;
     }
+
+    // 15 15
+    ToUpgradeCnt %= 3;
+    PT(15, 15, 153, 52, ToUpgradeDC[ToUpgradeCnt++]);
 
     /*
     int oldX, oldY, X, Y;

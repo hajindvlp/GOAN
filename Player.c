@@ -137,10 +137,9 @@ void EnemyLoad(int Ecode) {
 }
 
 void Debug() {
-    for(int i=0 ; i<gang.characterNum ; i++) {
-        printf("%d %d %d\n", gang.characters[i].WalkSpriteNum, gang.characters[i].AttackSpriteNum, gang.characters[i].DieSpriteNum);
-    }
-    getch();
+    char tmp[101];
+    sprintf(tmp, "%d %d", GMX(), GMY());
+    SetConsoleTitle(tmp);
 }
 
 void Save() {

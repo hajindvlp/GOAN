@@ -31,14 +31,18 @@ HDC ConsoleDC;
 HDC     StartScreenDC,  MenuSelectDC;
 HBITMAP StartScreenMap, MenuSelectMap;
 
-HDC     MenuUpgradeDC;
-HBITMAP MenuUpgradeMap;
+HDC     MenuUpgradeDC , ToMapDC[3];
+HBITMAP MenuUpgradeMap, ToMapMap[3];
 
-HDC     MenuMapDC,  BracketLeftDC, BracketRightDC;
-HBITMAP MenuMapMap, BracketLeftMap, BracketRightMap;
+HDC     MenuMapDC,  BracketLeftDC, BracketRightDC  , ToUpgradeDC[3];
+HBITMAP MenuMapMap, BracketLeftMap, BracketRightMap, ToUpgradeMap[3];
 
-HDC     BattleBackgroundDC,  CoinDC,  LooseScreenDC,  WinScreenDC,  BlackDC;
-HBITMAP BattleBackgroundMap, CoinMap, LooseScreenMap, WinScreenMap, BlackMap;
+HDC     BattleBackgroundDC,  CoinDC, BlackDC,  
+        LoseScreenDC, LoseMapDC, LoseStoreDC, LoseRetryDC,
+        WinScreenDC, WinMapDC, WinStoreDC;
+HBITMAP BattleBackgroundMap, CoinMap, BlackMap, 
+        LoseScreenMap, LoseMapMap, LoseStoreMap, LoseRetryMap,
+        WinScreenMap, WinMapMap, WinStoreMap;
 
 HDC     NumberRawDC;
 HBITMAP NumberRawMap;

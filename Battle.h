@@ -22,7 +22,7 @@ void BattleInit();
 int BattleUpdate();
 void BattleKeyin();
 void BattleRender();
-int RenderLoose();
+int RenderLose();
 int RenderWin();
 
 Gang Enemy;

@@ -59,7 +59,7 @@ int BattleUpdate() {
     // check Lose Win
     
     if(AllyCastle.hp <= 0) {
-        return RenderLoose();
+        return RenderLose();
     } else if(EnemyCastle.hp <= 0) {
         return RenderWin();
     }
@@ -230,34 +230,45 @@ void BattleRender() {
     // printf("render out\n");
 }
 
-int RenderLoose() {
+int RenderLose() {
+    int BackTransparency = 0x7f;
+    int ScreenTransparency = 0;
+    
+    BattleBackBldFunc.SourceConstantAlpha = BackTransparency;
+    AlphaBlend(ConsoleDC, 0, 0, 800, 600, BlackDC, 0, 0, 800, 600, BattleBackBldFunc);
 
     while(1) {
-        if(BlackMap == NULL) printf("d");
-        getch();
-        AlphaBlend(ConsoleDC, 0, 0, 800, 600, BlackDC, 0, 0, 800, 600, BattleBackBldFunc);
-        PI(0, 75, 800, 450, LooseScreenDC);
+        PI(0, 75, 800, 450, LoseScreenDC);
 
         // get Mouse click
+        Debug();
     }
 }
 
 int RenderWin() {
     int BackTransparency = 0x7f;
-    int ScreenTransparency = 0;
+    int tmp = 0, oldTmp = -1;
 
     BattleBackBldFunc.SourceConstantAlpha = BackTransparency;
     AlphaBlend(ConsoleDC, 0, 0, 800, 600, BlackDC, 0, 0, 800, 600, BattleBackBldFunc);
 
     Conquered[ECode] = 1;
+
     while(1) {
+        if(oldTmp != tmp) {
+            PI(0, 75, 800, 450, WinScreenDC);
+            if     (tmp == 1) PT(0, 75, 800, 450, WinMapDC);
+            else if(tmp == 2) PT(0, 75, 800, 450, WinStoreDC);
+            oldTmp = tmp;
+        }
 
-        if(ScreenTransparency < 256 ) ScreenTransparency++;
-        BattleBackBldFunc.SourceConstantAlpha = ScreenTransparency;
-        AlphaBlend(ConsoleDC, 0, 75, 800, 450, WinScreenDC, 0, 0, 800, 450, BattleBackBldFunc);
-
-        // getch();
-        // Sleep(100);
         // get Mouse click
+        Debug();
+        if(MIA(210, 325, 150, 35)) tmp = 1;
+        else if(MIA(340, 325, 150, 35)) tmp = 2;
+        else tmp = 0;
+        
+        // Map 210 325
+        //     340 325
     }
 }

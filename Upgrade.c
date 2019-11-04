@@ -10,14 +10,14 @@ int UpgradeSelect() {
         if( UpgradeUpdate(&selected) )
             return 2;
         UpgradeRender(selected);
-        Sleep(300);
+        Sleep(100);
     }    
 }
 
 void UpgradeInit() {
 
     SetConsoleTitle("Upgrade Screen");
-
+    ToMapCnt = 0;
     // UC[0] = { 107, 175, 100, 100 };
     // UC[1] = { 107, 175, 100, 100 };
     // UC[2] = { 100, 135, 150, 150 };
@@ -57,6 +57,10 @@ void UpgradeRender(int selected) {
     PT( 630, 190, 80, 80, gang.characters[3].UpgradeIconDC );
     PT( 540, 280, 80, 80, gang.characters[4].UpgradeIconDC );
     PT( 630, 280, 80, 80, gang.characters[5].UpgradeIconDC );
+    // 566 378
+
+    ToMapCnt %= 3;
+    PT(566, 378, 154, 52, ToMapDC[ToMapCnt++]);
 
     // render character Sprite
     if(selected >= 0)

@@ -13,6 +13,7 @@ int UpgradeUpdate(int *selected);
 void UpgradeRender(int selected);
 
 int x, y;
+int ToMapCnt;
 
 typedef struct {
     int sx, sy, w, h;

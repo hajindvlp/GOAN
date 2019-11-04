@@ -12,15 +12,30 @@ void UtilityInit() {
     LI(&MenuSelectDC, &MenuSelectMap,   "./resources/Main/SelectMenu.bmp");
 
     LI(&MenuUpgradeDC, &MenuUpgradeMap, "./resources/Upgrade/Upgrade.bmp");
+    for(int i=0 ; i<3 ; i++) {
+        char tmp[101];
+        sprintf(tmp, "./resources/Upgrade/ToMap/%d.bmp", i);
+        LI(&ToMapDC[i], &ToMapMap[i], tmp);
+    }
 
     LI(&MenuMapDC, &MenuMapMap,           "./resources/Map/Map.bmp");
     LI(&BracketLeftDC, &BracketLeftMap,   "./resources/Map/BracketLeft.bmp");
     LI(&BracketRightDC, &BracketRightMap, "./resources/Map/BracketRight.bmp");
+    for(int i=0 ; i<3 ; i++) {
+        char tmp[101];
+        sprintf(tmp, "./resources/Map/ToUpgrade/%d.bmp", i);
+        LI(&ToUpgradeDC[i], &ToUpgradeMap[i], tmp);
+    }
 
     LI(&BattleBackgroundDC, &BattleBackgroundMap, "./resources/Battle/BattleBackground.bmp");
     LI(&CoinDC, &CoinMap,                         "./resources/Battle/Coin.bmp");
-    LI(&LooseScreenDC, &LooseScreenMap,           "./resources/Battle/Loose.bmp");
-    LI(&WinScreenDC, &WinScreenMap,               "./resources/Battle/Win.bmp");
+    LI(&WinScreenDC, &WinScreenMap,               "./resources/Battle/Win/Win.bmp");
+    LI(&WinMapDC, &WinMapMap,                     "./resources/Battle/Win/clickMap.bmp");
+    LI(&WinStoreDC, &WinStoreMap,                 "./resources/Battle/Win/clickStore.bmp");
+    LI(&LoseScreenDC, &LoseScreenMap,             "./resources/Battle/Lose/Lose.bmp");
+    LI(&LoseMapDC, &LoseMapMap,                   "./resources/Battle/Lose/clickMap.bmp");
+    LI(&LoseStoreDC, &LoseStoreMap,               "./resources/Battle/Lose/clickRetry.bmp");
+    LI(&LoseRetryDC, &LoseRetryMap,               "./resources/Battle/Lose/clickStore.bmp");
     LI(&BlackDC, &BlackMap,                       "./resources/Battle/Black.bmp");
 
     LI(&NumberRawDC, &NumberRawMap, "./resources/Number/number.bmp");
