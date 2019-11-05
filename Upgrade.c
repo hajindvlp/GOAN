@@ -18,29 +18,25 @@ void UpgradeInit() {
 
     SetConsoleTitle("Upgrade Screen");
     ToMapCnt = 0;
-    // UC[0] = { 107, 175, 100, 100 };
-    // UC[1] = { 107, 175, 100, 100 };
-    // UC[2] = { 100, 135, 150, 150 };
-    // UC[3] = { 100, 135, 150, 150 };
-    // UC[4] = { 100, 135, 150, 150 };
-    // UC[5] = { 100, 135, 150, 150 };
 }
 
 int UpgradeUpdate(int *selected) {
-    if(kp('O')) {
+    if(kp('O') || (MIA(460, 308, 92, 20) && kp(VK_LBUTTON)) ) {
         return 1;
     }
-    if( MIA(460, 308, 92, 20) && kp(VK_LBUTTON)) {
-        return 1;
-    }
-    if(kp(VK_RIGHT)) {
+    if(kp(VK_RIGHT) && *selected < 5) {
         (*selected) ++;
     }
-    if(kp(VK_LEFT)) {
+    if(kp(VK_LEFT) && *selected > 0) {
         (*selected) --;
     }
-    if(MIA(434, 65, 80, 80) && kp(VK_LBUTTON)) (*selected) = 0;
-    if(MIA(505, 65, 80, 80) && kp(VK_LBUTTON)) (*selected) = 1;
+
+    if(MIA(433, 80, 60, 60) && kp(VK_LBUTTON)) (*selected) = 0;
+    if(MIA(505, 80, 60, 60) && kp(VK_LBUTTON)) (*selected) = 1;
+    if(MIA(433, 153, 60, 60) && kp(VK_LBUTTON)) (*selected) = 2;
+    if(MIA(505, 153, 60, 60) && kp(VK_LBUTTON)) (*selected) = 3;
+    if(MIA(433, 224, 60, 60) && kp(VK_LBUTTON)) (*selected) = 4;
+    if(MIA(505, 224, 60, 60) && kp(VK_LBUTTON)) (*selected) = 5;
     return 0;
 }
 
@@ -64,6 +60,6 @@ void UpgradeRender(int selected) {
 
     // render character Sprite
     if(selected >= 0)
-        PT( 100, 146, 150, 150, 
-               gang.characters[selected].AttackSpriteDC[(gang.characters[selected].AttackSpriteCnt++)%gang.characters[selected].AttackSpriteNum]);
+        PT( 120, 185, gang.characters[selected].Height, gang.characters[selected].Height, 
+               gang.characters[selected].WalkSpriteDC[(gang.characters[selected].WalkSpriteCnt++)%gang.characters[selected].WalkSpriteNum]);
 }
