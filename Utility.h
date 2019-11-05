@@ -9,6 +9,7 @@
 #include <time.h>
 
 void UtilityInit();
+void Video();
 void gotoxy(int x, int y);
 int RR(int ratio);
 int kp(int key);

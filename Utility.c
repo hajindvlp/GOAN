@@ -60,6 +60,30 @@ void UtilityInit() {
     // mciSendString("open resources/Sounds/music.mp3 type mpegvideo", NULL,0,0);
 }
 
+void Video() {
+    HDC TmpDC[910];
+    HBITMAP TmpMap[910];
+    char tmp[201];
+    int fcnt = 0;
+
+    for(int i=0 ; i<=900 ; i++) {
+        sprintf(tmp, "./resources/Video/%d.bmp", i);
+        SetConsoleTitle(tmp);
+        LI(&TmpDC[i], &TmpMap[i], tmp);
+    }
+
+    while(1) {
+
+        PI(0, 0, 480, 270, TmpDC[fcnt++]);
+        Sleep(1000/30);
+        sprintf(tmp, "%d", fcnt);
+        SetConsoleTitle(tmp);
+        if(TmpMap[fcnt] == NULL) SetConsoleTitle("dsafd");
+        else SetConsoleTitle("bad");
+
+    }
+}
+
 int RR(int ratio) {
     int r = rand();
     return ((r%100+100)%100 <= ratio);
