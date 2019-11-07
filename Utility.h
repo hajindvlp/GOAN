@@ -23,6 +23,7 @@ void LI(HDC* DC, HBITMAP* Map, char* path);
 void PT(int sx, int sy, int w, int h, HDC originDC);
 void PO(int sx, int sy, int ox, int oy, int w, int h, HDC originDC);
 void PI(int sx, int sy, int w, int h, HDC originDC);
+void PM(char *path);
 void PrintBackground(int UMCode);
  
 HWND ConsoleWindow;

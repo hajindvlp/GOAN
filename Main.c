@@ -18,6 +18,13 @@ void MainInit() {
     Load();
     UtilityInit();
     MapInit();
+
+    PM("Main.mp3");
+    // char Command[201];
+    //sprintf(Command, "open resources/Sounds/%s type mpegvideo", path);
+    // mciSendString("open resources/Sounds/Main.mp3 type mpegvideo", NULL, 0, 0);
+    //sprintf(Command, "play resources/Sounds/%s", path);
+    // mciSendString("play resources/Sounds/Main.mp3", NULL, 0, 0);
 }
 
 void MainUpdate() {

@@ -160,6 +160,14 @@ void PN(int sx, int sy, int w, int h, int number) {
     
 }
 
+void PM(char *path) {
+    char Command[201];
+    sprintf(Command, "open resources/Sounds/%s type mpegvideo", path);
+    mciSendString(Command, NULL, 0, 0);
+    sprintf(Command, "play resources/Sounds/%s repeat", path);
+    mciSendString(Command, NULL, 0, 0);
+}
+
 // void PS(int w, int h, char* Str) {
 //     for(int i=0 ; Str[i] ; i++) {
 //         PT()
