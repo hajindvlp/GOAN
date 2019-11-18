@@ -45,7 +45,7 @@ void BattleKeyin() {
 
     // icon click
     for(int i=0 ; i<Ally.characterNum ; i++) {
-        if(fcnt % Ally.characters[i].sc == 0 && MIA(640-(100+10)*(i+1), 10, 80, 80) && kp(VK_LBUTTON) && Cost-Ally.characters[i].cost > 0 ) {
+        if(fcnt % Ally.characters[i].sc == 0 && MIA(640-(8+48)*(i+1), 8, 48, 48) && kp(VK_LBUTTON) && Cost-Ally.characters[i].cost > 0 ) {
             OutAlly[OutAllyCnt]     = Ally.characters[i];
             OutAlly[OutAllyCnt].bX  = 175; // Ally castle Entrence
             OutAlly[OutAllyCnt].bd  = 0;
@@ -166,6 +166,10 @@ int BattleUpdate() {
 
 void BattleRender() {
 
+    char tmp[101] = "";
+    sprintf(tmp, "%d %d", GMX(), GMY());
+    SetConsoleTitle(tmp);
+
     // Render Background
 
     PO(0, 0, ScreenX, 0, SCREEN_WIDTH, 600, BattleBackgroundDC);
@@ -179,7 +183,7 @@ void BattleRender() {
     // Render Enemy
 
     for(int i=0 ; i<OutEnemyCnt ; i++) {
-        if(OutEnemy[i].bd == 0 && OutEnemy[i].bX+100 > ScreenX && OutEnemy[i].bX < ScreenX + SCREEN_WIDTH) {
+        if(OutEnemy[i].bd == 0 && OutEnemy[i].bX+OutEnemy[i].Width > ScreenX && OutEnemy[i].bX < ScreenX + SCREEN_WIDTH) {
             if(OutEnemy[i].bw) {
                 if(fcnt % 3 == 0) OutEnemy[i].WalkSpriteCnt++, OutEnemy[i].WalkSpriteCnt%=OutEnemy[i].WalkSpriteNum;
                 PT(OutEnemy[i].bX-ScreenX, GROUND - OutEnemy[i].Height, OutEnemy[i].Width, OutEnemy[i].Height,
@@ -200,7 +204,7 @@ void BattleRender() {
     // Render Allys
 
     for(int i=0 ; i<OutAllyCnt ; i++) {
-        if(OutAlly[i].bd == 0 && OutAlly[i].bX+100 > ScreenX && OutAlly[i].bX < ScreenX + 800) {
+        if(OutAlly[i].bd == 0 && OutAlly[i].bX+OutEnemy[i].Width > ScreenX && OutAlly[i].bX < ScreenX + 800) {
             if(OutAlly[i].bw) {   
                 if(fcnt % 3 == 0) OutAlly[i].WalkSpriteCnt++, OutAlly[i].WalkSpriteCnt%=OutAlly[i].WalkSpriteNum;
                 PT(OutAlly[i].bX-ScreenX, GROUND - OutAlly[i].Height, OutAlly[i].Width, OutAlly[i].Height, 

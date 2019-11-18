@@ -8,7 +8,6 @@ int main() {
 
 void MainGame() {    
     MainInit();
-    
     MainRender(0);
     MainUpdate();
 }
@@ -60,7 +59,6 @@ void MainUpdate() {
 }
 
 void MainRender(int selected) {
-
     // render background
     PI(0, 0, 800, 450, StartScreenDC);
 
