@@ -84,7 +84,9 @@ void EnemyLoad(int Ecode) {
 
     if(ConfigureFile != NULL) {
         fscanf(ConfigureFile, "%d", &AllyCastle.hp);
+        AllyCastle.MaxHp = AllyCastle.hp;
         fscanf(ConfigureFile, "%d", &EnemyCastle.hp);
+        EnemyCastle.MaxHp = EnemyCastle.hp;
         fscanf(ConfigureFile, "%d", &Enemy.characterNum);
 
         for(int i=0 ; i<Enemy.characterNum ; i++) {

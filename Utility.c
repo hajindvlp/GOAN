@@ -38,6 +38,10 @@ void UtilityInit() {
     LI(&LoseStoreDC, &LoseStoreMap,               "./resources/Battle/Lose/clickStore.bmp");
     LI(&LoseRetryDC, &LoseRetryMap,               "./resources/Battle/Lose/clickRetry.bmp");
     LI(&BlackDC, &BlackMap,                       "./resources/Battle/Black.bmp");
+    LI(&AllyHealthBar1DC, &AllyHealthBar1Map,     "./resources/Battle/HealthBar/Ally1.bmp");
+    LI(&AllyHealthBar2DC, &AllyHealthBar2Map,     "./resources/Battle/HealthBar/Ally2.bmp");
+    LI(&EnemyHealthBar1DC, &EnemyHealthBar1Map,     "./resources/Battle/HealthBar/Enemy1.bmp");
+    LI(&EnemyHealthBar2DC, &EnemyHealthBar2Map,     "./resources/Battle/HealthBar/Enemy2.bmp");
 
     LI(&NumberRawDC, &NumberRawMap, "./resources/Number/number.bmp");
 

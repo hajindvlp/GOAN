@@ -43,10 +43,12 @@ HBITMAP MenuMapMap, BracketLeftMap, BracketRightMap, ToUpgradeMap[3], ConqueredM
 
 HDC     BattleBackgroundDC,  CoinDC, BlackDC,  
         LoseScreenDC, LoseMapDC, LoseStoreDC, LoseRetryDC,
-        WinScreenDC, WinMapDC, WinStoreDC;
+        WinScreenDC, WinMapDC, WinStoreDC,
+        AllyHealthBar1DC, AllyHealthBar2DC, EnemyHealthBar1DC, EnemyHealthBar2DC;
 HBITMAP BattleBackgroundMap, CoinMap, BlackMap, 
         LoseScreenMap, LoseMapMap, LoseStoreMap, LoseRetryMap,
-        WinScreenMap, WinMapMap, WinStoreMap;
+        WinScreenMap, WinMapMap, WinStoreMap,
+        AllyHealthBar1Map, AllyHealthBar2Map, EnemyHealthBar1Map, EnemyHealthBar2Map;
 
 HDC     NumberRawDC;
 HBITMAP NumberRawMap;
@@ -110,6 +112,7 @@ typedef struct {
 
 typedef struct {
     int hp;
+    int MaxHp;
 } Castle;
 
 Gang gang;

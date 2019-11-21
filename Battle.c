@@ -45,16 +45,21 @@ void BattleKeyin() {
 
     // icon click
     for(int i=0 ; i<Ally.characterNum ; i++) {
-        if(fcnt % Ally.characters[i].sc == 0 && MIA(640-(8+48)*(i+1), 8, 48, 48) && kp(VK_LBUTTON) && Cost-Ally.characters[i].cost > 0 ) {
+        if(Cost >= Ally.characters[i].cost && fcnt % Ally.characters[i].sc == 0 && MIA(640-(8+48)*(i+1), 8, 48, 48) && kp(VK_LBUTTON) && Cost-Ally.characters[i].cost > 0 ) {
             OutAlly[OutAllyCnt]     = Ally.characters[i];
             OutAlly[OutAllyCnt].bX  = 175; // Ally castle Entrence
             OutAlly[OutAllyCnt].bd  = 0;
+            Cost -= Ally.characters[i].cost;
             OutAllyCnt++;
         }
     }
 }
 
 int BattleUpdate() {
+
+    char tmp[101] = "";
+    sprintf(tmp, "%d", Cost);
+    SetConsoleTitle(tmp);
 
     // refresh frame cound to avoid integer overflow
     fcnt = fcnt%1110;
@@ -72,7 +77,8 @@ int BattleUpdate() {
             coin[i].x += (ScreenX+COIN_X-coin[i].x)/(30-coin[i].fcnt);
             coin[i].y += coin[i].vy;
             coin[i].fcnt++;
-        } else {
+        } else if(coin[i].isRender) {
+            Cost++;
             coin[i].isRender = 0;
         }
     }
@@ -181,10 +187,6 @@ int BattleUpdate() {
 
 void BattleRender() {
 
-    char tmp[101] = "";
-    sprintf(tmp, "%d %d", GMX(), GMY());
-    SetConsoleTitle(tmp);
-
     // Render Background
 
     PO(0, 0, ScreenX, 0, SCREEN_WIDTH, 600, BattleBackgroundDC);
@@ -245,7 +247,13 @@ void BattleRender() {
         }
     }
     
-    PN(0, 0, 300, 50, GMX());
+    // Render Castle Health
+    PT(10-ScreenX, 200, 320, 20, AllyHealthBar1DC);
+    PT(10-ScreenX+(320*AllyCastle.hp)/AllyCastle.MaxHp, 200, (320*(AllyCastle.MaxHp-AllyCastle.hp))/AllyCastle.MaxHp, 20, AllyHealthBar2DC);
+    PT(2109-ScreenX-330, 200, 320, 20, EnemyHealthBar1DC);
+    PT(2109-ScreenX-330, 200, (320*(EnemyCastle.MaxHp-EnemyCastle.hp))/EnemyCastle.MaxHp, 20, EnemyHealthBar2DC);
+
+    // PN(0, 0, 300, 50, GMX());
 }
 
 int RenderLose() {
@@ -266,7 +274,7 @@ int RenderLose() {
         }
 
         // get Mouse click
-        Debug();
+        // Debug();
         if (MIA(210, 240, 117, 26)) {
             tmp = 1;
             if(kp(VK_LBUTTON)) return 1;
@@ -278,8 +286,6 @@ int RenderLose() {
             if(kp(VK_LBUTTON)) return BattleMain(ECode);
         }
         else tmp = 0;
-        // get Mouse click
-        Debug();
     }
 }
 
