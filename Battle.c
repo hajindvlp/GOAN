@@ -154,7 +154,7 @@ int BattleUpdate() {
         for(int i=0 ; i<Enemy.characterNum ; i++) {
             if(RR(Enemy.characters[i].ratio)) {
                 OutEnemy[OutEnemyCnt] = Enemy.characters[i];
-                OutEnemy[OutEnemyCnt].bX = 1960; // Enemy Castle Entrence
+                OutEnemy[OutEnemyCnt].bX = 1960-Enemy.characters[i].Width; // Enemy Castle Entrence
                 OutEnemy[OutEnemyCnt].bd = 0;
                 OutEnemyCnt++;
                 break;
@@ -280,7 +280,9 @@ int RenderWin() {
     BattleBackBldFunc.SourceConstantAlpha = BackTransparency;
     AlphaBlend(ConsoleDC, 0, 0, 800, 600, BlackDC, 0, 0, 800, 600, BattleBackBldFunc);
 
-    Conquered[ECode] = 1;
+    Conquered[ECode-1] = 1;
+    PlayerFile = fopen("./resources/Files/PLAYER", "w+");
+    for(int i=0 ; i<5 ; i++) fprintf(PlayerFile, "%d ", Conquered[i]);
 
     while(1) {
         if(oldTmp != tmp) {
@@ -290,8 +292,6 @@ int RenderWin() {
             oldTmp = tmp;
         }
 
-        // get Mouse click
-        Debug();
         if (MIA(210, 325, 150, 35)) {
             tmp = 1;
             if(kp(VK_LBUTTON)) return -1;
@@ -301,7 +301,5 @@ int RenderWin() {
         } 
         else tmp = 0;
         
-        // Map 210 325
-        //     340 325
     }
 }

@@ -37,8 +37,8 @@ HBITMAP StartScreenMap, MenuSelectMap;
 HDC     MenuUpgradeDC , ToMapDC[3];
 HBITMAP MenuUpgradeMap, ToMapMap[3];
 
-HDC     MenuMapDC,  BracketLeftDC, BracketRightDC  , ToUpgradeDC[3];
-HBITMAP MenuMapMap, BracketLeftMap, BracketRightMap, ToUpgradeMap[3];
+HDC     MenuMapDC,  BracketLeftDC, BracketRightDC  , ToUpgradeDC[3],  ConqueredDC;
+HBITMAP MenuMapMap, BracketLeftMap, BracketRightMap, ToUpgradeMap[3], ConqueredMap;
 
 HDC     BattleBackgroundDC,  CoinDC, BlackDC,  
         LoseScreenDC, LoseMapDC, LoseStoreDC, LoseRetryDC,

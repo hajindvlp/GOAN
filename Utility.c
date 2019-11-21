@@ -21,6 +21,7 @@ void UtilityInit() {
     LI(&MenuMapDC, &MenuMapMap,           "./resources/Map/Map.bmp");
     LI(&BracketLeftDC, &BracketLeftMap,   "./resources/Map/BracketLeft.bmp");
     LI(&BracketRightDC, &BracketRightMap, "./resources/Map/BracketRight.bmp");
+    LI(&ConqueredDC, &ConqueredMap, "./resources/Map/Conquered.bmp");
     for(int i=0 ; i<3 ; i++) {
         char tmp[101];
         sprintf(tmp, "./resources/Map/ToUpgrade/%d.bmp", i);

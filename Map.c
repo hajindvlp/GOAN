@@ -78,6 +78,9 @@ void MapRender(int selected) {
     PT(BracketCoord[selected][2], BracketCoord[selected][3], 9, 43, BracketRightDC);
     oldSelected = selected;
 
+    for(int i=0 ; i<5 ; i++) if(Conquered[i]) 
+        PT((BracketCoord[i][0] + BracketCoord[i][2])/2-20, (BracketCoord[i][1] + BracketCoord[i][3])/2+43, 40, 40, ConqueredDC);
+
     ToUpgradeCnt %= 3;
     PT(15, 15, 153, 52, ToUpgradeDC[ToUpgradeCnt++]);
 }

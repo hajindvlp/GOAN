@@ -13,5 +13,6 @@ void Save();
 void Debug();
 
 FILE * ConfigureFile;
+FILE * PlayerFile;
 
 #endif

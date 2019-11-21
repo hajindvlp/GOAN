@@ -1,9 +1,14 @@
 #include "Player.h"
 
 void Load() {
+    PlayerFile = fopen("./resources/Files/PLAYER", "r+");
+    for(int i=0 ; i<5 ; i++) fscanf(PlayerFile, "%d", &Conquered[i]);
+
+
     ConfigureFile = fopen("./resources/Files/DATA", "r+");
 
     if(ConfigureFile != NULL) {
+
 
         fscanf(ConfigureFile, "%d", &PlayerExp); // player exp
 
