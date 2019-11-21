@@ -14,6 +14,8 @@
 
 #define SCREEN_WIDTH 800
 #define SCREEN_HEIGHT 600
+#define COIN_X 30
+#define COIN_Y 20 
 #define GROUND 590
 #define FPS 30
 

@@ -26,6 +26,7 @@ void PI(int sx, int sy, int w, int h, HDC originDC);
 void PN(int sx, int sy, int w, int h, int number);
 void PM(char *path);
 void PrintBackground(int UMCode);
+int abs(int x);
  
 HWND ConsoleWindow;
 HINSTANCE ConsoleInstance;
@@ -97,8 +98,9 @@ typedef struct {
 } Character;
 
 typedef struct {
-    int x;
+    int x, y;
     int vx, vy;
+    int isRender, fcnt;
 } Coin;
 
 typedef struct {

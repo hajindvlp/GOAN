@@ -60,11 +60,21 @@ int BattleUpdate() {
     fcnt = fcnt%1110;
 
     // check Lose Win
-    
     if(AllyCastle.hp <= 0) {
         return RenderLose();
     } else if(EnemyCastle.hp <= 0) {
         return RenderWin();
+    }
+
+    // coin movement update
+    for(int i=0 ; i<coinNum ; i++) {
+        if(coin[i].isRender && !(coin[i].x == COIN_X && coin[i].y == COIN_Y) && coin[i].fcnt != 30) {
+            coin[i].x += (ScreenX+COIN_X-coin[i].x)/(30-coin[i].fcnt);
+            coin[i].y += coin[i].vy;
+            coin[i].fcnt++;
+        } else {
+            coin[i].isRender = 0;
+        }
     }
 
     // move & check Die & attack
@@ -121,8 +131,12 @@ int BattleUpdate() {
             OutEnemy[i].DieSpriteCnt = 0;
 
             // Set Coin
-            // coin[coinNum].x = OutEnemy[i].bX;   // Add vx, vy for animation
-            // coinNum++;
+            coin[coinNum].x = OutEnemy[i].bX;   // Add vx, vy for animation
+            coin[coinNum].y = GROUND-40;
+            coin[coinNum].vy = (COIN_Y - coin[coinNum].y)/30;
+            coin[coinNum].isRender = 1;
+            coin[coinNum].fcnt = 0;
+            coinNum++;
         } 
 
         for(int j=0 ; j<OutAllyCnt ; j++) { // Enemy -> Ally
@@ -161,6 +175,7 @@ int BattleUpdate() {
             }
         }
     }
+
     return 0;
 }
 
@@ -223,18 +238,13 @@ void BattleRender() {
     }
 
     // Render Coin
-
-    // for(int i=0 ; i<coinNum ; i++) {
-    //     if(coin[i].x+40 > ScreenX) {
-    //         PT(coin[i].x-ScreenX, 400, 40, 40, CoinDC);
-    //     }
-    // }
-
-    // Render Arrows
+    PT(COIN_X, COIN_Y, 40, 40, CoinDC);
+    for(int i=0 ; i<coinNum ; i++) {
+        if(coin[i].isRender) {
+            PT(coin[i].x-ScreenX, coin[i].y, 40, 40, CoinDC);
+        }
+    }
     
-    // if(GMX() <= 100 && ScreenX >= 3)         PI(10, 215, 20, 20, ArrowLeftDC);
-    // if(GMX() >= 540 && ScreenX < 2109 - 800) PI(780, 215, 20, 20, ArrowLeftDC);
-    // printf("render out\n");
     PN(0, 0, 300, 50, GMX());
 }
 
