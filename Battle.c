@@ -235,6 +235,7 @@ void BattleRender() {
     // if(GMX() <= 100 && ScreenX >= 3)         PI(10, 215, 20, 20, ArrowLeftDC);
     // if(GMX() >= 540 && ScreenX < 2109 - 800) PI(780, 215, 20, 20, ArrowLeftDC);
     // printf("render out\n");
+    PN(0, 0, 300, 50, GMX());
 }
 
 int RenderLose() {

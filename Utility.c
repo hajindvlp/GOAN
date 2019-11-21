@@ -55,7 +55,7 @@ void UtilityInit() {
     //     LI(&AlphabetDC[i], &AlphabetMap[i], path);
     // }
 
-    for(int i=0 ; i<10 ; i++) TransparentBlt(NumbersDC[i], 0, 0, 32, 50, NumberRawDC, i*32, 0, 32, 50, RGB(255, 0, 255));
+    for(int i=0 ; i<10 ; i++) TransparentBlt(NumbersDC[i], 0, 0, 32, 50, NumberRawDC, i*32, 0, 32, 50, RGB(255, 1, 255));
 
     // mciSendString("open resources/Sounds/music.mp3 type mpegvideo", NULL,0,0);
 }
@@ -157,7 +157,21 @@ void PI(int sx, int sy, int w, int h, HDC originDC) {
 
 
 void PN(int sx, int sy, int w, int h, int number) {
-    
+    HDC tFNDC = CreateCompatibleDC(ConsoleDC);
+    HDC FNDC = CreateCompatibleDC(ConsoleDC);
+    int i = 0;
+
+    while(number) {
+        char tmp[101] = "";
+        sprintf(tmp, "%d", number);
+        SetConsoleTitle(tmp);
+        BitBlt(tFNDC, i*32, 0, 32, 50, NumbersDC[number%10], 32, 50, SRCCOPY);
+        i++;
+        number/=10;
+    }
+    PI(0, 0, i*32, 50, tFNDC);
+    StretchBlt(FNDC, 0, 0, w, h, tFNDC, 0, 0, i*32, 50, SRCCOPY);
+    PT(sx, sy, w, h, FNDC);
 }
 
 void PM(char *path) {
