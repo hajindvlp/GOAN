@@ -15,7 +15,7 @@ int MapSelect() {
 }
 
 void MapInit() {
-
+    LoadPlayer();
     // hard code things -- hate this
     oldSelected = -1;
     ToUpgradeCnt = 0;

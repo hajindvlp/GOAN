@@ -1,10 +1,12 @@
 #include "Player.h"
 
-void Load() {
+void LoadPlayer() {
     PlayerFile = fopen("./resources/Files/PLAYER", "r+");
-    for(int i=0 ; i<5 ; i++) fscanf(PlayerFile, "%d", &Conquered[i]);
+    for(int i=0 ; i<5 ; i++) fscanf(PlayerFile, "%d", &Conquered[i]);    
+}
 
-
+void Load() {
+    LoadPlayer();
     ConfigureFile = fopen("./resources/Files/DATA", "r+");
 
     if(ConfigureFile != NULL) {

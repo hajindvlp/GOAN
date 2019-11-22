@@ -7,6 +7,7 @@
 #include "Map.h"
 #include "Battle.h"
 
+void LoadPlayer(); 
 void Load();
 void EnemyLoad(int Ecode);
 void Save();
