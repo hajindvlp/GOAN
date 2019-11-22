@@ -27,18 +27,26 @@ void MainInit() {
 }
 
 void MainUpdate() {
-    int key = -1; 
+    int key = 0; 
     int selected = 0;
     
     while(1) {
-        if(key == 0) {
-            key = UpgradeSelect();
-        } else if(key == 1) {
-            PlayerFile = fopen("./resources/Files/PLAYER", "w+");
-            for(int i=0 ; i<5 ; i++) fscanf(PlayerFile, "0 ");
+        if(key == 1) {
+            sleep(10);
             key = UpgradeSelect();
         } else if(key == 2) {
-            return;
+            sleep(10);
+            key = MapSelect();
+        } else if(key == -1) {
+            PlayerFile = fopen("./resources/Files/PLAYER", "w+");
+            for(int i=0 ; i<5 ; i++) fprintf(PlayerFile, "0 ");
+            key = 1;
+        } else if(key == 0) {
+            if(GetAsyncKeyState('I') & 0x8000) {
+                key =  1;
+            } else if(GetAsyncKeyState('O') & 0x8000) {
+                key = -1;
+            }
         }
 
         if(key == 0) {
@@ -50,7 +58,8 @@ void MainUpdate() {
                 if(GMY() >= 230 && GMY() <= 265 && selected != 1) selected = 1, MainRender(selected);
                 if(GMY() >= 270 && GMY() <= 330 && selected != 2) selected = 2, MainRender(selected);
 
-                if(kp(VK_LBUTTON)) key = selected+1;
+                if(kp(VK_LBUTTON) && selected != 2) key = selected+1;
+                if(kp(VK_LBUTTON) && selected == 2) key = -1;
             }
         }
     }
