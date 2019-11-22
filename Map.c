@@ -3,6 +3,7 @@
 int MapSelect() {
 
     int selected = 0;
+    system("mode 100, 28");
     
     SetConsoleTitle("Map Screen");
 

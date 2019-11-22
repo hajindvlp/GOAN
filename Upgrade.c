@@ -4,6 +4,7 @@ int UpgradeSelect() {
     
     int selected = -1;
 
+    system("mode 100, 28");
     UpgradeInit();
     while(1) {
         Debug();

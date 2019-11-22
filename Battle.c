@@ -2,6 +2,7 @@
 
 int BattleMain(int EnemyCode) {
     int key;
+    system("mode 100, 38");
 
     ECode = EnemyCode;
     SetConsoleTitle("Battle Screen");
