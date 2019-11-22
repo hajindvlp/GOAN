@@ -31,16 +31,14 @@ void MainUpdate() {
     int selected = 0;
     
     while(1) {
-        if(key == 1) {
+        if(key == 0) {
+            key = UpgradeSelect();
+        } else if(key == 1) {
+            PlayerFile = fopen("./resources/Files/PLAYER", "w+");
+            for(int i=0 ; i<5 ; i++) fscanf(PlayerFile, "0 ");
             key = UpgradeSelect();
         } else if(key == 2) {
-            key = MapSelect();
-        } else if(key == 0) {
-            if(GetAsyncKeyState('I') & 0x8000) {
-                key =  1;
-            } else if(GetAsyncKeyState('O') & 0x8000) {
-                key = 2;
-            }
+            return;
         }
 
         if(key == 0) {
