@@ -27,7 +27,7 @@ void MainInit() {
 }
 
 void MainUpdate() {
-    int key = 0; 
+    int key = -1; 
     int selected = 0;
     
     while(1) {
