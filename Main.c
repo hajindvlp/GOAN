@@ -13,7 +13,7 @@ void MainGame() {
 }
 
 void MainInit() {
-    SetConsoleTitle("Main Screen");
+    SetConsoleTitle("Main");
     Load();
     UtilityInit();
     MapInit();

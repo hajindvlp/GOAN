@@ -7,7 +7,6 @@ int UpgradeSelect() {
     system("mode 100, 28");
     UpgradeInit();
     while(1) {
-        Debug();
         if( UpgradeUpdate(&selected) )
             return 2;
         UpgradeRender(selected);
@@ -17,6 +16,7 @@ int UpgradeSelect() {
 
 void UpgradeInit() {
 
+    system("mode 100, 28");
     SetConsoleTitle("Upgrade Screen");
     ToMapCnt = 0;
 }
@@ -43,6 +43,15 @@ int UpgradeUpdate(int *selected) {
 
 void UpgradeRender(int selected) {
 
+    int CharacterOffset[6][2] = {
+        {0, 0},
+        {0, 0},
+        {10, 20},
+        {-10, 80},
+        {24, 80},
+        {-20, 0},
+    };
+
     // render store background
     PI(0, 0, 800, 450, MenuUpgradeDC);
 
@@ -61,6 +70,6 @@ void UpgradeRender(int selected) {
 
     // render character Sprite
     if(selected >= 0)
-        PT( 120, 185, gang.characters[selected].Height, gang.characters[selected].Height, 
+        PT( 120-CharacterOffset[selected][0], 185-CharacterOffset[selected][1], gang.characters[selected].Height, gang.characters[selected].Height, 
                gang.characters[selected].WalkSpriteDC[(gang.characters[selected].WalkSpriteCnt++)%gang.characters[selected].WalkSpriteNum]);
 }

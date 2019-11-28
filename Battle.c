@@ -5,7 +5,7 @@ int BattleMain(int EnemyCode) {
     system("mode 100, 38");
 
     ECode = EnemyCode;
-    SetConsoleTitle("Battle Screen");
+    SetConsoleTitle("Battle");
     BattleInit();
     while(1) {
         fcnt++;
@@ -23,6 +23,7 @@ int BattleMain(int EnemyCode) {
 void BattleInit() {
 
     ScreenX = 0;
+    system("mode 100, 38");
 
     OutAllyCnt = 0;
     OutEnemyCnt = 0;
@@ -57,10 +58,6 @@ void BattleKeyin() {
 }
 
 int BattleUpdate() {
-
-    char tmp[101] = "";
-    sprintf(tmp, "%d", Cost);
-    SetConsoleTitle(tmp);
 
     // refresh frame cound to avoid integer overflow
     fcnt = fcnt%1110;
@@ -190,7 +187,7 @@ void BattleRender() {
 
     // Render Background
 
-    PO(0, 0, ScreenX, 0, SCREEN_WIDTH, 600, BattleBackgroundDC);
+    PO(0, 0, ScreenX, 0, SCREEN_WIDTH, 600, BattleBackgroundDC[ECode-1]);
 
     // Render icons
 
@@ -274,8 +271,6 @@ int RenderLose() {
             oldTmp = tmp;
         }
 
-        // get Mouse click
-        // Debug();
         if (MIA(210, 240, 117, 26)) {
             tmp = 1;
             if(kp(VK_LBUTTON)) return 1;

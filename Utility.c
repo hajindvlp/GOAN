@@ -28,7 +28,11 @@ void UtilityInit() {
         LI(&ToUpgradeDC[i], &ToUpgradeMap[i], tmp);
     }
 
-    LI(&BattleBackgroundDC, &BattleBackgroundMap, "./resources/Battle/BattleBackground.bmp");
+    for(int i=0 ; i<5 ; i++) {
+        char tmp[101];
+        sprintf(tmp, "./resources/Battle/Background/%d.bmp", i);
+        LI(&BattleBackgroundDC[i], &BattleBackgroundMap[i], tmp);
+    }
     LI(&CoinDC, &CoinMap,                         "./resources/Battle/Coin.bmp");
     LI(&WinScreenDC, &WinScreenMap,               "./resources/Battle/Win/Win.bmp");
     LI(&WinMapDC, &WinMapMap,                     "./resources/Battle/Win/clickMap.bmp");

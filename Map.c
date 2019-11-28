@@ -5,7 +5,7 @@ int MapSelect() {
     int selected = 0;
     system("mode 100, 28");
     
-    SetConsoleTitle("Map Screen");
+    SetConsoleTitle("Map");
 
     while(1) {
         if(MapUpdate(&selected))
@@ -16,6 +16,7 @@ int MapSelect() {
 }
 
 void MapInit() {
+    system("mode 100, 28");
     LoadPlayer();
     // hard code things -- hate this
     oldSelected = -1;

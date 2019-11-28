@@ -41,11 +41,11 @@ HBITMAP MenuUpgradeMap, ToMapMap[3];
 HDC     MenuMapDC,  BracketLeftDC, BracketRightDC  , ToUpgradeDC[3],  ConqueredDC;
 HBITMAP MenuMapMap, BracketLeftMap, BracketRightMap, ToUpgradeMap[3], ConqueredMap;
 
-HDC     BattleBackgroundDC,  CoinDC, BlackDC,  
+HDC     BattleBackgroundDC[5],  CoinDC, BlackDC,  
         LoseScreenDC, LoseMapDC, LoseStoreDC, LoseRetryDC,
         WinScreenDC, WinMapDC, WinStoreDC,
         AllyHealthBar1DC, AllyHealthBar2DC, EnemyHealthBar1DC, EnemyHealthBar2DC;
-HBITMAP BattleBackgroundMap, CoinMap, BlackMap, 
+HBITMAP BattleBackgroundMap[5], CoinMap, BlackMap, 
         LoseScreenMap, LoseMapMap, LoseStoreMap, LoseRetryMap,
         WinScreenMap, WinMapMap, WinStoreMap,
         AllyHealthBar1Map, AllyHealthBar2Map, EnemyHealthBar1Map, EnemyHealthBar2Map;
